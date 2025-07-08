@@ -1,8 +1,8 @@
-# IEEE SB CET Website
+# IEEE SB CETkr Website
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 
-Official website for IEEE Student Branch at College of Engineering Trivandrum (CET). This modern, responsive website is built with Astro and Tailwind CSS, featuring information about the student branch, its activities, achievements, and events.
+Official website for IEEE Student Branch at College of Engineering THrikaripur (CETKr). This modern, responsive website is built with Astro and Tailwind CSS, featuring information about the student branch, its activities, achievements, and events.
 
 ## 🚀 Features
 
