@@ -95,8 +95,6 @@ We welcome contributions from the community! Here's how you can help:
 3. **Improve Documentation**: Help improve our documentation
 4. **Spread the Word**: Star the repository and share it with others
 
-Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting pull requests.
-
 ### Development Workflow
 
 1. Fork the repository
