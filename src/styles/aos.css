@@ -1,0 +1,151 @@
+/**
+ * Website for IEEE SB CETKR
+ * Copyright (C) 2024 IEEE Student Branch CETKR
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+/* AOS styles */
+[data-aos] {
+  opacity: 0;
+  transition-property: opacity, transform;
+}
+
+[data-aos].aos-animate {
+  opacity: 1;
+  transform: translateZ(0);
+}
+
+/* Fade animations */
+[data-aos^="fade"][data-aos^="fade"] {
+  opacity: 0;
+  transition-property: opacity, transform;
+}
+
+[data-aos^="fade"][data-aos^="fade"].aos-animate {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+[data-aos="fade-up"] {
+  transform: translate3d(0, 20px, 0);
+}
+
+[data-aos="fade-down"] {
+  transform: translate3d(0, -20px, 0);
+}
+
+[data-aos="fade-right"] {
+  transform: translate3d(-20px, 0, 0);
+}
+
+[data-aos="fade-left"] {
+  transform: translate3d(20px, 0, 0);
+}
+
+/* Zoom animations */
+[data-aos^="zoom"][data-aos^="zoom"] {
+  opacity: 0;
+  transition-property: opacity, transform;
+}
+
+[data-aos^="zoom"][data-aos^="zoom"].aos-animate {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+[data-aos="zoom-in"] {
+  transform: scale(0.6);
+}
+
+[data-aos="zoom-in-up"] {
+  transform: translate3d(0, 40px, 0) scale(0.6);
+}
+
+[data-aos="zoom-in-down"] {
+  transform: translate3d(0, -40px, 0) scale(0.6);
+}
+
+[data-aos="zoom-in-right"] {
+  transform: translate3d(-40px, 0, 0) scale(0.6);
+}
+
+[data-aos="zoom-in-left"] {
+  transform: translate3d(40px, 0, 0) scale(0.6);
+}
+
+/* Slide animations */
+[data-aos^="slide"][data-aos^="slide"] {
+  transition-property: transform;
+  visibility: hidden;
+}
+
+[data-aos^="slide"][data-aos^="slide"].aos-animate {
+  visibility: visible;
+  transform: translate3d(0, 0, 0);
+}
+
+[data-aos="slide-up"] {
+  transform: translate3d(0, 100%, 0);
+}
+
+[data-aos="slide-down"] {
+  transform: translate3d(0, -100%, 0);
+}
+
+[data-aos="slide-right"] {
+  transform: translate3d(-100%, 0, 0);
+}
+
+[data-aos="slide-left"] {
+  transform: translate3d(100%, 0, 0);
+}
+
+/* Flip animations */
+[data-aos^="flip"][data-aos^="flip"] {
+  backface-visibility: hidden;
+  transition-property: transform;
+}
+
+[data-aos="flip-left"] {
+  transform: perspective(2500px) rotateY(-100deg);
+}
+
+[data-aos="flip-left"].aos-animate {
+  transform: perspective(2500px) rotateY(0);
+}
+
+[data-aos="flip-right"] {
+  transform: perspective(2500px) rotateY(100deg);
+}
+
+[data-aos="flip-right"].aos-animate {
+  transform: perspective(2500px) rotateY(0);
+}
+
+[data-aos="flip-up"] {
+  transform: perspective(2500px) rotateX(-100deg);
+}
+
+[data-aos="flip-up"].aos-animate {
+  transform: perspective(2500px) rotateX(0);
+}
+
+[data-aos="flip-down"] {
+  transform: perspective(2500px) rotateX(100deg);
+}
+
+[data-aos="flip-down"].aos-animate {
+  transform: perspective(2500px) rotateX(0);
+}

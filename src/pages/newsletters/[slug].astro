@@ -1,0 +1,127 @@
+<!--
+ * Website for IEEE SB CETKR
+ * Copyright (C) 2024 IEEE Student Branch CETKR
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+-->
+---
+import { getCollection } from 'astro:content';
+import NewsletterLayout from '../../layouts/NewsletterLayout.astro';
+
+export async function getStaticPaths() {
+  const newsletters = await getCollection('newsletters');
+  return newsletters.map((newsletter) => ({
+    params: { slug: newsletter.slug },
+    props: { 
+      newsletter,
+      title: newsletter.data.title,
+      description: newsletter.data.description || `Read the latest newsletter: ${newsletter.data.title}`
+    },
+  }));
+}
+
+const { newsletter, title, description } = Astro.props;
+const { Content } = await newsletter.render();
+const { pubDate, image } = newsletter.data;
+---
+
+<NewsletterLayout 
+  title={title}
+  description={description}
+  pubDate={pubDate}
+  image={image}
+>
+  <script>
+  // Apply inline styles for images with width/height attributes
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll<HTMLElement>('img[width][height]').forEach(img => {
+      img.style.setProperty('--img-width', img.getAttribute('width') + 'px');
+      img.style.setProperty('--img-height', img.getAttribute('height') + 'px');
+    });
+  });
+</script>
+<Content />
+  
+  <div class="mt-12 pt-8 border-t border-slate-800">
+    <a 
+      href="/newsletters/" 
+      class="inline-flex items-center text-cyan-400 hover:text-cyan-300 transition-colors"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
+      Back to all newsletters
+    </a>
+  </div>
+</NewsletterLayout>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Add copy buttons to all pre elements
+    document.querySelectorAll('pre').forEach((pre) => {
+      // Skip if already has a copy button
+      if (pre.querySelector('.copy-button')) return;
+      
+      // Create copy button
+      const button = document.createElement('button');
+      button.className = 'copy-button';
+      button.title = 'Copy to clipboard';
+      button.innerHTML = `
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+          <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+        </svg>
+        <span>Copy</span>
+      `;
+      
+      // Add button to pre element
+      pre.style.position = 'relative';
+      pre.prepend(button);
+      
+      // Add click event to copy code
+      button.addEventListener('click', async () => {
+        const code = pre.querySelector('code');
+        if (!code) return;
+        
+        try {
+          await navigator.clipboard.writeText(code.textContent || '');
+          
+          // Update button state
+          const originalText = button.innerHTML;
+          button.innerHTML = `
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Copied!</span>
+          `;
+          button.classList.add('copied');
+          
+          // Reset button after 2 seconds
+          setTimeout(() => {
+            button.innerHTML = originalText;
+            button.classList.remove('copied');
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy text: ', err);
+          button.textContent = 'Error';
+          button.style.color = '#ef4444';
+          setTimeout(() => {
+            button.innerHTML = originalText;
+            button.style.color = '';
+          }, 2000);
+        }
+      });
+    });
+  });
+</script>

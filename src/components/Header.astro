@@ -1,0 +1,120 @@
+<!--
+ * Website for IEEE SB CETKR
+ * Copyright (C) 2024 IEEE Student Branch CETKR
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+-->
+---
+const navLinks = [
+  { name: 'ABOUT', href: '/#about' },
+  { name: 'EVENTS', href: '/events' },
+  { name: 'EXECOM', href: '/execom' },
+  { name: 'CHAPTERS', href: '/chapters' },
+  { name: 'ACHIEVEMENTS', href: '/achievements' },
+  { name: 'NEWSLETTERS', href: '/newsletters' },
+  { name: 'CONTACT', href: '/contact' },
+];
+
+interface Props {
+  className?: string;
+}
+
+const { className } = Astro.props;
+---
+
+<header class={`absolute top-0 left-0 right-0 z-50 backdrop-blur-sm bg-slate-900/30 ${className || ''}`.trim()}>
+  <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <!-- Logo -->
+    <a href="/" class="text-2xl font-bold tracking-wider hover:scale-105 transition-transform duration-300">
+      <span class="text-cyan-400">IEEE</span> SB CETKR
+    </a>
+
+    <!-- Desktop Navigation -->
+    <div class="hidden md:flex items-center space-x-8">
+      <nav class="flex items-center space-x-6 text-sm font-medium">
+        {navLinks.map((link) => (
+          <a 
+            href={link.href} 
+            class="text-slate-300 hover:text-cyan-400 transition-colors duration-300 relative group"
+          >
+            {link.name}
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full"></span>
+          </a>
+        ))}
+      </nav>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button 
+      id="mobile-menu-button" 
+      class="md:hidden flex items-center p-2 rounded-md hover:bg-slate-800 transition-colors"
+      aria-label="Toggle menu"
+    >
+      <span class="material-icons text-white">menu</span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div 
+    id="mobile-menu" 
+    class="hidden md:hidden bg-slate-900/95 border-t border-slate-800 backdrop-blur-lg"
+  >
+    <div class="px-6 py-4 space-y-2">
+      {navLinks.map((link) => (
+        <a 
+          href={link.href} 
+          class="block text-slate-300 hover:text-cyan-400 px-3 py-3 rounded-md transition-colors duration-200 hover:bg-slate-800/50"
+        >
+          {link.name}
+        </a>
+      ))}
+    </div>
+  </div>
+</header>
+
+<!-- Add padding to account for fixed header -->
+<div class="h-20"></div>
+
+<script is:inline>
+  // Mobile menu toggle with animation
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+        mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+        mobileMenu.classList.toggle('hidden');
+        
+        // Toggle menu icon between menu and close
+        const icon = mobileMenuButton.querySelector('.material-icons');
+        if (icon) {
+          icon.textContent = isExpanded ? 'menu' : 'close';
+        }
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!mobileMenuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
+          mobileMenu.classList.add('hidden');
+          mobileMenuButton.setAttribute('aria-expanded', 'false');
+          const icon = mobileMenuButton.querySelector('.material-icons');
+          if (icon) icon.textContent = 'menu';
+        }
+      });
+    }
+  });
+</script>

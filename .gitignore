@@ -1,0 +1,80 @@
+# build output
+dist/
+build/
+.next/
+out/
+
+# generated files
+.astro/
+.cache/
+.svelte-kit/
+
+# dependencies
+node_modules/
+.pnp
+.pnp.*
+
+# logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# environment variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# system files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# testing
+coverage/
+.nyc_output/
+
+# Astro
+.astro/
+
+# Vercel
+.vercel/
+
+# Playform Compress
+.astro-compress/
+
+# Sitemap
+sitemap-*
+
+# React
+**/.eslintcache
+
+# TypeScript
+*.tsbuildinfo
+.next/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Workspace files
+ieeesbcetkr.code-workspace

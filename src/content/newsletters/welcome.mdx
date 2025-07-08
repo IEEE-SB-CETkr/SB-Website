@@ -1,0 +1,150 @@
+---
+title: "Newsletter Author Guide"
+description: "Learn how to create beautiful newsletters using MDX and Markdown"
+pubDate: "2025-07-08T00:00:00.000Z"
+image:
+  url: "/images/newsletters/placeholder.jpg"
+  alt: "MDX and Markdown Guide"
+author: "IEEE SB CETKR Team"
+tags: ["guide", "markdown", "mdx"]
+---
+
+# Creating Newsletters with MDX & Markdown
+
+Welcome to the IEEE SB CETKR newsletter system! This guide will help you create beautiful, responsive newsletters using MDX and Markdown.
+
+## Basic Formatting
+
+### Headers
+```markdown
+# H1 - Main Title
+## H2 - Section
+### H3 - Subsection
+#### H4 - Sub-subsection
+```
+
+### Text Styling
+```markdown
+**Bold text**  
+*Italic text*  
+~~Strikethrough~~  
+`inline code`
+```
+
+## Lists
+
+### Bulleted List
+```markdown
+- Item 1
+- Item 2
+  - Nested item
+  - Another nested item
+- Item 3
+```
+
+### Numbered List
+```markdown
+1. First item
+2. Second item
+3. Third item
+```
+
+## Adding Media
+
+### Images
+```markdown
+![Alt text](/path/to/image.jpg "Optional title")
+```
+
+With custom classes:
+```markdown
+<img 
+  src="/images/example.jpg" 
+  alt="Description"
+  width="800"
+  height="450"
+  class="w-full rounded-lg my-4"
+  loading="lazy"
+/>
+```
+
+## Code Blocks
+
+### Inline Code
+`` `console.log('Hello, world!')` ``
+
+### Code Blocks with Syntax Highlighting
+```js
+// JavaScript example
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+
+greet('IEEE Member');
+```
+
+## Tables
+
+```markdown
+| Syntax      | Description |
+| ----------- | ----------- |
+| Header      | Title       |
+| Paragraph   | Text        |
+```
+
+## Callouts & Alerts
+
+```markdown
+> **Note**  
+> This is an important note for readers.
+
+> **Warning**  
+> This is a warning message.
+```
+
+## Buttons & Links
+
+```markdown
+[Button Text](/link-url){: .btn .btn-primary }
+```
+
+## Front Matter
+
+Each newsletter starts with front matter (YAML format):
+
+```yaml
+---
+title: "Your Newsletter Title"
+description: "Brief description"
+pubDate: "2025-01-01T00:00:00.000Z"
+image:
+  url: "/images/newsletters/your-image.jpg"
+  alt: "Image description"
+author: "Your Name"
+tags: ["tag1", "tag2"]
+---
+```
+
+## Best Practices
+
+1. Keep paragraphs short (2-3 sentences)
+2. Use headings to break up content
+3. Add alt text to all images
+4. Test your newsletter on different devices
+5. Keep code examples concise and well-commented
+
+## Need Help?
+
+Contact the web team at [web@ieeesbcetkr.org](mailto:web@ieeesbcetkr.org) for assistance with:
+- Custom components
+- Advanced formatting
+- Image optimization
+- Any other questions
+```
+Join our community and be part of the innovation:
+
+- Follow us on social media
+- Attend our events
+- Volunteer for our initiatives
+
+We can't wait to see what we'll achieve together this year! 🚀

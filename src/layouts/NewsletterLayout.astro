@@ -1,0 +1,88 @@
+<!--
+ * Website for IEEE SB CETKR
+ * Copyright (C) 2024 IEEE Student Branch CETKR
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+-->
+---
+import Layout from './Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+  pubDate: Date;
+  image?: {
+    url: string;
+    alt?: string;  // Made alt optional
+  };
+}
+
+const { title, description, pubDate, image } = Astro.props;
+---
+
+<Layout title={`${title} | IEEE SB CETKR`}>
+  <Header className="sticky top-0 z-50" />
+  
+  <main class="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 py-16">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <a 
+        href="/newsletters" 
+        class="inline-flex items-center text-cyan-400 hover:text-cyan-300 transition-colors mb-8 group"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to all newsletters
+      </a>
+
+      <article class="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-800 p-8">
+        <header class="mb-8">
+          <time class="text-sm text-cyan-400 font-mono">
+            {new Date(pubDate).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })}
+          </time>
+          <h1 class="text-4xl font-bold mt-2 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+            {title}
+          </h1>
+          {description && (
+            <p class="mt-4 text-lg text-slate-300">
+              {description}
+            </p>
+          )}
+          {image?.url && (
+            <div class="mt-6">
+              <img 
+                src={image.url} 
+                alt={image.alt || title}
+                class="w-full h-auto max-h-64 object-contain mx-auto rounded-lg"
+                loading="lazy"
+              />
+            </div>
+          )}
+        </header>
+
+        <div class="prose prose-invert max-w-none">
+          <slot />
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

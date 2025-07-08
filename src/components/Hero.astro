@@ -1,0 +1,96 @@
+<!--
+ * Website for IEEE SB CETKR
+ * Copyright (C) 2024 IEEE Student Branch CETKR
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+-->
+---
+---
+
+<section class="relative min-h-[90vh] flex items-center justify-center px-4 py-20 overflow-hidden">
+  <!-- Animated background elements -->
+  <div class="absolute -top-20 -left-20 w-40 h-40 border-2 border-cyan-400/20 rounded-full animate-pulse" />
+  <div class="absolute -bottom-20 -right-20 w-40 h-40 border-2 border-indigo-400/20 rounded-full animate-pulse delay-500" />
+  
+  <div class="container mx-auto text-center relative z-10 max-w-5xl px-6">
+    <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-6 leading-tight tracking-tighter">
+      <span class="gradient-text">INNOVATE. INSPIRE. IGNITE.</span>
+    </h1>
+    
+    <p class="text-lg md:text-xl text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+      Join a global community of innovators at the IEEE Student Branch, College of Engineering Trikarpur. 
+      Let's shape the future of technology together.
+    </p>
+    
+    <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+      <a 
+        href="https://www.ieee.org/membership/join" 
+        class="btn-primary inline-block text-center transform hover:scale-105 transition-transform duration-300"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
+        JOIN IEEE
+      </a>
+      <a 
+        href="/events" 
+        class="btn-outline inline-flex items-center justify-center gap-2 transform hover:scale-105 transition-transform duration-300"
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
+        <span>EXPLORE EVENTS</span>
+        <span class="material-icons text-base">arrow_forward</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+    <div class="w-6 h-10 border-2 border-slate-400 rounded-full flex justify-center p-1">
+      <div class="w-1 h-2 bg-slate-400 rounded-full animate-scroll"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes scroll {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(8px); opacity: 0.5; }
+  }
+  
+  .animate-scroll {
+    animation: scroll 1.5s ease-in-out infinite;
+  }
+  
+  /* Animate each word with a slight delay */
+  .gradient-text span {
+    display: inline-block;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+  
+  .gradient-text span:nth-child(1) { animation-delay: 0.1s; }
+  .gradient-text span:nth-child(2) { animation-delay: 0.3s; }
+  .gradient-text span:nth-child(3) { animation-delay: 0.5s; }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

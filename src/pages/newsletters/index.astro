@@ -1,0 +1,130 @@
+<!--
+ * Website for IEEE SB CETKR
+ * Copyright (C) 2024 IEEE Student Branch CETKR
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+-->
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const allNewsletters = await getCollection('newsletters');
+const sortedNewsletters = allNewsletters.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const pageTitle = 'Newsletters | IEEE SB CETKR';
+const pageDescription = 'Stay updated with the latest news and updates from IEEE SB CETKR';
+---
+<Header />
+<Layout 
+  title={pageTitle}
+  description={pageDescription}
+>
+  <main class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 bg-gradient-to-br from-slate-900 to-slate-800">
+      <div class="absolute inset-0 opacity-20">
+        <div class="absolute inset-0 bg-[url('/images/grid.svg')] [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+      </div>
+      
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
+            <span class="gradient-text">IEEE SB CETKR Newsletters</span>
+          </h1>
+          <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto rounded-full mb-8"></div>
+          <p class="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
+            Stay updated with our latest news, events, and technical insights from the IEEE Student Branch at College of Engineering Trikaripur.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletters Grid -->
+    <section class="py-16 bg-slate-900">
+      <div class="container mx-auto px-6 max-w-7xl">
+
+          {allNewsletters.length > 0 ? (
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              {allNewsletters.map((newsletter) => (
+                <article class="group bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 h-full flex flex-col hover:shadow-lg hover:shadow-cyan-500/10">
+                  <a href={`/newsletters/${newsletter.slug}/`} class="block h-full flex flex-col">
+                    {newsletter.data.image ? (
+                      <div class="h-48 md:h-56 overflow-hidden bg-slate-700/30">
+                        <img 
+                          src={newsletter.data.image.url} 
+                          alt={newsletter.data.image.alt || newsletter.data.title}
+                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          loading="lazy"
+                          width={400}
+                          height={225}
+                        />
+                      </div>
+                    ) : (
+                      <div class="h-48 md:h-56 bg-gradient-to-br from-slate-700/50 to-slate-800/50 flex items-center justify-center">
+                        <span class="text-4xl opacity-30">📰</span>
+                      </div>
+                    )}
+                    <div class="p-6 flex-1 flex flex-col">
+                      <div class="flex-1">
+                        <time class="text-sm text-cyan-400 font-mono">
+                          {newsletter.data.pubDate.toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric',
+                          })}
+                        </time>
+                        <h2 class="text-xl font-bold mt-2 mb-3 text-slate-100 group-hover:text-cyan-400 transition-colors">
+                          {newsletter.data.title}
+                        </h2>
+                        {newsletter.data.description && (
+                          <p class="text-slate-300 line-clamp-3 leading-relaxed">
+                            {newsletter.data.description}
+                          </p>
+                        )}
+                      </div>
+                      <div class="mt-6 pt-4 border-t border-slate-700/50">
+                        <span class="inline-flex items-center text-cyan-400 text-sm font-medium group-hover:translate-x-1 transition-transform">
+                          Read more
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                          </svg>
+                        </span>
+                      </div>
+                    </div>
+                  </a>
+                </article>
+              ))}
+            </div>
+          ) : (
+
+            <div class="text-center py-16 md:py-24 bg-slate-800/30 rounded-2xl border border-dashed border-slate-700/50">
+              <div class="text-6xl mb-6 opacity-50">📭</div>
+              <h3 class="text-2xl font-semibold text-slate-200 mb-2">No newsletters yet</h3>
+              <p class="text-slate-400 max-w-md mx-auto">We're working on some exciting content. Check back soon for updates!</p>
+              <a href="/" class="mt-6 inline-flex items-center px-6 py-3 rounded-full bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 transition-colors border border-cyan-500/20">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                Back to Home
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+<Footer />

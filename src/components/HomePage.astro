@@ -1,0 +1,172 @@
+<!--
+ * Website for IEEE SB CETKR
+ * Copyright (C) 2024 IEEE Student Branch CETKR
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+-->
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "./Header.astro";
+import Hero from "./Hero.astro";
+import Footer from "./Footer.astro";
+
+
+// Social media links
+const socialLinks = [
+	{ name: "GitHub", icon: "code", url: "#" },
+	{ name: "Twitter", icon: "twitter", url: "#" },
+	{ name: "LinkedIn", icon: "linkedin", url: "#" },
+	{ name: "Instagram", icon: "instagram", url: "#" },
+	{ name: "YouTube", icon: "play_circle", url: "#" },
+];
+---
+
+<Layout title="IEEE SB CETKR | Innovate. Inspire. Ignite.">
+	<Header />
+
+	<main class="relative overflow-hidden">
+		<Hero />
+
+		<!-- About Section -->
+		<section id="about" class="relative py-20 overflow-hidden">
+			<div class="container mx-auto px-6 relative z-10">
+				<div class="text-center mb-16">
+					<h2 class="text-4xl md:text-5xl font-bold mb-6">
+						<span class="gradient-text">About Us</span>
+					</h2>
+					<div
+						class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto rounded-full"
+					>
+					</div>
+				</div>
+
+				<div class="grid md:grid-cols-2 gap-12 items-center">
+					<div class="space-y-6">
+						<h3 class="text-3xl font-bold text-white">
+							Empowering Future Innovators
+						</h3>
+						<p class="text-slate-300 leading-relaxed">
+							The IEEE Student Branch at College of Engineering
+							Trikarpur is a dynamic community of students
+							passionate about technology, innovation, and
+							professional development. We provide a platform for
+							students to enhance their technical skills, network
+							with industry professionals, and work on
+							cutting-edge projects.
+						</p>
+						<p class="text-slate-300 leading-relaxed">
+							Our mission is to inspire, engage, and empower the
+							next generation of engineers and technologists to
+							innovate for a better tomorrow.
+						</p>
+						<div class="pt-4">
+							<a href="#contact" class="btn-primary inline-block">
+								GET IN TOUCH
+							</a>
+						</div>
+					</div>
+					<div class="relative">
+						<div
+							class="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-1 border border-slate-700/50"
+						>
+							<div
+								class="bg-slate-900 rounded-xl overflow-hidden aspect-video flex items-center justify-center"
+							>
+								<span
+									class="material-icons text-6xl text-slate-700"
+									>play_circle</span
+								>
+							</div>
+						</div>
+						<div
+							class="absolute -z-10 -top-6 -right-6 w-48 h-48 bg-cyan-500/10 rounded-full filter blur-3xl"
+						>
+						</div>
+						<div
+							class="absolute -z-10 -bottom-6 -left-6 w-48 h-48 bg-indigo-500/10 rounded-full filter blur-3xl"
+						>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Stats Section -->
+		<section class="py-16 bg-gradient-to-b from-slate-900/50 to-slate-900">
+			<div class="container mx-auto px-6">
+				<div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+					{
+						[
+							{ number: "100+", label: "Members" },
+							{ number: "20+", label: "Events" },
+							{ number: "5+", label: "Workshops" },
+							{ number: "10+", label: "Projects" },
+						].map((stat) => (
+							<div class="p-6 bg-slate-800/30 rounded-xl backdrop-blur-sm border border-slate-800 hover:border-cyan-500/30 transition-all duration-300">
+								<div class="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2">
+									{stat.number}
+								</div>
+								<div class="text-slate-400 text-sm font-medium uppercase tracking-wider">
+									{stat.label}
+								</div>
+							</div>
+						))
+					}
+				</div>
+			</div>
+		</section>
+	</main>
+
+  <Footer />
+</Layout>
+
+<!-- AOS CSS -->
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+<!-- Custom Scripts -->
+<script>
+  // Load AOS after the page is fully loaded
+  window.addEventListener('load', () => {
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/aos@2.3.4/dist/aos.js';
+    script.onload = () => {
+      // Initialize AOS
+      if (typeof AOS !== 'undefined') {
+        AOS.init({
+          duration: 800,
+          easing: 'ease-in-out',
+          once: true,
+          mirror: false,
+        });
+      }
+    };
+    document.body.appendChild(script);
+  });
+
+  // Smooth scrolling for anchor links
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(anchor.getAttribute('href') || '');
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          });
+        }
+      });
+    });
+  });
+</script>

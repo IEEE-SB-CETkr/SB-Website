@@ -1,0 +1,127 @@
+<!--
+ * Website for IEEE SB CETKR
+ * Copyright (C) 2024 IEEE Student Branch CETKR
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+-->
+---
+import '../styles/global.css';
+import '../styles/aos.css';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  url?: string;
+  type?: 'website' | 'article';
+}
+
+const { 
+  title = 'IEEE SB CETKR | Innovate. Inspire. Ignite.', 
+  description = 'IEEE Student Branch at College of Engineering Trikarpur - Empowering future engineers and technologists through innovation, collaboration, and professional development.',
+  image = '/images/og-image.jpg',
+  url = 'https://ieeesbcetkr.org',
+  type = 'website'
+} = Astro.props;
+
+const fullTitle = title.includes('IEEE SB CETKR') ? title : `IEEE SB CETKR | ${title}`;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Primary Meta Tags -->
+    <title>{fullTitle}</title>
+    <meta name="title" content={fullTitle}>
+    <meta name="description" content={description}>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type}>
+    <meta property="og:url" content={url}>
+    <meta property="og:title" content={fullTitle}>
+    <meta property="og:description" content={description}>
+    <meta property="og:image" content={image}>
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content={url}>
+    <meta property="twitter:title" content={fullTitle}>
+    <meta property="twitter:description" content={description}>
+    <meta property="twitter:image" content={image}>
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0f172a">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" /></noscript>
+  </head>
+  <body class="min-h-screen flex flex-col relative bg-grid overflow-x-hidden">
+    <div class="fixed inset-0 w-screen h-screen overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-transparent to-slate-900 z-0" />
+      <div class="absolute top-0 left-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl filter animate-spin-slow" />
+      <div class="absolute bottom-0 right-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl filter animate-spin-slow-reverse" />
+    </div>
+    
+    <div class="relative z-10 flex flex-col min-h-screen w-full max-w-[100vw] overflow-x-hidden">
+      <slot />
+    </div>
+    
+    <!-- Material Icons for Web Components -->
+    <script>
+      // Load Material Icons
+      if (!document.querySelector('link[href*="Material+Icons"]')) {
+        const link = document.createElement('link');
+        link.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
+        link.rel = 'stylesheet';
+        document.head.appendChild(link);
+      }
+    </script>
+    
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js" defer></script>
+  </body>
+</html>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    min-height: 100vh;
+	}
+</style>
