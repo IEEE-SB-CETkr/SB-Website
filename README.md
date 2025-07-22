@@ -121,7 +121,7 @@ If you need help or have questions:
 
 ## 📜 Code of Conduct
 
-Please note that this project is governed by the [IEEE Code of Conduct](https://www.ieee.org/about/corporate/governance/p9-26.pdf). By participating, you're expected to uphold this code.
+Please note that this project is governed by the [IEEE Code of Conduct](https://www.ieee.org/about/corporate/governance/p7-8). By participating, you're expected to uphold this code.
 
 ---
 
