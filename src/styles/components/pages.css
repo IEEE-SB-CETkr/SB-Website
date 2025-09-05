@@ -1,0 +1,31 @@
+.gradient-text {
+  background: linear-gradient(90deg, #22d3ee 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+/* Smooth scrolling */
+html { scroll-behavior: smooth; }
+
+/* Custom scrollbar variations used across pages */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0f172a; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+.chapter-card { opacity: 0; animation: fadeIn 0.5s ease-out forwards; }
+.chapter-card:nth-child(1) { animation-delay: 0.1s; }
+.chapter-card:nth-child(2) { animation-delay: 0.2s; }
+.chapter-card:nth-child(3) { animation-delay: 0.3s; }
+.chapter-card:nth-child(4) { animation-delay: 0.4s; }
+.chapter-card:nth-child(5) { animation-delay: 0.5s; }
+.chapter-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* Map embed helper */
+.map-embed { min-height: 300px; border: 0; display: block; }

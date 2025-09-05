@@ -20,6 +20,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { achievements } from '../data/achievements';
+import '../styles/components/pages.css';
 
 const title = 'Our Achievements';
 const description = 'Celebrating the accomplishments and milestones of IEEE SB CETKR';
@@ -108,11 +109,4 @@ const description = 'Celebrating the accomplishments and milestones of IEEE SB C
 </Layout>
 <Footer />
 
-<style>
-  .gradient-text {
-    background: linear-gradient(90deg, #22d3ee 0%, #3b82f6 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: inline-block;
-  }
-</style>
+---

@@ -19,6 +19,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import '../styles/components/pages.css';
 
 // Contact Information
 const contactInfo = {
@@ -126,12 +127,12 @@ const description = "Get in touch with IEEE Student Branch at College of Enginee
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div class="lg:col-span-2">
-            <div class="rounded-lg overflow-hidden border border-slate-700/50 bg-slate-800 h-full">
+              <div class="rounded-lg overflow-hidden border border-slate-700/50 bg-slate-800 h-full">
               <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5031.222861355563!2d75.23167867601698!3d12.24347803042137!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba465c310dea69b%3A0xe1985dae01d5292!2sCoE%20Trikaripur!5e1!3m2!1sen!2sin!4v1751959332372!5m2!1sen!2sin&style=feature:all|element:geometry|color:0x1a1a1a&style=feature:all|element:labels.text.fill|color:0x858585&style=feature:all|element:labels.text.stroke|color:0x000000&style=feature:all|element:labels.icon|visibility:off&style=feature:administrative|element:geometry|visibility:simplified&style=feature:administrative.land_parcel|visibility:off&style=feature:administrative.neighborhood|visibility:off&style=feature:landscape|element:geometry|color:0x2c2c2c&style=feature:poi|visibility:off&style=feature:road|element:geometry|color:0x2c2c2c&style=feature:road|element:labels|visibility:off&style=feature:transit|visibility:off&style=feature:water|element:geometry|color:0x000000&style=feature:water|element:labels.text.fill|color:0x3d3d3d" 
                 width="100%" 
                 height="100%" 
-                style="min-height: 300px; border: 0;" 
+                class="map-embed" 
                 allowfullscreen="" 
                 loading="lazy" 
                 referrerpolicy="no-referrer-when-downgrade"
@@ -224,33 +225,4 @@ const description = "Get in touch with IEEE Student Branch at College of Enginee
   <Footer />
 </Layout>
 
-<style>
-  /* Add any custom styles here if needed */
-  form input:focus, form textarea:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.5);
-  }
-  
-  /* Smooth scroll behavior */
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  /* Custom scrollbar */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  
-  ::-webkit-scrollbar-track {
-    background: #0f172a;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background: #1e40af;
-    border-radius: 4px;
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background: #1e3a8a;
-  }
-</style>
+

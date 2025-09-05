@@ -21,6 +21,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { execomMembers } from '../data/execom';
 import MemberCard from '../components/MemberCard.astro';
+import '../styles/components/pages.css';
 
 // Page metadata
 const title = "Executive Committee | IEEE SB CETKR";
@@ -107,28 +108,4 @@ const description = "Meet the dedicated team behind IEEE Student Branch at Colle
 </Layout>
 <Footer />
 
-<style>
-  /* Smooth scrolling for anchor links */
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  /* Custom scrollbar */
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-  
-  ::-webkit-scrollbar-track {
-    background: #0f172a;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background: #1e293b;
-    border-radius: 4px;
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background: #334155;
-  }
-</style>
+---

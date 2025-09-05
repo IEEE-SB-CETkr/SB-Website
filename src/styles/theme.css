@@ -1,0 +1,38 @@
+/* Site-wide "fun" theme: colorful accents, rounded shapes, playful shadows */
+
+:root{
+  --fun-pink: #ff6fb5;
+  --fun-yellow: #ffd36b;
+  --fun-aqua: #7be3ff;
+  --fun-deep: #071025;
+  --glass: rgba(255,255,255,0.04);
+}
+
+/* Global helpers */
+.fun-bg-gradient {
+  background: linear-gradient(135deg, rgba(123,227,255,0.04), rgba(255,122,181,0.03));
+}
+
+.rounded-xl-fun { border-radius: 1rem; }
+.soft-shadow { box-shadow: 0 10px 30px rgba(3,7,18,0.6); }
+.glassy { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03); backdrop-filter: blur(6px); }
+
+.fun-btn { display:inline-flex; align-items:center; gap:0.6rem; padding:0.6rem 1rem; border-radius:999px; font-weight:600; cursor:pointer; transition:transform .18s ease, box-shadow .18s ease }
+.fun-btn:active{ transform: translateY(1px) }
+.btn-pink{ background: linear-gradient(90deg,var(--fun-pink), #ff98c9); color:#071025 }
+.btn-aqua{ background: linear-gradient(90deg,var(--fun-aqua), #bff7ff); color:#071025 }
+
+.accent-pill{ padding:0.35rem 0.6rem; border-radius:999px; font-weight:700; font-size:0.85rem }
+.pill-pink{ background:linear-gradient(90deg,var(--fun-pink), #ffb3d9); color:#071025 }
+.pill-yellow{ background:linear-gradient(90deg,var(--fun-yellow), #ffe9a8); color:#1a1a09 }
+
+/* playful headings */
+.playful-h1{ font-size: clamp(1.8rem, 4vw, 3rem); font-weight:800; letter-spacing:-0.02em; background: linear-gradient(90deg,var(--fun-pink), var(--fun-aqua)); -webkit-background-clip:text; background-clip:text; color:transparent }
+
+/* subtle confetti using pseudo element on containers */
+.confetti { position:relative }
+.confetti::before{ content:''; position:absolute; inset: -40px -20px auto auto; width:100px; height:100px; background: radial-gradient(circle at 20% 20%, rgba(255,111,181,0.8), transparent 20%), radial-gradient(circle at 80% 80%, rgba(123,227,255,0.6), transparent 20%); filter: blur(6px); opacity:0.6; pointer-events:none }
+
+/* utility spacing tuned for playful layout */
+.space-md { gap: 1rem }
+.space-lg { gap: 1.5rem }
