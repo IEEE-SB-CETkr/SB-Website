@@ -1,0 +1,216 @@
+---
+interface Image {
+  src: string;
+  alt: string;
+}
+
+// Type for the image module import
+interface ImageModule {
+  default: string;
+  file: string;
+}
+
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+let images: Image[] = [];
+try {
+  // Read files directly from the public images directory at build time
+  const publicDir = new URL('../../public/images/carousel_gallery', import.meta.url);
+  const dirPath = fileURLToPath(publicDir);
+  const files = fs.readdirSync(dirPath);
+  const allowed = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
+  images = files
+    .filter((f) => allowed.includes(path.extname(f).toLowerCase()))
+    .map((filename) => ({ src: `/images/carousel_gallery/${filename}`, alt: filename.split('.')[0] }));
+} catch (err) {
+  // Fallback: try import.meta.glob (works in some environments)
+  try {
+    const imageFiles = Object.values(
+      import.meta.glob('/images/carousel_gallery/*.{jpg,jpeg,png,gif,webp}', {
+        query: '?url',
+        import: 'default',
+        eager: true
+      }) as Record<string, string>
+    );
+    images = imageFiles.map((imageUrl: string) => {
+      let filename = String(imageUrl);
+      try {
+        // Try parsing as URL
+        const url = new URL(imageUrl as string);
+        const pathParts = url.pathname.split('/');
+        filename = pathParts[pathParts.length - 1];
+      } catch {
+        // Fallback: take substring after last '/'
+        const parts = String(imageUrl).split('/');
+        filename = parts[parts.length - 1];
+      }
+      return { src: `/images/carousel_gallery/${filename}`, alt: filename.split('.')[0] };
+    });
+  } catch (_err) {
+    console.warn('No images found in carousel_gallery directory');
+    images = [];
+  }
+}
+---
+
+<div class="relative w-full max-w-4xl mx-auto">
+  <div class="relative overflow-hidden rounded-2xl bg-slate-900 aspect-video">
+    {images.length > 0 ? (
+      <>
+        <div class="relative w-full h-full">
+          {images.map((image, index) => (
+            <div 
+              id={`carousel-item-${index}`}
+              class={`absolute inset-0 w-full h-full transition-opacity duration-500 ${index === 0 ? 'opacity-100' : 'opacity-0'}`}
+              data-index={index}
+            >
+              <img 
+                src={image.src} 
+                alt={image.alt}
+                class="w-full h-full object-cover cursor-zoom-in carousel-image"
+                data-src={image.src}
+                loading={index === 0 ? 'eager' : 'lazy'}
+              />
+            </div>
+          ))}
+        </div>
+
+        <button 
+          id="carousel-prev"
+          class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+          aria-label="Previous image"
+        >
+          <span class="material-icons">chevron_left</span>
+        </button>
+        <button 
+          id="carousel-next"
+          class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+          aria-label="Next image"
+        >
+          <span class="material-icons">chevron_right</span>
+        </button>
+
+        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+          {images.map((_, index) => (
+            <button 
+              class={`carousel-dot w-3 h-3 rounded-full transition-colors ${index === 0 ? 'bg-white' : 'bg-white/50 hover:bg-white/75'}`}
+              aria-label={`Go to slide ${index + 1}`}
+              data-index={index}
+            ></button>
+          ))}
+        </div>
+      </>
+    ) : (
+      <div class="w-full h-full flex items-center justify-center text-slate-500">
+        <p>No images found in the carousel gallery.</p>
+      </div>
+    )}
+  </div>
+
+  <div id="imageModal" class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center p-4">
+    <button 
+      id="modal-close"
+      class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300"
+      aria-label="Close modal"
+    >
+      &times;
+    </button>
+    <img id="modalImage" class="max-w-full max-h-[90vh] object-contain" src="" alt="Enlarged view">
+  </div>
+</div>
+
+<script is:inline>
+  let currentIndex = 0;
+  let slideInterval;
+  let slides = [];
+  let totalSlides = 0;
+
+  function startCarousel() {
+    stopCarousel();
+    slideInterval = setInterval(() => navigateCarousel(1), 4000);
+  }
+
+  function stopCarousel() {
+    if (slideInterval) clearInterval(slideInterval);
+  }
+
+  function navigateCarousel(direction) {
+    currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
+    updateCarousel();
+    startCarousel();
+  }
+
+  function goToSlide(index) {
+    currentIndex = index;
+    updateCarousel();
+    startCarousel();
+  }
+
+  function updateCarousel() {
+    slides.forEach((slide, index) => {
+      slide.style.opacity = index === currentIndex ? '1' : '0';
+    });
+    // update dot active state
+    document.querySelectorAll('.carousel-dot').forEach((dot, idx) => {
+      dot.classList.toggle('bg-white', idx === currentIndex);
+      dot.classList.toggle('bg-white/50', idx !== currentIndex);
+    });
+  }
+
+  function openModal(src) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    if (!modal || !modalImg) return;
+    modalImg.src = src;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+    stopCarousel();
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('imageModal');
+    if (!modal) return;
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.style.overflow = 'auto';
+    startCarousel();
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    slides = Array.from(document.querySelectorAll('[id^="carousel-item-"]'));
+    totalSlides = slides.length;
+    if (totalSlides > 0) startCarousel();
+
+    document.getElementById('carousel-prev')?.addEventListener('click', () => navigateCarousel(-1));
+    document.getElementById('carousel-next')?.addEventListener('click', () => navigateCarousel(1));
+
+    document.querySelectorAll('.carousel-dot').forEach(dot => {
+      dot.addEventListener('click', () => {
+        const idx = Number(dot.getAttribute('data-index'));
+        goToSlide(idx);
+      });
+    });
+
+    document.querySelectorAll('.carousel-image').forEach(img => {
+      img.addEventListener('click', (e) => {
+        const src = img.getAttribute('data-src');
+        if (src) openModal(src);
+      });
+    });
+
+    document.getElementById('modal-close')?.addEventListener('click', closeModal);
+
+    // Close modal when clicking outside the image
+    const modal = document.getElementById('imageModal');
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+  });
+</script>
+
+<style>
+  /* Add any additional styles here */
+</style>

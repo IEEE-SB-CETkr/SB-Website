@@ -36,8 +36,9 @@ const { className } = Astro.props;
 <header class={`absolute top-0 left-0 right-0 z-50 backdrop-blur-sm bg-slate-900/30 ${className || ''}`.trim()}>
   <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
     <!-- Logo -->
-    <a href="/" class="text-2xl font-bold tracking-wider hover:scale-105 transition-transform duration-300">
-      <span class="text-cyan-400">IEEE</span> SB CETKR
+    <a href="/" class="flex items-center gap-3 hover:scale-105 transition-transform duration-300">
+      <img src="/SB_LOGO_W.png" alt="IEEE SB CETKR logo" class="w-10 h-10 object-contain" />
+      <span class="text-2xl font-bold tracking-wider"><span class="text-cyan-400">IEEE</span> SB CETKR</span>
     </a>
 
     <!-- Desktop Navigation -->
