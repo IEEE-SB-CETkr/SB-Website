@@ -339,7 +339,7 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       id: 22,
       name: "Amay M Thamban",
       role: "Membership Development Chair",
-      image: "/images/team/KaiVarghese.jpeg",
+      image: "/images/team/Amay.jpeg",
       social: {
         linkedin: "https://www.linkedin.com/inn/aymt",
         github: "https:github.com/amaymt990",
