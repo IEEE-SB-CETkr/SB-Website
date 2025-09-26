@@ -30,13 +30,38 @@ export interface ExecomMember {
   year?: string;
 }
 
-export const execomMembers: { [key: string]: ExecomMember[] } = {
+// Import all images from src/media/team as URLs so Astro/Vite can optimize them.
+// We use eager import with Vite's recommended query so the values are strings at build time.
+const _teamImports = import.meta.glob('../media/team/*.{jpg,jpeg,png,webp,avif}', { eager: true, query: '?url', import: 'default' });
+const _teamMap: Record<string, string> = Object.fromEntries(
+  Object.entries(_teamImports).map(([p, url]) => [p.split('/').pop() ?? p, String(url)])
+);
+
+function resolveTeamImage(img: string): string {
+  if (!img) return img;
+  // If already an absolute URL (http(s):) leave it
+  if (/^https?:\/\//i.test(img)) return img;
+
+  // If it's an absolute public path like /media/team/Foo.jpg, try to map by basename
+  const publicTeamMatch = /\/media\/team\/(.+)$/.exec(img);
+  if (publicTeamMatch) {
+    const base = publicTeamMatch[1];
+    if (_teamMap[base]) return _teamMap[base];
+    return img; // no optimized version found; keep public path
+  }
+
+  // If it's a relative path (e.g. ../media/team/Name.jpg) or bare filename, map by basename
+  const base = img.split('/').pop() ?? img;
+  if (_teamMap[base]) return _teamMap[base];
+  return img;
+}
+export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   "Branch Counselor": [
     {
       id: 0,
       name: "Dr. Naveena AK",
       role: "Branch Counselor",
-      image: "/images/team/Dr.Naveena.jpeg",
+  image: ("../media/team/Dr.Naveena.jpeg"),
       social: {},
       department: "HOD - Department of CSE",
       year: "Faculty"
@@ -47,7 +72,7 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       id: 1,
       name: "Heba Hassan",
       role: "Chairperson",
-      image: "/images/team/HebaHassan.jpeg",
+  image: ("../media/team/HebaHassan.jpeg"),
       social: {
         linkedin: "http://www.linkedin.com/in/heba-hassan-a93607247",
         github: "https://github.com/hebahassan22",
@@ -62,7 +87,7 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       id: 2,
       name: "Aliya TM",
       role: "Vice Chairperson",
-      image: "/images/team/Aliya.jpeg",
+  image: ("../media/team/Aliya.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/aliya-tm-6b60762b3/",
         instagram: "https://www.instagram.com/__alyaahh?igsh=eXFsZHpxYmszbXU3"
@@ -76,7 +101,7 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       id: 3,
       name: "Akshay Sreedharan",
       role: "Secretary",
-      image: "/images/team/AkshaySreedharan.jpeg",
+  image: ("../media/team/AkshaySreedharan.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/akshay-sreedharan-125890325",
         instagram: "https://www.instagram.com/a_4_ksh_y?igsh=MXdsb3M5dDV2Zm04MA==",
@@ -91,7 +116,7 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       id: 4,
       name: "Anush Ahmed",
       role: "Joint Secretary",
-      image: "/images/team/Anush.jpeg",
+  image: ("../media/team/Anush.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/anush-ahmed-15144a316?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
         instagram: "https://www.instagram.com/anush__ahmed"
@@ -105,7 +130,7 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       id: 5,
       name: "Vaishnav K",
       role: "Treasurer",
-      image: "/images/team/Vaishnav.jpeg",
+  image: ("../media/team/Vaishnav.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/vaishnav-kadambur-0a6296367?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
         instagram: "https://www.instagram.com/vaishnav_kadambur"
@@ -119,7 +144,7 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       id: 6,
       name: "Abhishek Vadakke Madam",
       role: "Webmaster",
-      image: "/images/team/Abhishek.jpeg",
+  image: ("../media/team/Abhishek.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/abhishek-vadakke-madam-2b7b53296",
         github: "https://github.com/Unkn0wn-007",
@@ -132,7 +157,7 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       id: 7,
       name: "Anukheth Sunil",
       role: "Webmaster",
-      image: "/images/team/Anukheth.jpeg",
+  image: ("../media/team/Anukheth.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/anukheth-sunil/",
         github: "https://github.com/kethu-x86",
@@ -147,7 +172,7 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       id: 8,
       name: "Jasim AG",
       role: "Event Coordinator",
-      image: "/images/team/Jasim.jpeg",
+  image: ("../media/team/Jasim.jpeg"),
       social: {
         linkedin: "http://linkedin.com/in/jasim-ag-396a30316",
         instagram: "https://www.instagram.com/jasim_ag?igsh=MjYxZjVua3l0aHk5&utm_source=qr"
@@ -161,7 +186,7 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       id: 9,
       name: "Mubeen Keerantakath",
       role: "Design Lead",
-      image: "/images/team/MubeenKeerantakath.jpeg",
+  image: ("../media/team/MubeenKeerantakath.jpeg"),
       social: {
         instagram: "https://www.instagram.com/adobe.varayan"
       },
@@ -172,7 +197,7 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       id: 10,
       name: "Ridha Davood",
       role: "Design Lead",
-      image: "/images/team/Ridha.jpeg",
+  image: ("../media/team/Ridha.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/ridha-davood-01755a29b",
         github: "https://github.com/ridha-davood"
@@ -186,7 +211,7 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       id: 11,
       name: "Aadithyan Parangen",
       role: "Content Lead",
-      image: "/images/team/AadithyanParangen.jpeg",
+  image: ("../media/team/AadithyanParangen.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/aadithyan-p-2702a62a4?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
         github: "https://github.com/agaadhi",
@@ -199,7 +224,7 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       id: 12,
       name: "Laya Khathoon V",
       role: "Content Lead",
-      image: "/images/team/Laya.jpeg",
+  image: ("../media/team/Laya.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/laya-khathoon-v-763189387?trk=contact-info",
         github: "https://github.com/Layakhathoon",
@@ -214,7 +239,7 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       id: 13,
       name: "Athulya P N",
       role: "IEEE PES Chair",
-      image: "/images/team/Athulya.jpeg",
+  image: ("../media/team/Athulya.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/athulya-nixan-251a0b306?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
         instagram: "https://www.instagram.com/__.ann.____?igsh=YTlsZ2xranRyZ2pw"
@@ -228,7 +253,7 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       id: 14,
       name: "Abdullahi Farhan",
       role: "IEEE PES Vice Chair",
-      image: "/images/team/Farhan.jpeg",
+  image: ("../media/team/Farhan.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/abdullahi-farhan-402833281?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
         instagram: "https://www.instagram.com/abdullahi.farhan___?igsh=MXBpeTQxbjI5NXBsMQ=="
@@ -242,7 +267,7 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       id: 15,
       name: "Sukanya A Kamalakshan",
       role: "Women in Power Lead",
-      image: "/images/team/Sukanya.jpeg",
+  image: ("../media/team/Sukanya.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/sukanya-a-kamalakshan-0ab6b0297",
         instagram: "https://www.instagram.com/sukanya_kamal"
@@ -256,7 +281,7 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       id: 16,
       name: "James Wilson",
       role: "FYP Coordinator",
-      image: "/images/team/placeholder.jpeg",
+  image: ("../media/team/placeholder.jpeg"),
       social: {
         linkedin: "#"
       },
@@ -269,7 +294,7 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       id: 17,
       name: "Asliya S",
       role: "IEEE IAS Chair",
-      image: "/images/team/Asliya.jpeg",
+  image: ("../media/team/Asliya.jpeg"),
       social: {
         linkedin: "www.linkedin.com/in/asliya-s-9332a7304?utm_source=share_via&utm_content=profile&utm_medium=member_android",
         instagram: "https://www.instagram.com/as__liya.__?igsh=MWNjaTNqOW5tZG9qNQ=="
@@ -283,7 +308,7 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       id: 18,
       name: "Devanandan P",
       role: "IEEE IAS Vice Chair",
-      image: "/images/team/Devanandan.jpeg",
+  image: ("../media/team/Devanandan.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/devanandan-p-906101367",
         instagram: "https://www.instagram.com/devanandanp_08?igsh=c283YmU1dWpvbWxz"
@@ -297,7 +322,7 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       id: 19,
       name: "Anjana. K",
       role: "IEEE WIE Chair",
-      image: "/images/team/Anjana.jpeg",
+  image: resolveTeamImage("/media/team/Anjana.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/anjana-k-973740332",
         instagram: "https://www.instagram.com/anjahhna?igsh=dTV2YXp6eDhheTNz"
@@ -311,7 +336,7 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       id: 20,
       name: "Adhima Sudheer MV",
       role: "IEEE WIE Vice Chair",
-      image: "/images/team/Adhima.jpeg",
+  image: resolveTeamImage("/media/team/Adhima.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/adhima-sudheer-mv-450701332",
         instagram: "https://www.instagram.com/__adhimasudheer?igsh=MWhoNzI3Z2N2dnNhaw=="
@@ -325,7 +350,7 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       id: 21,
       name: "Unnikrishnan Namboothiri EN",
       role: "IEEE Link Representative",
-      image: "/images/team/placeholder.jpeg",
+  image: resolveTeamImage("/media/team/placeholder.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/unnikrishnan-namboothiri-en-63aa58332",
         instagram: "https://www.instagram.com/iunni_005"
@@ -334,12 +359,12 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       year: "2024"
     }
   ],
-  "Membership Development Chair": [
+  "Membership Development Coordinator": [
     {
       id: 22,
       name: "Amay M Thamban",
-      role: "Membership Development Chair",
-      image: "/images/team/Amay.jpeg",
+      role: "Membership Development Coordinator",
+  image: resolveTeamImage("/media/team/Amay.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/inn/aymt",
         github: "https:github.com/amaymt990",
@@ -354,7 +379,7 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       id: 23,
       name: "Aadith V P",
       role: "ECC",
-      image: "/images/team/Aadith.jpeg",
+  image: resolveTeamImage("/media/team/Aadith.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/aadithvp",
         github: "https://github.com/aadithvp",
@@ -367,15 +392,23 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
   "Media": [
     {
       id: 24,
-      name:  "Parthiv E.V",
+      name:  "Parthiv EV",
       role:  "Media Lead",
-      image: "/images/team/Parthiv.jpeg",
+  image: resolveTeamImage("/media/team/Parthiv.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/parthiv-ev-323512302?trk=contact-info",
         instagram: "https://www.instagram.com/pa6thiv?igsh=MXBscjY0aG1qcWtiag=="
       },
-      department: "ECE",
+      department: "EEE",
       year: "2022"
     }
   ]
 };
+
+// Build-time resolved copy: replace image paths with imported URLs when possible.
+export const execomMembers: { [key: string]: ExecomMember[] } = Object.fromEntries(
+  Object.entries(execomMembersRaw).map(([group, members]) => [
+    group,
+    members.map((m) => ({ ...m, image: resolveTeamImage(m.image) }))
+  ])
+) as { [key: string]: ExecomMember[] };
