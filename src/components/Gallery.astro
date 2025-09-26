@@ -17,6 +17,7 @@
 -->
 ---
 import { Image } from 'astro:assets';
+import '../styles/components/gallery.css';
 
 interface GalleryItem {
   type: 'image' | 'video';
@@ -203,6 +204,3 @@ const galleryId = `gallery-${Math.random().toString(36).substring(2, 9)}`;
     });
   });
 </script>
-
----
-import '../styles/components/gallery.css';
