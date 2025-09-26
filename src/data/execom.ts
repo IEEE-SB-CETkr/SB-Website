@@ -31,16 +31,13 @@ export interface ExecomMember {
 }
 
 export const execomMembers: { [key: string]: ExecomMember[] } = {
-  "Branch Advisor": [
+  "Branch Counselor": [
     {
       id: 0,
       name: "Dr. Naveena AK",
       role: "Branch Counselor",
       image: "/images/team/Dr.Naveena.jpeg",
-      social: {
-        linkedin: "https://www.linkedin.com/in/saji-gopinath-4b4b0214",
-        instagram: "https://www.instagram.com/sajigopinath_/?igsh=MWZ1Z2Q3a3ZkZzVt"
-      },
+      social: {},
       department: "HOD - Department of CSE",
       year: "Faculty"
     }
@@ -133,7 +130,7 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
     },
     {
       id: 7,
-      name: "Anukheth",
+      name: "Anukheth Sunil",
       role: "Webmaster",
       image: "/images/team/Anukheth.jpeg",
       social: {
@@ -288,7 +285,8 @@ export const execomMembers: { [key: string]: ExecomMember[] } = {
       role: "IEEE IAS Vice Chair",
       image: "/images/team/Devanandan.jpeg",
       social: {
-        linkedin: "https://www.linkedin.com/in/devanandan-p-906101367?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+        linkedin: "https://www.linkedin.com/in/devanandan-p-906101367",
+        instagram: "https://www.instagram.com/devanandanp_08?igsh=c283YmU1dWpvbWxz"
       },
       department: "Electronics",
       year: "2023"
