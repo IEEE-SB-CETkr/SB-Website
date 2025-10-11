@@ -350,7 +350,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
       id: 21,
       name: "Unnikrishnan Namboothiri EN",
       role: "IEEE Link Representative",
-  image: resolveTeamImage("/media/team/placeholder.jpeg"),
+  image: resolveTeamImage("/media/team/Unni.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/unnikrishnan-namboothiri-en-63aa58332",
         instagram: "https://www.instagram.com/iunni_005"
