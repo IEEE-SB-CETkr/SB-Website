@@ -9,7 +9,7 @@ const chapters = [
   {
     id: "pes",
     title: "Power & Energy Society",
-    shortTitle: "PESCO",
+    shortTitle: "PES",
     description:
       "Advancing the theory and practice of electrical and electronic engineering in power systems.",
     vision:
@@ -25,6 +25,11 @@ const chapters = [
     ],
     bgColor: "bg-yellow-500/10",
     color: "text-yellow-400",
+    borderColor: "group-hover:border-yellow-500/50",
+    shadowColor: "hover:shadow-yellow-500/20",
+    badgeBg: "bg-yellow-400/10",
+    badgeText: "text-yellow-300",
+    iconColor: "text-yellow-400",
     stats: { events: 12, year: 2015 },
     highlights: [
       "Annual Power Symposium",
@@ -53,6 +58,11 @@ const chapters = [
     ],
     bgColor: "bg-pink-500/10",
     color: "text-pink-400",
+    borderColor: "group-hover:border-pink-500/50",
+    shadowColor: "hover:shadow-pink-500/20",
+    badgeBg: "bg-pink-400/10",
+    badgeText: "text-pink-300",
+    iconColor: "text-pink-400",
     stats: { events: 15, year: 2016 },
     highlights: [
       "Women in Tech Conference",
@@ -81,6 +91,11 @@ const chapters = [
     ],
     bgColor: "bg-blue-500/10",
     color: "text-blue-400",
+    borderColor: "group-hover:border-blue-500/50",
+    shadowColor: "hover:shadow-blue-500/20",
+    badgeBg: "bg-blue-400/10",
+    badgeText: "text-blue-300",
+    iconColor: "text-blue-400",
     stats: { events: 14, year: 2015 },
     highlights: [
       "Industrial Automation Workshops",
@@ -101,152 +116,144 @@ const description =
 <!--
  * Website for IEEE SB CETKR
  * Copyright (C) 2025 IEEE Student Branch CETKR
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
--->
+ -->
 <Header />
 <Layout title={title} description={description}>
+  <!-- Background Elements -->
+  <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+    <div
+      class="absolute top-0 right-[10%] w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[100px]"
+    >
+    </div>
+    <div
+      class="absolute bottom-0 left-[10%] w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[100px]"
+    >
+    </div>
+  </div>
+
   <!-- Hero Section -->
-  <section
-    class="relative pt-32 pb-20 bg-gradient-to-br from-slate-900 to-slate-800"
-  >
-    <div class="absolute inset-0 opacity-20">
+  <section class="relative pt-40 pb-20 overflow-hidden">
+    <div class="absolute inset-0 z-0">
       <div
-        class="absolute inset-0 bg-[url('/images/grid.svg')] [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"
+        class="absolute inset-0 bg-[url('/images/grid.svg')] opacity-10 [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"
       >
       </div>
     </div>
 
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
-          <span class="gradient-text">Technical Chapters</span>
-        </h1>
-        <div
-          class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto rounded-full mb-8"
+    <div class="container mx-auto px-6 relative z-10 text-center">
+      <div data-aos="fade-down" data-aos-duration="1000">
+        <span
+          class="inline-block px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 text-sm font-medium mb-6 backdrop-blur-sm"
         >
-        </div>
-        <p class="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
-          Join our specialized technical chapters to connect with like-minded
-          individuals, enhance your skills, and stay at the forefront of
-          technological innovation.
-        </p>
+          Explore Our Communities
+        </span>
       </div>
+
+      <h1
+        class="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight"
+        data-aos="fade-up"
+        data-aos-duration="1000"
+        data-aos-delay="100"
+      >
+        Technical <span class="gradient-text font-extrabold">Chapters</span>
+      </h1>
+
+      <p
+        class="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed"
+        data-aos="fade-up"
+        data-aos-duration="1000"
+        data-aos-delay="200"
+      >
+        Connect with like-minded innovators, enhance your technical skills, and
+        drive the future of technology through our specialized societies.
+      </p>
     </div>
   </section>
 
   <!-- Chapters Grid -->
-  <section class="py-16 bg-slate-900">
+  <section class="pb-32 relative z-10">
     <div class="container mx-auto px-6">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {
-          chapters.map((chapter) => (
-            <div class="group relative overflow-hidden rounded-2xl bg-slate-800/50 hover:bg-slate-800/70 backdrop-blur-sm border border-slate-700/50 hover:border-cyan-500/30 transition-all duration-300 hover:-translate-y-1 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/10 flex flex-col h-full">
-              <div class="p-6 flex-1 flex flex-col">
-                <div class="flex justify-end mb-6" />
+          chapters.map((chapter, index) => (
+            <div
+              class={`group relative flex flex-col h-full bg-slate-900/40 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${chapter.borderColor ?? "hover:border-cyan-500/30"} ${chapter.shadowColor ?? "hover:shadow-cyan-500/10"}`}
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+            >
+              {/* Card Header & Title */}
+              <div class="p-8 pb-4">
+                <div class="flex justify-between items-start mb-6">
+                  <div
+                    class={`p-3 rounded-2xl ${chapter.bgColor} ${chapter.color}`}
+                  >
+                    <span class="material-icons text-3xl">layers</span>
+                  </div>
+                  <span
+                    class={`px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase ${chapter.badgeBg ?? "bg-slate-800"} ${chapter.badgeText ?? "text-slate-300"}`}
+                  >
+                    {chapter.shortTitle}
+                  </span>
+                </div>
 
-                <h3 class="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
+                <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-white/90 transition-colors">
                   {chapter.title}
                 </h3>
-                <p class="text-slate-400 mb-4">{chapter.description}</p>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                  {chapter.description}
+                </p>
+              </div>
 
-                {/* Vision */}
-                <div class="mb-4">
-                  <h4 class="text-sm font-semibold text-cyan-400 mb-1 flex items-center">
-                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-2" />
-                    VISION
+              {/* Vision & Mission Tabs Area */}
+              <div class="px-8 py-6 bg-slate-950/30 border-y border-white/5 space-y-4 flex-grow">
+                <div>
+                  <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 flex items-center">
+                    <span class="material-icons text-sm mr-2 opacity-70">
+                      visibility
+                    </span>
+                    Vision
                   </h4>
-                  <p class="text-sm text-slate-300">{chapter.vision}</p>
+                  <p class="text-sm text-slate-300 italic">
+                    "{chapter.vision}"
+                  </p>
                 </div>
+              </div>
 
-                {/* Mission */}
-                <div class="mb-4">
-                  <h4 class="text-sm font-semibold text-cyan-400 mb-1 flex items-center">
-                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-2" />
-                    MISSION
-                  </h4>
-                  <p class="text-sm text-slate-300">{chapter.mission}</p>
+              {/* Values Tags */}
+              <div class="px-8 py-4">
+                <div class="flex flex-wrap gap-2">
+                  {chapter.values.slice(0, 3).map((value) => (
+                    <span class="text-[10px] text-slate-400 bg-slate-800/50 border border-white/5 px-2 py-1 rounded-md">
+                      # {value}
+                    </span>
+                  ))}
+                  {chapter.values.length > 3 && (
+                    <span class="text-[10px] text-slate-500 bg-slate-800/30 border border-white/5 px-2 py-1 rounded-md">
+                      +{chapter.values.length - 3} more
+                    </span>
+                  )}
                 </div>
+              </div>
 
-                {/* Values */}
-                <div class="mb-4">
-                  <h4 class="text-sm font-semibold text-cyan-400 mb-2 flex items-center">
-                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-2" />
-                    CORE VALUES
-                  </h4>
-                  <ul class="grid grid-cols-2 gap-2">
-                    {chapter.values.map((value) => (
-                      <li class="text-xs text-slate-300 bg-slate-800/50 px-3 py-1.5 rounded">
-                        {value}
-                      </li>
-                    ))}
-                  </ul>
+              {/* Footer / Stats */}
+              <div class="mt-auto px-8 py-5 bg-slate-950/50 border-t border-white/5 flex items-center justify-between group-hover:bg-slate-950/70 transition-colors">
+                <div class="flex flex-col">
+                  <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">
+                    Chair
+                  </span>
+                  <span class="text-sm font-medium text-slate-200">
+                    {chapter.chair}
+                  </span>
                 </div>
-
-                <div class="mt-auto pt-4">
-                  <div class="grid grid-cols-2 gap-3">
-                    <div class="bg-slate-800/50 p-3 rounded-lg">
-                      <p class="text-xs text-cyan-400 font-medium mb-1">
-                        CHAIR
-                      </p>
-                      <p class="text-sm text-white font-medium">
-                        {chapter.chair}
-                      </p>
-                    </div>
-                    <div class="bg-slate-800/50 p-3 rounded-lg">
-                      <p class="text-xs text-cyan-400 font-medium mb-1">
-                        VICE CHAIR
-                      </p>
-                      <p class="text-sm text-white font-medium">
-                        {chapter.viceChair}
-                      </p>
-                    </div>
-                    <div class="bg-slate-800/50 p-3 rounded-lg">
-                      <p class="text-xs text-cyan-400 font-medium mb-1">
-                        ESTABLISHED
-                      </p>
-                      <p class="text-white font-medium">{chapter.stats.year}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="pt-5 mt-5 border-t border-slate-700/50">
-                  <h4 class="text-sm font-medium text-cyan-400 mb-3">
-                    Key Activities:
-                  </h4>
-                  <ul class="space-y-2.5">
-                    {chapter.highlights.map((item) => (
-                      <li class="flex items-start group/item">
-                        <svg
-                          class="h-5 w-5 text-cyan-400 mr-3 mt-0.5 flex-shrink-0"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                        <span class="text-sm text-slate-300 group-hover/item:text-white transition-colors">
-                          {item}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
+                <div class="text-right">
+                  <span class="block text-[10px] text-slate-500 font-bold uppercase tracking-wider">
+                    Est.
+                  </span>
+                  <span
+                    class={`text-sm font-bold ${chapter.color ?? "text-cyan-400"}`}
+                  >
+                    {chapter.stats.year}
+                  </span>
                 </div>
               </div>
             </div>
@@ -256,6 +263,5 @@ const description =
     </div>
   </section>
 
-  <!-- Footer -->
   <Footer />
 </Layout>

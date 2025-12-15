@@ -1,206 +1,404 @@
-<!--
- * Website for IEEE SB CETKR
- * Copyright (C) 2025 IEEE Student Branch CETKR
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
--->
 ---
-import { Image } from 'astro:assets';
-import '../styles/components/gallery.css';
-
 interface GalleryItem {
-  type: 'image' | 'video';
+  type: "image" | "video";
   url: string;
   alt?: string;
   caption?: string;
+  thumbnail?: string; // Optional: Poster for videos to avoid loading full video in grid
 }
 
 interface Props {
   items: GalleryItem[];
-  className?: string;
+  class?: string;
+  hideElementId?: string; // Optional: ID of an element (like a navbar) to hide when lightbox opens
 }
 
-const { items = [], className = '' } = Astro.props;
-const galleryId = `gallery-${Math.random().toString(36).substring(2, 9)}`;
+const { items = [], class: className = "", hideElementId } = Astro.props;
+const galleryId = `gallery-${Math.random().toString(36).slice(2, 9)}`;
 ---
 
-<div id={galleryId} class:list={['gallery-grid', className]}>
-  {items.map((item, index) => (
-    <a
-      href={item.url}
-      data-type={item.type}
-      data-caption={item.caption}
-      data-index={index}
-      class="gallery-item group"
-      aria-label={`View item ${index + 1}: ${item.caption || item.alt || ''}`}
-    >
-      {item.type === 'image' ? (
-        <Image
-          src={item.url}
-          alt={item.alt || 'Gallery image'}
-          width={400}
-          height={300}
-          format="webp"
-          quality={80}
-          loading="lazy"
-          class="gallery-thumbnail"
-        />
-      ) : (
-        <div class="video-thumbnail-wrapper">
-          <video
-            src={item.url}
-            class="gallery-thumbnail"
-            preload="metadata"
-            muted
-            loop
-            playsinline
-          >
-            Your browser does not support the video tag.
-          </video>
-          <div class="video-play-icon">
-            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M6.3 2.841A1.5 1.5 0 0 0 4 4.118v11.764a1.5 1.5 0 0 0 2.3 1.277l9.344-5.882a1.5 1.5 0 0 0 0-2.554L6.3 2.84Z"></path></svg>
+<section id={galleryId} class:list={["w-full", className]}>
+  <div class="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4">
+    {
+      items.map((item, index) => (
+        <a
+          href={item.url}
+          data-type={item.type}
+          data-caption={item.caption || ""}
+          data-index={index}
+          class="gallery-trigger group relative block break-inside-avoid rounded-xl overflow-hidden bg-slate-900 border border-white/5 shadow-md hover:shadow-cyan-500/10 transition-transform duration-300 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+          aria-label={`View ${item.type}: ${item.caption || item.alt || "Gallery item"}`}
+        >
+          <div class="relative overflow-hidden aspect-auto">
+            {item.type === "image" ? (
+              <img
+                src={item.url}
+                alt={item.alt || ""}
+                class="w-full h-auto object-cover transform transition-transform duration-700 will-change-transform group-hover:scale-105"
+                loading={index < 4 ? "eager" : "lazy"}
+                decoding="async"
+                width="600"
+                height="400"
+              />
+            ) : (
+              <div class="relative w-full">
+                {item.thumbnail ? (
+                  <img
+                    src={item.thumbnail}
+                    class="w-full h-auto object-cover opacity-80 group-hover:opacity-60 transition-opacity"
+                    loading="lazy"
+                    alt="Video thumbnail"
+                  />
+                ) : (
+                  <video
+                    src={item.url}
+                    class="w-full h-auto object-cover opacity-80 group-hover:opacity-60 transition-opacity"
+                    muted
+                    preload="metadata"
+                    playsinline
+                  />
+                )}
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30 group-hover:scale-110 group-hover:bg-white/30 transition-all duration-300">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      class="w-6 h-6 text-white"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+            {item.caption && (
+              <div class="absolute bottom-0 left-0 w-full p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                <p class="text-white text-sm font-medium leading-tight drop-shadow-md line-clamp-2">
+                  {item.caption}
+                </p>
+              </div>
+            )}
           </div>
-        </div>
-      )}
-      {item.caption && <div class="caption">{item.caption}</div>}
-    </a>
-  ))}
-</div>
-
-<div id="lightbox" class="lightbox-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption">
-  <div class="lightbox-content">
-    <div class="lightbox-media-wrapper">
-  <img id="lightbox-image" class="lightbox-media hidden" alt="Lightbox view" />
-  <video id="lightbox-video" class="lightbox-media hidden" controls playsinline></video>
-    </div>
-    <div id="lightbox-caption" class="lightbox-caption"></div>
+        </a>
+      ))
+    }
   </div>
-  <button id="lightbox-close" class="lightbox-button close" aria-label="Close lightbox">
-    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M6 18 18 6M6 6l12 12"></path></svg>
-  </button>
-  <button id="lightbox-prev" class="lightbox-button prev" aria-label="Previous item">
-    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="m15 19-7-7 7-7"></path></svg>
-  </button>
-  <button id="lightbox-next" class="lightbox-button next" aria-label="Next item">
-    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="m9 5 7 7-7 7"></path></svg>
-  </button>
-  <div id="lightbox-counter" class="lightbox-counter"></div>
-</div>
 
-<script define:vars={{ galleryId, items }}>
-  document.addEventListener('DOMContentLoaded', () => {
+  <dialog
+    id={`${galleryId}-lightbox`}
+    class="fixed inset-0 z-[9999] w-full h-full p-0 m-0 bg-transparent backdrop:bg-slate-950/95 backdrop:backdrop-blur-md open:animate-fade-in closed:animate-fade-out"
+    aria-hidden="true"
+  >
+    <div
+      class="relative w-full h-full flex flex-col items-center justify-center"
+    >
+      <div
+        class="absolute top-0 left-0 w-full p-4 flex justify-between items-center z-50 bg-gradient-to-b from-black/60 to-transparent pointer-events-none"
+      >
+        <span
+          id="lb-counter"
+          class="text-white/90 font-mono text-sm pointer-events-auto px-3 py-1 bg-black/20 rounded-full backdrop-blur-md border border-white/10"
+        ></span>
+        <button
+          id="lb-close"
+          class="pointer-events-auto p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/50"
+          aria-label="Close lightbox"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <button
+        id="lb-prev"
+        class="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/20 hover:bg-black/40 text-white/90 hover:text-white backdrop-blur-sm border border-white/10 transition-all hover:scale-105 z-40 hidden md:flex focus:outline-none focus:ring-2 focus:ring-white/50"
+        aria-label="Previous image"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 19.5L8.25 12l7.5-7.5"></path>
+        </svg>
+      </button>
+
+      <div
+        class="relative w-full h-full flex items-center justify-center p-4"
+        id="lb-backdrop-target"
+      >
+        <div
+          class="relative max-w-[95vw] max-h-[85vh] shadow-2xl overflow-hidden rounded-md bg-black"
+        >
+          <img
+            id="lb-img"
+            class="max-w-full max-h-[85vh] object-contain hidden"
+            alt="Lightbox"
+            draggable="false"
+          />
+          <video
+            id="lb-video"
+            class="max-w-full max-h-[85vh] hidden"
+            controls
+            playsinline></video>
+        </div>
+
+        <div
+          id="lb-caption-container"
+          class="absolute bottom-8 left-1/2 -translate-x-1/2 max-w-xl w-full px-4 text-center pointer-events-none hidden"
+        >
+          <p
+            id="lb-caption"
+            class="inline-block px-4 py-2 bg-black/60 backdrop-blur-md rounded-lg text-white/90 text-sm font-medium shadow-lg"
+          >
+          </p>
+        </div>
+      </div>
+
+      <button
+        id="lb-next"
+        class="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/20 hover:bg-black/40 text-white/90 hover:text-white backdrop-blur-sm border border-white/10 transition-all hover:scale-105 z-40 hidden md:flex focus:outline-none focus:ring-2 focus:ring-white/50"
+        aria-label="Next image"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
+        </svg>
+      </button>
+    </div>
+  </dialog>
+</section>
+
+<style>
+  /* Minimal animations for Dialog open/close */
+  dialog[open] {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+  dialog.closing {
+    animation: fadeOut 0.2s ease-in forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+</style>
+
+<script define:vars={{ galleryId, hideElementId }}>
+  (() => {
     const gallery = document.getElementById(galleryId);
     if (!gallery) return;
 
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.getElementById('lightbox-image');
-    const lightboxVideo = document.getElementById('lightbox-video');
-    const lightboxCaption = document.getElementById('lightbox-caption');
-    const lightboxCounter = document.getElementById('lightbox-counter');
-    const closeBtn = document.getElementById('lightbox-close');
-    const prevBtn = document.getElementById('lightbox-prev');
-    const nextBtn = document.getElementById('lightbox-next');
+    // Elements
+    const dialog = document.getElementById(`${galleryId}-lightbox`);
+    const imgEl = document.getElementById("lb-img");
+    const vidEl = document.getElementById("lb-video");
+    const captionEl = document.getElementById("lb-caption");
+    const captionContainer = document.getElementById("lb-caption-container");
+    const counterEl = document.getElementById("lb-counter");
 
+    // Config
+    const externalHeader = hideElementId
+      ? document.getElementById(hideElementId)
+      : null;
+    let items = []; // Will be populated from DOM
     let currentIndex = 0;
+    let isTransitioning = false;
+
+    // Initialize: Collect items from DOM to avoid JSON bloat
+    const triggers = gallery.querySelectorAll(".gallery-trigger");
+    triggers.forEach((el, idx) => {
+      items.push({
+        type: el.dataset.type,
+        url: el.getAttribute("href"),
+        caption: el.dataset.caption,
+      });
+
+      // Attach click directly
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        openLightbox(idx);
+      });
+    });
+
+    function updateContent(index) {
+      const item = items[index];
+
+      // Reset Media
+      imgEl.classList.add("hidden");
+      vidEl.classList.add("hidden");
+      vidEl.pause();
+
+      if (item.type === "image") {
+        imgEl.src = item.url;
+        imgEl.classList.remove("hidden");
+      } else {
+        vidEl.src = item.url;
+        vidEl.classList.remove("hidden");
+        // Optional: Auto-play video in lightbox
+        vidEl.play().catch(() => {});
+      }
+
+      // Caption
+      if (item.caption) {
+        captionEl.textContent = item.caption;
+        captionContainer.classList.remove("hidden");
+      } else {
+        captionContainer.classList.add("hidden");
+      }
+
+      // Counter
+      counterEl.textContent = `${index + 1} / ${items.length}`;
+      currentIndex = index;
+
+      // Preload neighbors
+      preload(index + 1);
+      preload(index - 1);
+    }
+
+    function openLightbox(index) {
+      if (dialog.open) return;
+      updateContent(index);
+      dialog.showModal();
+      document.body.style.overflow = "hidden";
+      if (externalHeader)
+        externalHeader.classList.add(
+          "opacity-0",
+          "pointer-events-none",
+          "transition-opacity"
+        );
+    }
+
+    function closeLightbox() {
+      dialog.classList.add("closing");
+      dialog.addEventListener(
+        "animationend",
+        () => {
+          dialog.classList.remove("closing");
+          dialog.close();
+          vidEl.pause();
+          vidEl.src = ""; // Stop buffering
+          document.body.style.overflow = "";
+          if (externalHeader)
+            externalHeader.classList.remove("opacity-0", "pointer-events-none");
+        },
+        { once: true }
+      );
+    }
+
+    function next() {
+      let nextIndex = currentIndex + 1;
+      if (nextIndex >= items.length) nextIndex = 0;
+      updateContent(nextIndex);
+    }
+
+    function prev() {
+      let prevIndex = currentIndex - 1;
+      if (prevIndex < 0) prevIndex = items.length - 1;
+      updateContent(prevIndex);
+    }
+
+    function preload(idx) {
+      if (idx < 0) idx = items.length - 1;
+      if (idx >= items.length) idx = 0;
+      if (items[idx].type === "image") {
+        const i = new Image();
+        i.src = items[idx].url;
+      }
+    }
+
+    // Event Listeners
+    document
+      .getElementById("lb-close")
+      .addEventListener("click", closeLightbox);
+    document.getElementById("lb-next").addEventListener("click", next);
+    document.getElementById("lb-prev").addEventListener("click", prev);
+
+    // Close on backdrop click
+    document
+      .getElementById("lb-backdrop-target")
+      .addEventListener("click", (e) => {
+        if (e.target.id === "lb-backdrop-target") closeLightbox();
+      });
+
+    // Keyboard Navigation
+    dialog.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "Escape") closeLightbox();
+    });
+
+    // Touch Swipe Logic
     let touchStartX = 0;
     let touchEndX = 0;
+    const minSwipeDistance = 50;
 
-    const galleryItems = Array.from(gallery.querySelectorAll('.gallery-item'));
+    dialog.addEventListener(
+      "touchstart",
+      (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      },
+      { passive: true }
+    );
 
-    function showItem(index) {
-      currentIndex = index;
-      const item = galleryItems[index];
-      const type = item.dataset.type;
-      const url = item.href;
-      const caption = item.dataset.caption;
+    dialog.addEventListener(
+      "touchend",
+      (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      },
+      { passive: true }
+    );
 
-      if (type === 'image') {
-        lightboxImage.src = url;
-        lightboxImage.style.display = 'block';
-        lightboxVideo.style.display = 'none';
-        lightboxVideo.pause();
-        lightboxVideo.src = '';
-      } else {
-        lightboxVideo.src = url;
-        lightboxVideo.style.display = 'block';
-        lightboxVideo.autoplay = true;
-        lightboxImage.style.display = 'none';
-        lightboxImage.src = '';
-      }
-
-      lightboxCaption.textContent = caption || '';
-      lightboxCounter.textContent = `${index + 1} / ${galleryItems.length}`;
-
-      lightbox.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-      
-      prevBtn.style.display = galleryItems.length > 1 ? 'flex' : 'none';
-      nextBtn.style.display = galleryItems.length > 1 ? 'flex' : 'none';
-
-      preload(currentIndex + 1);
-      preload(currentIndex - 1);
+    function handleSwipe() {
+      if (touchEndX < touchStartX - minSwipeDistance) next();
+      if (touchEndX > touchStartX + minSwipeDistance) prev();
     }
-
-    function hideLightbox() {
-      lightbox.style.display = 'none';
-      lightboxVideo.pause();
-      document.body.style.overflow = '';
-    }
-
-    function showNext() {
-      showItem((currentIndex + 1) % galleryItems.length);
-    }
-
-    function showPrev() {
-      showItem((currentIndex - 1 + galleryItems.length) % galleryItems.length);
-    }
-    
-    function preload(index) {
-      const total = galleryItems.length;
-      if (index < 0 || index >= total) return;
-      const item = galleryItems[index];
-      if (item.dataset.type === 'image') {
-        const img = new Image();
-        img.src = item.href;
-      }
-    }
-
-    gallery.addEventListener('click', (e) => {
-      e.preventDefault();
-      const targetItem = e.target.closest('.gallery-item');
-      if (targetItem) {
-        showItem(parseInt(targetItem.dataset.index));
-      }
-    });
-
-    closeBtn.addEventListener('click', hideLightbox);
-    nextBtn.addEventListener('click', showNext);
-    prevBtn.addEventListener('click', showPrev);
-
-    document.addEventListener('keydown', (e) => {
-      if (lightbox.style.display === 'flex') {
-        if (e.key === 'Escape') hideLightbox();
-        if (e.key === 'ArrowRight') showNext();
-        if (e.key === 'ArrowLeft') showPrev();
-      }
-    });
-
-    lightbox.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX }, { passive: true });
-    lightbox.addEventListener('touchend', e => {
-      touchEndX = e.changedTouches[0].screenX;
-      if (touchEndX < touchStartX - 50) showNext();
-      if (touchEndX > touchStartX + 50) showPrev();
-    });
-  });
+  })();
 </script>

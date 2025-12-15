@@ -1,3 +1,21 @@
+---
+import Layout from "./Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+export interface Props {
+  title: string;
+  description?: string;
+  pubDate: Date;
+  image?: {
+    url: string;
+    alt?: string;
+  };
+}
+
+const { title, description, pubDate, image } = Astro.props;
+---
+
 <!--
  * Website for IEEE SB CETKR
  * Copyright (C) 2025 IEEE Student Branch CETKR
@@ -15,72 +33,99 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
 -->
----
-import Layout from './Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-
-export interface Props {
-  title: string;
-  description?: string;
-  pubDate: Date;
-  image?: {
-    url: string;
-    alt?: string;  // Made alt optional
-  };
-}
-
-const { title, description, pubDate, image } = Astro.props;
----
-
 <Layout title={`${title} | IEEE SB CETKR`}>
   <Header className="sticky top-0 z-50" />
-  
-  <main class="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 py-16">
-    <div class="container mx-auto px-4 max-w-4xl">
-      <a 
-        href="/newsletters" 
-        class="inline-flex items-center text-cyan-400 hover:text-cyan-300 transition-colors mb-8 group"
+
+  <main class="min-h-screen bg-slate-950 relative overflow-hidden">
+    <!-- Background Elements -->
+    <div class="fixed inset-0 opacity-20 pointer-events-none">
+      <div
+        class="absolute inset-0 bg-[url('/images/grid.svg')] [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-        </svg>
-        Back to all newsletters
-      </a>
+      </div>
+    </div>
+    <div
+      class="fixed top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"
+    >
+    </div>
+    <div
+      class="fixed bottom-0 left-0 -ml-20 -mb-20 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"
+    >
+    </div>
 
-      <article class="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-800 p-8">
-        <header class="mb-8">
-          <time class="text-sm text-cyan-400 font-mono">
-            {new Date(pubDate).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            })}
-          </time>
-          <h1 class="text-4xl font-bold mt-2 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-            {title}
-          </h1>
-          {description && (
-            <p class="mt-4 text-lg text-slate-300">
-              {description}
-            </p>
-          )}
-          {image?.url && (
-            <div class="mt-6">
-              <img 
-                src={image.url} 
-                alt={image.alt || title}
-                class="w-full h-auto max-h-64 object-contain mx-auto rounded-lg"
-                loading="lazy"
-              />
-            </div>
-          )}
-        </header>
+    <div class="relative z-10 pt-32 pb-20">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <a
+          href="/newsletters"
+          class="inline-flex items-center text-cyan-400 hover:text-cyan-300 transition-colors mb-12 group bg-slate-900/50 px-4 py-2 rounded-full border border-cyan-500/20 hover:border-cyan-500/50 hover:bg-cyan-950/30"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+          </svg>
+          Back to all newsletters
+        </a>
 
-        <div class="prose prose-invert max-w-none">
-          <slot />
-        </div>
-      </article>
+        <article
+          class="bg-slate-900/60 backdrop-blur-md rounded-3xl border border-slate-800 p-8 md:p-12 shadow-2xl"
+        >
+          <header class="mb-12 text-center">
+            <time
+              class="inline-block px-4 py-1.5 mb-6 text-sm font-bold text-cyan-400 bg-cyan-950/30 border border-cyan-500/20 rounded-full"
+            >
+              {
+                new Date(pubDate).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })
+              }
+            </time>
+            <h1
+              class="text-4xl md:text-5xl font-bold mt-2 bg-gradient-to-r from-cyan-300 via-cyan-400 to-blue-500 bg-clip-text text-transparent leading-tight mb-8"
+            >
+              {title}
+            </h1>
+
+            {
+              image?.url && (
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-700/50 mb-8 group max-w-2xl mx-auto">
+                  <div class="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent pointer-events-none" />
+                  <img
+                    src={image.url}
+                    alt={image.alt || title}
+                    class="w-full h-auto max-h-[400px] object-cover mx-auto transform group-hover:scale-105 transition-transform duration-700"
+                    loading="lazy"
+                  />
+                </div>
+              )
+            }
+
+            {
+              description && (
+                <p class="text-xl text-slate-300 leading-relaxed font-light italic border-l-4 border-cyan-500/50 pl-6 text-left">
+                  {description}
+                </p>
+              )
+            }
+          </header>
+
+          <div
+            class="prose prose-lg prose-invert max-w-none prose-headings:text-slate-100 prose-p:text-slate-300 prose-a:text-cyan-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-code:text-cyan-300 prose-pre:bg-slate-950/50 prose-pre:border prose-pre:border-slate-800 prose-blockquote:border-cyan-500/50 prose-blockquote:bg-cyan-950/10 prose-blockquote:py-2 prose-blockquote:px-6 prose-blockquote:rounded-r-lg"
+          >
+            <slot />
+          </div>
+        </article>
+      </div>
     </div>
   </main>
 

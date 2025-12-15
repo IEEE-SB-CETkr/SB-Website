@@ -1,29 +1,12 @@
-<!--
- * Website for IEEE SB CETKR
- * Copyright (C) 2025 IEEE Student Branch CETKR
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
--->
 ---
-import { getCollection } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import Gallery from '../../components/Gallery.astro';
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Gallery from "../../components/Gallery.astro";
 
 export async function getStaticPaths() {
-  const events = await getCollection('events');
+  const events = await getCollection("events");
   return events.map((event) => ({
     params: { slug: event.slug },
     props: { event },
@@ -33,106 +16,184 @@ export async function getStaticPaths() {
 const { event } = Astro.props;
 const { Content } = await event.render();
 
-const pageTitle = `${event.data.title} | IEEE SB CETKR`;
-const pageDescription = event.data.description || `Details about ${event.data.title}`;
+// Destructure for cleaner template access
+const {
+  title,
+  description,
+  eventDate,
+  image,
+  location,
+  registrationLink,
+  gallery,
+} = event.data;
+
+const pageTitle = `${title} | IEEE SB CETKR`;
+const pageDescription = description || `Details about ${title}`;
+
+// Formatters
+const dateStr = eventDate.toLocaleDateString("en-US", {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+const timeStr = eventDate.toLocaleTimeString("en-US", {
+  hour: "2-digit",
+  minute: "2-digit",
+});
 ---
 
 <Header />
-<Layout 
-  title={pageTitle}
-  description={pageDescription}
-  image={event.data.image?.url}
->
-  <main class="min-h-screen">
-    <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 bg-gradient-to-br from-slate-900 to-slate-800">
-      <div class="absolute inset-0 opacity-20">
-        <div class="absolute inset-0 bg-[url('/images/grid.svg')] [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
-      </div>
-      
-      <div class="container mx-auto px-6 relative z-10">
-        <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div class="max-w-4xl mx-auto text-center">
-            <a href="/events" class="inline-flex items-center text-cyan-400 hover:text-cyan-300 mb-8 transition-colors justify-center">
-              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-              </svg>
-              Back to All Events
-            </a>
-            <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
-              <span class="gradient-text">{event.data.title}</span>
-            </h1>
-            <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto rounded-full mb-8"></div>
-            <div class="flex flex-wrap justify-center gap-6 text-slate-300 mb-8">
-              <div class="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-              {event.data.eventDate.toLocaleDateString('en-US', { 
-                weekday: 'long',
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-              })}
-            </div>
-            
-            {event.data.location && (
-              <div class="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                {event.data.location}
-              </div>
-            )}
-          </div>
-          
-          {event.data.registrationLink && (
-            <a 
-              href={event.data.registrationLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-cyan-500/20"
-            >
-              Register Now
-              <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 -mr-1 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-              </svg>
-            </a>
-          )}
-        </div>
-      </div>
-    </section>
 
-    <!-- Event Content -->
-    <article class="prose prose-invert max-w-4xl mx-auto px-6 py-16">
-      {event.data.image && (
-        <div class="rounded-xl overflow-hidden mb-12 border border-slate-700/50">
-          <img 
-            src={event.data.image.url} 
-            alt={event.data.image.alt || event.data.title}
-            class="w-full h-auto max-h-[500px] object-cover"
-          />
-        </div>
-      )}
-      
-      <div class="prose-headings:text-white prose-a:text-cyan-400 prose-strong:text-white prose-ul:list-disc prose-ol:list-decimal prose-img:rounded-lg prose-img:border prose-img:border-slate-700/50">
-        <Content />
+<Layout title={pageTitle} description={pageDescription} image={image?.url}>
+  <main class="min-h-screen bg-slate-950 pt-24 pb-20 selection:bg-cyan-500/30">
+    <div class="container mx-auto px-4 sm:px-6 max-w-6xl">
+      <nav class="mb-8">
+        <a
+          href="/events"
+          class="group inline-flex items-center text-slate-400 hover:text-cyan-400 transition-colors text-sm font-medium"
+        >
+          <span
+            class="material-icons text-sm mr-2 group-hover:-translate-x-1 transition-transform"
+          >
+            arrow_back
+          </span>
+          Back to Events
+        </a>
+      </nav>
+
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-14">
+        <article class="lg:col-span-8 space-y-8">
+          <header>
+            <h1
+              class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight tracking-tight"
+            >
+              {title}
+            </h1>
+
+            {
+              image && (
+                <div class="rounded-2xl overflow-hidden shadow-2xl shadow-black/50 border border-slate-800 mb-8 bg-slate-900 aspect-video relative">
+                  <img
+                    src={image.url}
+                    alt={title}
+                    class="w-full h-full object-cover"
+                    loading="eager"
+                    fetchpriority="high"
+                  />
+                </div>
+              )
+            }
+          </header>
+
+          <div
+            class="prose prose-lg prose-invert max-w-none prose-headings:text-white prose-p:text-slate-300 prose-a:text-cyan-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-li:text-slate-300"
+          >
+            <Content />
+          </div>
+
+          {/* Gallery Section - Only render if gallery has items */}
+          {
+            gallery && gallery.length > 0 && (
+              <section class="pt-12 mt-12 border-t border-slate-800/50">
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                  <span class="material-icons text-cyan-500">
+                    photo_library
+                  </span>
+                  Event Gallery
+                </h2>
+                <Gallery items={gallery ?? []} />
+              </section>
+            )
+          }
+        </article>
+
+        <aside class="lg:col-span-4 relative">
+          <div class="sticky top-28 space-y-6">
+            <div
+              class="bg-slate-900/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-800 shadow-xl overflow-hidden relative"
+            >
+              <div
+                class="absolute top-0 right-0 -mr-16 -mt-16 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none"
+              >
+              </div>
+
+              <h3
+                class="text-lg font-semibold text-white mb-6 border-b border-slate-800 pb-4"
+              >
+                Event Details
+              </h3>
+
+              <div class="space-y-5">
+                <div class="flex items-start group">
+                  <span
+                    class="material-icons text-cyan-500 mr-3 mt-0.5 group-hover:text-cyan-400 transition-colors"
+                    >event</span
+                  >
+                  <div>
+                    <p
+                      class="text-xs text-slate-500 uppercase font-bold tracking-wider mb-0.5"
+                    >
+                      Date
+                    </p>
+                    <p class="text-slate-200 font-medium">{dateStr}</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start group">
+                  <span
+                    class="material-icons text-cyan-500 mr-3 mt-0.5 group-hover:text-cyan-400 transition-colors"
+                    >schedule</span
+                  >
+                  <div>
+                    <p
+                      class="text-xs text-slate-500 uppercase font-bold tracking-wider mb-0.5"
+                    >
+                      Time
+                    </p>
+                    <p class="text-slate-200 font-medium">{timeStr}</p>
+                  </div>
+                </div>
+
+                {
+                  location && (
+                    <div class="flex items-start group">
+                      <span class="material-icons text-cyan-500 mr-3 mt-0.5 group-hover:text-cyan-400 transition-colors">
+                        location_on
+                      </span>
+                      <div>
+                        <p class="text-xs text-slate-500 uppercase font-bold tracking-wider mb-0.5">
+                          Location
+                        </p>
+                        <p class="text-slate-200 font-medium">{location}</p>
+                      </div>
+                    </div>
+                  )
+                }
+              </div>
+
+              {
+                registrationLink && (
+                  <div class="mt-8 pt-6 border-t border-slate-800">
+                    <a
+                      href={registrationLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="group flex items-center justify-center w-full py-3.5 bg-gradient-to-r from-cyan-600 to-cyan-500 hover:from-cyan-500 hover:to-cyan-400 text-white font-bold rounded-xl transition-all shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 hover:-translate-y-0.5"
+                    >
+                      Register Now
+                      <span class="material-icons ml-2 text-sm group-hover:translate-x-1 transition-transform">
+                        open_in_new
+                      </span>
+                    </a>
+                  </div>
+                )
+              }
+            </div>
+          </div>
+        </aside>
       </div>
-      
-      {/* Event Gallery */}
-      {event.data.gallery && event.data.gallery.length > 0 && (
-        <div class="mt-16">
-          <h2 class="text-2xl font-bold text-white mb-8 flex items-center">
-            <span class="w-2 h-8 bg-cyan-400 rounded-full mr-3"></span>
-            Event Gallery
-          </h2>
-          <Gallery items={event.data.gallery} />
-        </div>
-      )}
-    </article>
+    </div>
   </main>
 </Layout>
 <Footer />

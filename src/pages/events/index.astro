@@ -1,190 +1,211 @@
-<!--
- * Website for IEEE SB CETKR
- * Copyright (C) 2025 IEEE Student Branch CETKR
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
--->
 ---
-import { getCollection } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
 
-const allEvents = await getCollection('events');
+// 1. Capture 'now' once for consistent filtering
+const now = new Date();
+
+// 2. Fetch and Sort
+const allEvents = await getCollection("events");
+
 const upcomingEvents = allEvents
-  .filter(event => event.data.eventDate >= new Date())
+  .filter((e) => e.data.eventDate >= now)
   .sort((a, b) => a.data.eventDate.getTime() - b.data.eventDate.getTime());
 
 const pastEvents = allEvents
-  .filter(event => event.data.eventDate < new Date())
+  .filter((e) => e.data.eventDate < now)
   .sort((a, b) => b.data.eventDate.getTime() - a.data.eventDate.getTime());
 
-const pageTitle = 'Events | IEEE SB CETKR';
-const pageDescription = 'Upcoming and past events organized by IEEE SB CETKR';
+// 3. Reusable Formatter
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
+const pageTitle = "Events | IEEE SB CETKR";
+const pageDescription = "Upcoming and past events organized by IEEE SB CETKR";
 ---
 
 <Header />
-<Layout 
-  title={pageTitle}
-  description={pageDescription}
->
-  <main class="min-h-screen">
-    <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 bg-gradient-to-br from-slate-900 to-slate-800">
-      <div class="absolute inset-0 opacity-20">
-        <div class="absolute inset-0 bg-[url('/images/grid.svg')] [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
-      </div>
-      
-      <div class="container mx-auto px-6 relative z-10">
-        <div class="max-w-4xl mx-auto text-center">
-          <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
-            <span class="gradient-text">IEEE SB CETKR Events</span>
-          </h1>
-          <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto rounded-full mb-8"></div>
-          <p class="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
-            Join us for exciting technical events, workshops, and competitions organized by IEEE Student Branch at College of Engineering Trikaripur.
-          </p>
+<Layout title={pageTitle} description={pageDescription}>
+  <main class="min-h-screen bg-slate-950">
+    <section
+      class="relative pt-32 pb-20 bg-gradient-to-br from-slate-900 to-slate-800 overflow-hidden"
+    >
+      <div class="absolute inset-0 opacity-20 pointer-events-none">
+        <div
+          class="absolute inset-0 bg-[url('/images/grid.svg')] [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"
+        >
         </div>
+      </div>
+
+      <div class="container mx-auto px-6 relative z-10 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
+          <span
+            class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500"
+          >
+            IEEE SB CETkr Events
+          </span>
+        </h1>
+        <div
+          class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto rounded-full mb-8"
+        >
+        </div>
+        <p
+          class="text-lg text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed"
+        >
+          Join us for exciting technical events, workshops, and competitions
+          organized by the IEEE Student Branch at College of Engineering
+          Trikaripur.
+        </p>
       </div>
     </section>
 
-    <!-- Upcoming Events -->
-    {upcomingEvents.length > 0 && (
-      <section class="py-16 bg-slate-900">
-        <div class="container mx-auto px-6 max-w-7xl">
-          <h2 class="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center">
-            <span class="w-2 h-8 bg-cyan-400 rounded-full mr-3"></span>
-            Upcoming Events
-          </h2>
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {upcomingEvents.map((event) => (
-              <article class="group bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 h-full flex flex-col hover:shadow-lg hover:shadow-cyan-500/10">
-                <a href={`/events/${event.slug}/`} class="block h-full flex flex-col">
-                  {event.data.image && (
-                    <div class="h-48 md:h-56 overflow-hidden bg-slate-700/30">
-                      <img 
-                        src={event.data.image.url} 
-                        alt={event.data.image.alt || event.data.title}
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        loading="lazy"
-                      />
-                    </div>
-                  )}
-                  <div class="p-6 flex-1 flex flex-col">
-                    <div class="flex-1">
-                      <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+    {
+      upcomingEvents.length > 0 && (
+        <section class="py-16 bg-slate-900">
+          <div class="container mx-auto px-6 max-w-7xl">
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center">
+              <span class="w-2 h-8 bg-cyan-400 rounded-full mr-3 shadow-[0_0_15px_rgba(34,211,238,0.5)]" />
+              Upcoming Events
+            </h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {upcomingEvents.map((event) => (
+                <article class="group relative flex flex-col h-full bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10 hover:-translate-y-1">
+                  <a
+                    href={`/events/${event.slug}/`}
+                    class="flex flex-col h-full"
+                  >
+                    {event.data.image && (
+                      <div class="h-48 md:h-56 overflow-hidden bg-slate-700/30 relative">
+                        <img
+                          src={event.data.image.url}
+                          alt={event.data.image.alt || event.data.title}
+                          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-60" />
+                      </div>
+                    )}
+
+                    <div class="p-6 flex-1 flex flex-col">
+                      <h3 class="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors line-clamp-2">
                         {event.data.title}
                       </h3>
-                      <p class="text-slate-300 text-sm mb-4 line-clamp-2">
+                      <p class="text-slate-300 text-sm mb-6 line-clamp-2 flex-1">
                         {event.data.description}
                       </p>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-slate-700/50">
-                      <div class="flex items-center text-sm text-slate-400 mb-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        {event.data.eventDate.toLocaleDateString('en-US', { 
-                          year: 'numeric', 
-                          month: 'long', 
-                          day: 'numeric',
-                          hour: '2-digit',
-                          minute: '2-digit'
-                        })}
-                      </div>
-                      {event.data.location && (
-                        <div class="flex items-center text-sm text-slate-400">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                          </svg>
-                          {event.data.location}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </a>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-    )}
 
-    <!-- Past Events -->
-    {pastEvents.length > 0 && (
-      <section class={`py-16 ${upcomingEvents.length > 0 ? 'bg-slate-900/50' : 'bg-slate-900'}`}>
-        <div class="container mx-auto px-6 max-w-7xl">
-          <h2 class="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center">
-            <span class="w-2 h-8 bg-cyan-400 rounded-full mr-3"></span>
-            Past Events
-          </h2>
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {pastEvents.map((event) => (
-              <article class="group bg-slate-800/30 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700/30 hover:border-cyan-500/30 transition-all duration-300 h-full flex flex-col hover:shadow-lg hover:shadow-cyan-500/5">
-                <a href={`/events/${event.slug}/`} class="block h-full flex flex-col">
-                  {event.data.image && (
-                    <div class="h-48 md:h-56 overflow-hidden bg-slate-700/20">
-                      <img 
-                        src={event.data.image.url} 
-                        alt={event.data.image.alt || event.data.title}
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        loading="lazy"
-                      />
+                      <div class="pt-4 border-t border-slate-700/50 space-y-2">
+                        <time
+                          datetime={event.data.eventDate.toISOString()}
+                          class="flex items-center text-sm text-slate-400"
+                        >
+                          <span class="material-icons text-base mr-2 text-cyan-400">
+                            calendar_today
+                          </span>
+                          {dateFormatter.format(event.data.eventDate)}
+                        </time>
+                        {event.data.location && (
+                          <div class="flex items-center text-sm text-slate-400">
+                            <span class="material-icons text-base mr-2 text-cyan-400">
+                              location_on
+                            </span>
+                            <span class="truncate">{event.data.location}</span>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  )}
-                  <div class="p-6 flex-1 flex flex-col">
-                    <div class="flex-1">
-                      <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                  </a>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      )
+    }
+
+    {
+      pastEvents.length > 0 && (
+        <section class="py-16 bg-slate-950 border-t border-slate-900">
+          <div class="container mx-auto px-6 max-w-7xl">
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center opacity-90">
+              <span class="w-2 h-8 bg-slate-600 rounded-full mr-3" />
+              Past Events
+            </h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {pastEvents.map((event) => (
+                <article class="group flex flex-col h-full bg-slate-900/50 rounded-2xl overflow-hidden border border-slate-800 hover:border-slate-700 transition-all duration-300 hover:shadow-lg">
+                  <a
+                    href={`/events/${event.slug}/`}
+                    class="flex flex-col h-full opacity-80 group-hover:opacity-100 transition-opacity"
+                  >
+                    {event.data.image && (
+                      <div class="h-48 overflow-hidden bg-slate-800">
+                        <img
+                          src={event.data.image.url}
+                          alt={event.data.image.alt || event.data.title}
+                          class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </div>
+                    )}
+
+                    <div class="p-6 flex-1 flex flex-col">
+                      <h3 class="text-lg font-bold text-slate-200 mb-2 group-hover:text-cyan-400 transition-colors">
                         {event.data.title}
                       </h3>
-                      <p class="text-slate-400 text-sm mb-4 line-clamp-2">
+                      <p class="text-slate-500 text-sm mb-4 line-clamp-2">
                         {event.data.description}
                       </p>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-slate-700/30">
-                      <div class="flex items-center text-sm text-slate-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        {event.data.eventDate.toLocaleDateString('en-US', { 
-                          year: 'numeric', 
-                          month: 'long', 
-                          day: 'numeric'
-                        })}
+
+                      <div class="mt-auto pt-4 border-t border-slate-800">
+                        <time
+                          datetime={event.data.eventDate.toISOString()}
+                          class="flex items-center text-sm text-slate-500"
+                        >
+                          <span class="material-icons text-base mr-2 text-slate-600">
+                            event
+                          </span>
+                          {dateFormatter.format(event.data.eventDate)}
+                        </time>
                       </div>
                     </div>
-                  </div>
-                </a>
-              </article>
-            ))}
+                  </a>
+                </article>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-    )}
+        </section>
+      )
+    }
 
-    {allEvents.length === 0 && (
-      <section class="py-32 text-center">
-        <div class="container mx-auto px-6">
-          <div class="max-w-2xl mx-auto">
-            <div class="text-6xl mb-6">📅</div>
-            <h2 class="text-2xl font-bold text-white mb-4">No Events Scheduled Yet</h2>
-            <p class="text-slate-400 mb-8">Check back later for upcoming events and workshops.</p>
+    {
+      allEvents.length === 0 && (
+        <section class="py-32 text-center">
+          <div class="container mx-auto px-6">
+            <div class="max-w-md mx-auto p-8 bg-slate-900/50 rounded-3xl border border-slate-800">
+              <span class="material-icons text-6xl text-slate-700 mb-4">
+                event_busy
+              </span>
+              <h2 class="text-2xl font-bold text-white mb-2">
+                No Events Scheduled
+              </h2>
+              <p class="text-slate-400">
+                Check back later for upcoming workshops and tech talks.
+              </p>
+            </div>
           </div>
-        </div>
-      </section>
-    )}
+        </section>
+      )
+    }
   </main>
 </Layout>
 <Footer />
