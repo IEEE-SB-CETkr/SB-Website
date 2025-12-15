@@ -76,7 +76,6 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
       social: {
         linkedin: "http://www.linkedin.com/in/heba-hassan-a93607247",
         github: "https://github.com/hebahassan22",
-        instagram: "https://www.instagram.com/__heba_hassan",
       },
       department: "CSE",
       year: "2022"
@@ -90,7 +89,6 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   image: ("../media/team/Aliya.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/aliya-tm-6b60762b3/",
-        instagram: "https://www.instagram.com/__alyaahh?igsh=eXFsZHpxYmszbXU3"
       },
       department: "CSE",
       year: "2022"
@@ -104,7 +102,6 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   image: ("../media/team/AkshaySreedharan.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/akshay-sreedharan-125890325",
-        instagram: "https://www.instagram.com/a_4_ksh_y?igsh=MXdsb3M5dDV2Zm04MA==",
         github: "https://github.com/AkshaySreedharan"
       },
       department: "CSE",
@@ -119,7 +116,6 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   image: ("../media/team/Anush.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/anush-ahmed-15144a316?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-        instagram: "https://www.instagram.com/anush__ahmed"
       },
       department: "CSE",
       year: "2023"
@@ -133,7 +129,6 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   image: ("../media/team/Vaishnav.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/vaishnav-kadambur-0a6296367?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
-        instagram: "https://www.instagram.com/vaishnav_kadambur"
       },
       department: "ECE",
       year: "2023"
@@ -147,8 +142,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   image: ("../media/team/Abhishek.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/abhishek-vadakke-madam-2b7b53296",
-        github: "https://github.com/Unkn0wn-007",
-        instagram: "https://www.instagram.com/shek_n0t_f0und"
+        github: "https://github.com/Unkn0wn-007"
       },
       department: "CSE",
       year: "2023"
@@ -160,8 +154,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   image: ("../media/team/Anukheth.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/anukheth-sunil/",
-        github: "https://github.com/kethu-x86",
-        instagram: "https://www.instagram.com/kethu_x86/"
+        github: "https://github.com/kethu-x86"
       },
       department: "CSE",
       year: "2023"
@@ -174,8 +167,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
       role: "Event Coordinator",
   image: ("../media/team/Jasim.jpeg"),
       social: {
-        linkedin: "http://linkedin.com/in/jasim-ag-396a30316",
-        instagram: "https://www.instagram.com/jasim_ag?igsh=MjYxZjVua3l0aHk5&utm_source=qr"
+        linkedin: "http://linkedin.com/in/jasim-ag-396a30316"
       },
       department: "CSE",
       year: "2023"
@@ -188,7 +180,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
       role: "Design Lead",
   image: ("../media/team/MubeenKeerantakath.jpeg"),
       social: {
-        instagram: "https://www.instagram.com/adobe.varayan"
+        linkedin: "https://www.linkedin.com/in/mubeen-keerantakath-2b7b53296"
       },
       department: "CSE",
       year: "2023"
@@ -214,8 +206,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   image: ("../media/team/AadithyanParangen.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/aadithyan-p-2702a62a4?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
-        github: "https://github.com/agaadhi",
-        instagram: "https://www.instagram.com/ag_.aadhi?igsh=MTF2MGU5anh4NnpwMg=="
+        github: "https://github.com/agaadhi"
       },
       department: "ECE",
       year: "2022"
@@ -227,8 +218,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   image: ("../media/team/Laya.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/laya-khathoon-v-763189387?trk=contact-info",
-        github: "https://github.com/Layakhathoon",
-        instagram: "https://www.instagram.com/laya.khathoon?igsh=MWVubG15aWpxdHc3bw%3D%3D&utm_source=qr"
+        github: "https://github.com/Layakhathoon"
       },
       department: "CSE",
       year: "2023"
@@ -241,8 +231,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
       role: "IEEE PES Chair",
   image: ("../media/team/Athulya.jpeg"),
       social: {
-        linkedin: "https://www.linkedin.com/in/athulya-nixan-251a0b306?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-        instagram: "https://www.instagram.com/__.ann.____?igsh=YTlsZ2xranRyZ2pw"
+        linkedin: "https://www.linkedin.com/in/athulya-nixan-251a0b306?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
       },
       department: "EEE",
       year: "2023"
@@ -255,8 +244,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
       role: "IEEE PES Vice Chair",
   image: ("../media/team/Farhan.jpeg"),
       social: {
-        linkedin: "https://www.linkedin.com/in/abdullahi-farhan-402833281?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-        instagram: "https://www.instagram.com/abdullahi.farhan___?igsh=MXBpeTQxbjI5NXBsMQ=="
+        linkedin: "https://www.linkedin.com/in/abdullahi-farhan-402833281?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
       },
       department: "CSE",
       year: "2024"
@@ -269,8 +257,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
       role: "Women in Power Lead",
   image: ("../media/team/Sukanya.jpeg"),
       social: {
-        linkedin: "https://www.linkedin.com/in/sukanya-a-kamalakshan-0ab6b0297",
-        instagram: "https://www.instagram.com/sukanya_kamal"
+        linkedin: "https://www.linkedin.com/in/sukanya-a-kamalakshan-0ab6b0297"
       },
       department: "EEE",
       year: "2023"
@@ -296,8 +283,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
       role: "IEEE IAS Chair",
   image: ("../media/team/Asliya.jpeg"),
       social: {
-        linkedin: "www.linkedin.com/in/asliya-s-9332a7304?utm_source=share_via&utm_content=profile&utm_medium=member_android",
-        instagram: "https://www.instagram.com/as__liya.__?igsh=MWNjaTNqOW5tZG9qNQ=="
+        linkedin: "www.linkedin.com/in/asliya-s-9332a7304?utm_source=share_via&utm_content=profile&utm_medium=member_android"
       },
       department: "ECE",
       year: "2023"
@@ -310,8 +296,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
       role: "IEEE IAS Vice Chair",
   image: ("../media/team/Devanandan.jpeg"),
       social: {
-        linkedin: "https://www.linkedin.com/in/devanandan-p-906101367",
-        instagram: "https://www.instagram.com/devanandanp_08?igsh=c283YmU1dWpvbWxz"
+        linkedin: "https://www.linkedin.com/in/devanandan-p-906101367"
       },
       department: "ECE",
       year: "2023"
@@ -324,8 +309,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
       role: "IEEE WIE Chair",
   image: resolveTeamImage("/media/team/Anjana.jpeg"),
       social: {
-        linkedin: "https://www.linkedin.com/in/anjana-k-973740332",
-        instagram: "https://www.instagram.com/anjahhna?igsh=dTV2YXp6eDhheTNz"
+        linkedin: "https://www.linkedin.com/in/anjana-k-973740332"
       },
       department: "ECE",
       year: "2023"
@@ -338,8 +322,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
       role: "IEEE WIE Vice Chair",
   image: resolveTeamImage("/media/team/Adhima.jpeg"),
       social: {
-        linkedin: "https://www.linkedin.com/in/adhima-sudheer-mv-450701332",
-        instagram: "https://www.instagram.com/__adhimasudheer?igsh=MWhoNzI3Z2N2dnNhaw=="
+        linkedin: "https://www.linkedin.com/in/adhima-sudheer-mv-450701332"
       },
       department: "ECE",
       year: "2023"
@@ -352,8 +335,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
       role: "IEEE Link Representative",
   image: resolveTeamImage("/media/team/Unni.jpeg"),
       social: {
-        linkedin: "https://www.linkedin.com/in/unnikrishnan-namboothiri-en-63aa58332",
-        instagram: "https://www.instagram.com/iunni_005"
+        linkedin: "https://www.linkedin.com/in/unnikrishnan-namboothiri-en-63aa58332"
       },
       department: "CSE",
       year: "2024"
@@ -367,8 +349,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   image: resolveTeamImage("/media/team/Amay.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/inn/aymt",
-        github: "https:github.com/amaymt990",
-        instagram: "https://www.instagram.com/aymt._"
+        github: "https:github.com/amaymt990"
       },
       department: "ECE",
       year: "2022"
@@ -382,8 +363,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   image: resolveTeamImage("/media/team/Aadith.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/aadithvp",
-        github: "https://github.com/aadithvp",
-        instagram: "https://www.instagram.com/aaadiithh"
+        github: "https://github.com/aadithvp"
       },
       department: "ECE",
       year: "2023"
@@ -397,7 +377,6 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   image: resolveTeamImage("/media/team/Parthiv.jpeg"),
       social: {
         linkedin: "https://www.linkedin.com/in/parthiv-ev-323512302?trk=contact-info",
-        instagram: "https://www.instagram.com/pa6thiv?igsh=MXBscjY0aG1qcWtiag=="
       },
       department: "EEE",
       year: "2022"
