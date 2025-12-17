@@ -23,19 +23,14 @@ const chapters = [
       "Diversity",
       "Innovation",
     ],
-    bgColor: "bg-yellow-500/10",
-    color: "text-yellow-400",
-    borderColor: "group-hover:border-yellow-500/50",
-    shadowColor: "hover:shadow-yellow-500/20",
-    badgeBg: "bg-yellow-400/10",
-    badgeText: "text-yellow-300",
-    iconColor: "text-yellow-400",
+    bgColor: "bg-yellow-50",
+    color: "text-yellow-700",
+    borderColor: "hover:border-yellow-300",
+    shadowColor: "hover:shadow-yellow-500/10",
+    badgeBg: "bg-yellow-100",
+    badgeText: "text-yellow-800",
+    iconColor: "text-yellow-600",
     stats: { events: 12, year: 2015 },
-    highlights: [
-      "Annual Power Symposium",
-      "Industrial Visits",
-      "Renewable Energy Workshops",
-    ],
     chair: "Athulya PN",
     viceChair: "Abdullahi Farhan",
   },
@@ -56,19 +51,14 @@ const chapters = [
       "Leadership",
       "Community",
     ],
-    bgColor: "bg-pink-500/10",
-    color: "text-pink-400",
-    borderColor: "group-hover:border-pink-500/50",
-    shadowColor: "hover:shadow-pink-500/20",
-    badgeBg: "bg-pink-400/10",
-    badgeText: "text-pink-300",
-    iconColor: "text-pink-400",
+    bgColor: "bg-pink-50",
+    color: "text-pink-700",
+    borderColor: "hover:border-pink-300",
+    shadowColor: "hover:shadow-pink-500/10",
+    badgeBg: "bg-pink-100",
+    badgeText: "text-pink-800",
+    iconColor: "text-pink-600",
     stats: { events: 15, year: 2016 },
-    highlights: [
-      "Women in Tech Conference",
-      "Mentorship Programs",
-      "Coding Workshops",
-    ],
     chair: "Anjana. K",
     viceChair: "Adhima Sudheer MV",
   },
@@ -89,19 +79,14 @@ const chapters = [
       "Innovation",
       "Knowledge Sharing",
     ],
-    bgColor: "bg-blue-500/10",
-    color: "text-blue-400",
-    borderColor: "group-hover:border-blue-500/50",
-    shadowColor: "hover:shadow-blue-500/20",
-    badgeBg: "bg-blue-400/10",
-    badgeText: "text-blue-300",
-    iconColor: "text-blue-400",
+    bgColor: "bg-blue-50",
+    color: "text-blue-700",
+    borderColor: "hover:border-blue-300",
+    shadowColor: "hover:shadow-blue-500/10",
+    badgeBg: "bg-blue-100",
+    badgeText: "text-blue-800",
+    iconColor: "text-blue-600",
     stats: { events: 14, year: 2015 },
-    highlights: [
-      "Industrial Automation Workshops",
-      "Technical Seminars",
-      "Plant Visits",
-    ],
     chair: "Asliya S",
     viceChair: "Devanandan P",
   },
@@ -122,46 +107,41 @@ const description =
   <!-- Background Elements -->
   <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
     <div
-      class="absolute top-0 right-[10%] w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[100px]"
+      class="absolute top-0 right-[10%] w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-[120px] mix-blend-multiply"
     >
     </div>
     <div
-      class="absolute bottom-0 left-[10%] w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[100px]"
+      class="absolute bottom-0 left-[10%] w-[600px] h-[600px] bg-purple-100/40 rounded-full blur-[120px] mix-blend-multiply"
     >
     </div>
   </div>
 
   <!-- Hero Section -->
   <section class="relative pt-40 pb-20 overflow-hidden">
-    <div class="absolute inset-0 z-0">
+    <div class="absolute inset-0 z-0 opacity-40">
       <div
-        class="absolute inset-0 bg-[url('/images/grid.svg')] opacity-10 [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"
+        class="absolute inset-0 bg-[url('/images/grid.svg')] [mask-image:linear-gradient(180deg,black,transparent)]"
       >
       </div>
     </div>
 
     <div class="container mx-auto px-6 relative z-10 text-center">
-      <div data-aos="fade-down" data-aos-duration="1000">
-        <span
-          class="inline-block px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 text-sm font-medium mb-6 backdrop-blur-sm"
-        >
-          Explore Our Communities
-        </span>
-      </div>
-
       <h1
-        class="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight"
+        class="text-4xl md:text-6xl font-bold text-zinc-900 mb-6 tracking-tight"
         data-aos="fade-up"
-        data-aos-duration="1000"
+        data-aos-duration="800"
         data-aos-delay="100"
       >
-        Technical <span class="gradient-text font-extrabold">Chapters</span>
+        Technical <span
+          class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-violet-600"
+          >Chapters</span
+        >
       </h1>
 
       <p
-        class="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed"
+        class="text-lg md:text-xl text-zinc-500 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
         data-aos="fade-up"
-        data-aos-duration="1000"
+        data-aos-duration="800"
         data-aos-delay="200"
       >
         Connect with like-minded innovators, enhance your technical skills, and
@@ -177,7 +157,7 @@ const description =
         {
           chapters.map((chapter, index) => (
             <div
-              class={`group relative flex flex-col h-full bg-slate-900/40 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${chapter.borderColor ?? "hover:border-cyan-500/30"} ${chapter.shadowColor ?? "hover:shadow-cyan-500/10"}`}
+              class={`group relative flex flex-col h-full bg-white/80 backdrop-blur-xl border border-zinc-200/80 rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl shadow-sm ${chapter.borderColor ?? "hover:border-blue-300"} ${chapter.shadowColor ?? "hover:shadow-blue-500/10"}`}
               data-aos="fade-up"
               data-aos-delay={index * 100}
             >
@@ -185,35 +165,35 @@ const description =
               <div class="p-8 pb-4">
                 <div class="flex justify-between items-start mb-6">
                   <div
-                    class={`p-3 rounded-2xl ${chapter.bgColor} ${chapter.color}`}
+                    class={`p-3 rounded-2xl ${chapter.bgColor} ${chapter.color} shadow-sm`}
                   >
                     <span class="material-icons text-3xl">layers</span>
                   </div>
                   <span
-                    class={`px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase ${chapter.badgeBg ?? "bg-slate-800"} ${chapter.badgeText ?? "text-slate-300"}`}
+                    class={`px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase border border-transparent ${chapter.badgeBg ?? "bg-zinc-100"} ${chapter.badgeText ?? "text-zinc-600"}`}
                   >
                     {chapter.shortTitle}
                   </span>
                 </div>
 
-                <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-white/90 transition-colors">
+                <h3 class="text-2xl font-bold text-zinc-900 mb-3 group-hover:text-blue-600 transition-colors">
                   {chapter.title}
                 </h3>
-                <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                <p class="text-zinc-500 text-sm leading-relaxed mb-6">
                   {chapter.description}
                 </p>
               </div>
 
               {/* Vision & Mission Tabs Area */}
-              <div class="px-8 py-6 bg-slate-950/30 border-y border-white/5 space-y-4 flex-grow">
+              <div class="px-8 py-6 bg-zinc-50/50 border-y border-zinc-100 space-y-4 flex-grow">
                 <div>
-                  <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 flex items-center">
+                  <h4 class="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-2 flex items-center">
                     <span class="material-icons text-sm mr-2 opacity-70">
                       visibility
                     </span>
                     Vision
                   </h4>
-                  <p class="text-sm text-slate-300 italic">
+                  <p class="text-sm text-zinc-600 italic font-medium">
                     "{chapter.vision}"
                   </p>
                 </div>
@@ -223,12 +203,12 @@ const description =
               <div class="px-8 py-4">
                 <div class="flex flex-wrap gap-2">
                   {chapter.values.slice(0, 3).map((value) => (
-                    <span class="text-[10px] text-slate-400 bg-slate-800/50 border border-white/5 px-2 py-1 rounded-md">
+                    <span class="text-[10px] text-zinc-500 bg-white border border-zinc-200 px-2.5 py-1 rounded-md font-semibold shadow-sm">
                       # {value}
                     </span>
                   ))}
                   {chapter.values.length > 3 && (
-                    <span class="text-[10px] text-slate-500 bg-slate-800/30 border border-white/5 px-2 py-1 rounded-md">
+                    <span class="text-[10px] text-zinc-400 bg-zinc-50 border border-zinc-100 px-2 py-1 rounded-md font-medium">
                       +{chapter.values.length - 3} more
                     </span>
                   )}
@@ -236,21 +216,21 @@ const description =
               </div>
 
               {/* Footer / Stats */}
-              <div class="mt-auto px-8 py-5 bg-slate-950/50 border-t border-white/5 flex items-center justify-between group-hover:bg-slate-950/70 transition-colors">
+              <div class="mt-auto px-8 py-5 bg-white border-t border-zinc-100 flex items-center justify-between group-hover:bg-zinc-50/50 transition-colors">
                 <div class="flex flex-col">
-                  <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">
+                  <span class="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">
                     Chair
                   </span>
-                  <span class="text-sm font-medium text-slate-200">
+                  <span class="text-sm font-semibold text-zinc-700">
                     {chapter.chair}
                   </span>
                 </div>
                 <div class="text-right">
-                  <span class="block text-[10px] text-slate-500 font-bold uppercase tracking-wider">
+                  <span class="block text-[10px] text-zinc-400 font-bold uppercase tracking-wider">
                     Est.
                   </span>
                   <span
-                    class={`text-sm font-bold ${chapter.color ?? "text-cyan-400"}`}
+                    class={`text-sm font-bold ${chapter.color ?? "text-blue-600"}`}
                   >
                     {chapter.stats.year}
                   </span>

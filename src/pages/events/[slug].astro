@@ -45,13 +45,28 @@ const timeStr = eventDate.toLocaleTimeString("en-US", {
 
 <Header />
 
-<Layout title={pageTitle} description={pageDescription} image={image?.url}>
-  <main class="min-h-screen bg-slate-950 pt-24 pb-20 selection:bg-cyan-500/30">
+<Layout
+  title={`${event.data.title} | IEEE SB CETKR`}
+  description={event.data.description}
+>
+  <!-- Background Elements (Copied from Chapters) -->
+  <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+    <div
+      class="absolute top-0 right-[10%] w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-[120px] mix-blend-multiply"
+    >
+    </div>
+    <div
+      class="absolute bottom-0 left-[10%] w-[600px] h-[600px] bg-purple-100/40 rounded-full blur-[120px] mix-blend-multiply"
+    >
+    </div>
+  </div>
+
+  <main class="relative pt-40 pb-16 bg-transparent">
     <div class="container mx-auto px-4 sm:px-6 max-w-6xl">
       <nav class="mb-8">
         <a
           href="/events"
-          class="group inline-flex items-center text-slate-400 hover:text-cyan-400 transition-colors text-sm font-medium"
+          class="group inline-flex items-center text-zinc-500 hover:text-blue-600 transition-colors text-sm font-medium bg-zinc-50 hover:bg-white px-4 py-2 rounded-full border border-zinc-200 shadow-sm"
         >
           <span
             class="material-icons text-sm mr-2 group-hover:-translate-x-1 transition-transform"
@@ -66,28 +81,36 @@ const timeStr = eventDate.toLocaleTimeString("en-US", {
         <article class="lg:col-span-8 space-y-8">
           <header>
             <h1
-              class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight tracking-tight"
+              class="text-3xl md:text-4xl lg:text-5xl font-bold text-zinc-900 mb-6 leading-tight tracking-tight"
             >
               {title}
             </h1>
 
             {
               image && (
-                <div class="rounded-2xl overflow-hidden shadow-2xl shadow-black/50 border border-slate-800 mb-8 bg-slate-900 aspect-video relative">
+                <div class="rounded-2xl overflow-hidden shadow-xl shadow-zinc-200/50 border border-zinc-200 mb-8 bg-zinc-100 aspect-video relative group max-w-4xl mx-auto">
                   <img
                     src={image.url}
                     alt={title}
-                    class="w-full h-full object-cover"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="eager"
                     fetchpriority="high"
                   />
+                  <div class="absolute inset-0 ring-1 ring-inset ring-black/5 rounded-2xl" />
                 </div>
               )
             }
           </header>
 
           <div
-            class="prose prose-lg prose-invert max-w-none prose-headings:text-white prose-p:text-slate-300 prose-a:text-cyan-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-li:text-slate-300"
+            class="prose prose-lg prose-zinc max-w-none
+            prose-headings:text-zinc-900 prose-headings:font-bold
+            prose-p:text-zinc-600 prose-p:leading-relaxed
+            prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
+            prose-strong:text-zinc-900
+            prose-li:text-zinc-600
+            prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 prose-blockquote:not-italic prose-blockquote:px-5 prose-blockquote:py-2 prose-blockquote:rounded-r-lg
+            prose-img:rounded-2xl prose-img:shadow-lg"
           >
             <Content />
           </div>
@@ -95,9 +118,9 @@ const timeStr = eventDate.toLocaleTimeString("en-US", {
           {/* Gallery Section - Only render if gallery has items */}
           {
             gallery && gallery.length > 0 && (
-              <section class="pt-12 mt-12 border-t border-slate-800/50">
-                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                  <span class="material-icons text-cyan-500">
+              <section class="pt-12 mt-12 border-t border-zinc-200">
+                <h2 class="text-2xl font-bold text-zinc-900 mb-6 flex items-center gap-2">
+                  <span class="material-icons text-blue-600">
                     photo_library
                   </span>
                   Event Gallery
@@ -111,15 +134,15 @@ const timeStr = eventDate.toLocaleTimeString("en-US", {
         <aside class="lg:col-span-4 relative">
           <div class="sticky top-28 space-y-6">
             <div
-              class="bg-slate-900/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-800 shadow-xl overflow-hidden relative"
+              class="bg-white/70 backdrop-blur-xl rounded-2xl p-6 border border-zinc-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden relative"
             >
               <div
-                class="absolute top-0 right-0 -mr-16 -mt-16 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none"
+                class="absolute top-0 right-0 -mr-16 -mt-16 w-32 h-32 bg-blue-100/50 rounded-full blur-2xl pointer-events-none"
               >
               </div>
 
               <h3
-                class="text-lg font-semibold text-white mb-6 border-b border-slate-800 pb-4"
+                class="text-lg font-bold text-zinc-900 mb-6 border-b border-zinc-100 pb-4"
               >
                 Event Details
               </h3>
@@ -127,45 +150,45 @@ const timeStr = eventDate.toLocaleTimeString("en-US", {
               <div class="space-y-5">
                 <div class="flex items-start group">
                   <span
-                    class="material-icons text-cyan-500 mr-3 mt-0.5 group-hover:text-cyan-400 transition-colors"
+                    class="material-icons text-blue-600 mr-3 mt-0.5 group-hover:text-blue-500 transition-colors bg-blue-50 p-1.5 rounded-lg"
                     >event</span
                   >
                   <div>
                     <p
-                      class="text-xs text-slate-500 uppercase font-bold tracking-wider mb-0.5"
+                      class="text-xs text-zinc-400 uppercase font-bold tracking-wider mb-0.5"
                     >
                       Date
                     </p>
-                    <p class="text-slate-200 font-medium">{dateStr}</p>
+                    <p class="text-zinc-700 font-semibold">{dateStr}</p>
                   </div>
                 </div>
 
                 <div class="flex items-start group">
                   <span
-                    class="material-icons text-cyan-500 mr-3 mt-0.5 group-hover:text-cyan-400 transition-colors"
+                    class="material-icons text-blue-600 mr-3 mt-0.5 group-hover:text-blue-500 transition-colors bg-blue-50 p-1.5 rounded-lg"
                     >schedule</span
                   >
                   <div>
                     <p
-                      class="text-xs text-slate-500 uppercase font-bold tracking-wider mb-0.5"
+                      class="text-xs text-zinc-400 uppercase font-bold tracking-wider mb-0.5"
                     >
                       Time
                     </p>
-                    <p class="text-slate-200 font-medium">{timeStr}</p>
+                    <p class="text-zinc-700 font-semibold">{timeStr}</p>
                   </div>
                 </div>
 
                 {
                   location && (
                     <div class="flex items-start group">
-                      <span class="material-icons text-cyan-500 mr-3 mt-0.5 group-hover:text-cyan-400 transition-colors">
+                      <span class="material-icons text-blue-600 mr-3 mt-0.5 group-hover:text-blue-500 transition-colors bg-blue-50 p-1.5 rounded-lg">
                         location_on
                       </span>
                       <div>
-                        <p class="text-xs text-slate-500 uppercase font-bold tracking-wider mb-0.5">
+                        <p class="text-xs text-zinc-400 uppercase font-bold tracking-wider mb-0.5">
                           Location
                         </p>
-                        <p class="text-slate-200 font-medium">{location}</p>
+                        <p class="text-zinc-700 font-semibold">{location}</p>
                       </div>
                     </div>
                   )
@@ -174,12 +197,12 @@ const timeStr = eventDate.toLocaleTimeString("en-US", {
 
               {
                 registrationLink && (
-                  <div class="mt-8 pt-6 border-t border-slate-800">
+                  <div class="mt-8 pt-6 border-t border-zinc-100">
                     <a
                       href={registrationLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="group flex items-center justify-center w-full py-3.5 bg-gradient-to-r from-cyan-600 to-cyan-500 hover:from-cyan-500 hover:to-cyan-400 text-white font-bold rounded-xl transition-all shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 hover:-translate-y-0.5"
+                      class="group flex items-center justify-center w-full py-3.5 bg-zinc-900 hover:bg-zinc-800 text-white font-bold rounded-xl transition-all shadow-lg shadow-zinc-900/10 hover:shadow-xl hover:shadow-zinc-900/20 hover:-translate-y-0.5"
                     >
                       Register Now
                       <span class="material-icons ml-2 text-sm group-hover:translate-x-1 transition-transform">

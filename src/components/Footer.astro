@@ -56,24 +56,22 @@ const socialLinks = [
 ];
 ---
 
-<footer
-  class="relative bg-slate-900/95 backdrop-blur-sm border-t border-slate-800 pt-16 pb-8"
->
+<footer class="relative bg-white border-t border-zinc-200 pt-16 pb-8">
   <div class="container mx-auto px-6">
     <div class="grid md:grid-cols-4 gap-12 mb-12">
       <div class="md:col-span-2">
         <a href="/" class="flex items-center gap-3 mb-6 w-fit group">
           <img
-            src="/SB_LOGO_W.png"
+            src="/SB_LOGO_B.png"
             alt="IEEE SB CETKR logo"
             class="w-12 h-12 object-contain transition-transform group-hover:scale-105"
             loading="lazy"
           />
-          <h3 class="text-2xl font-bold text-white">
-            <span class="text-cyan-400">IEEE</span> SB CETKR
+          <h3 class="text-2xl font-bold text-zinc-900">
+            <span class="text-blue-600">IEEE</span> SB CETKR
           </h3>
         </a>
-        <p class="text-slate-400 mb-6 max-w-md">
+        <p class="text-zinc-500 mb-6 max-w-md">
           Empowering the next generation of engineers and technologists through
           innovation, collaboration, and professional development.
         </p>
@@ -86,7 +84,7 @@ const socialLinks = [
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.name}
-                class="w-10 h-10 rounded-full bg-slate-800 hover:bg-cyan-500/10 text-slate-300 hover:text-cyan-400 flex items-center justify-center transition-all duration-300 hover:scale-110 border border-transparent hover:border-cyan-500/20"
+                class="w-10 h-10 rounded-full bg-zinc-100 hover:bg-blue-50 text-zinc-500 hover:text-blue-600 flex items-center justify-center transition-all duration-300 hover:scale-110 border border-zinc-200 hover:border-blue-200 shadow-sm"
               >
                 <svg
                   class="w-5 h-5"
@@ -111,7 +109,7 @@ const socialLinks = [
       </div>
 
       <div>
-        <h4 class="text-lg font-semibold text-white mb-6">Quick Links</h4>
+        <h4 class="text-lg font-bold text-zinc-900 mb-6">Quick Links</h4>
         <nav>
           <ul class="space-y-3">
             {
@@ -119,9 +117,9 @@ const socialLinks = [
                 <li>
                   <a
                     href={link.href}
-                    class="text-slate-400 hover:text-cyan-400 transition-colors duration-300 flex items-center group"
+                    class="text-zinc-500 hover:text-blue-600 transition-colors duration-300 flex items-center group font-medium"
                   >
-                    <span class="w-1.5 h-1.5 rounded-full bg-slate-600 mr-2 group-hover:bg-cyan-400 transition-colors" />
+                    <span class="w-1.5 h-1.5 rounded-full bg-zinc-300 mr-2 group-hover:bg-blue-600 transition-colors" />
                     {link.label}
                   </a>
                 </li>
@@ -132,12 +130,12 @@ const socialLinks = [
       </div>
 
       <div>
-        <h4 class="text-lg font-semibold text-white mb-6">Contact Us</h4>
+        <h4 class="text-lg font-bold text-zinc-900 mb-6">Contact Us</h4>
         <address class="not-italic">
-          <ul class="space-y-4 text-slate-400">
+          <ul class="space-y-4 text-zinc-500">
             <li class="flex items-start space-x-3">
               <svg
-                class="w-5 h-5 text-cyan-400 mt-0.5 shrink-0"
+                class="w-5 h-5 text-blue-600 mt-0.5 shrink-0"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -149,7 +147,7 @@ const socialLinks = [
             </li>
             <li class="flex items-center space-x-3">
               <svg
-                class="w-5 h-5 text-cyan-400 shrink-0"
+                class="w-5 h-5 text-blue-600 shrink-0"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -157,48 +155,31 @@ const socialLinks = [
               </svg>
               <a
                 href="mailto:ieeesbcetkr@gmail.com"
-                class="hover:text-cyan-400 transition-colors duration-300"
+                class="hover:text-blue-600 transition-colors duration-300 font-medium"
               >
                 ieeesbcetkr@gmail.com
               </a>
             </li>
-            <!--
-            <li class="flex items-center space-x-3">
-              <svg
-                class="w-5 h-5 text-cyan-400 shrink-0"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d={ICONS.phone}></path>
-              </svg>
-              <a
-                href="tel:+911234567890"
-                class="hover:text-cyan-400 transition-colors duration-300"
-              >
-                +91 12345 67890
-              </a>
-            </li>
-          -->
           </ul>
         </address>
       </div>
     </div>
 
-    <div class="border-t border-slate-800 pt-8 mt-8">
+    <div class="border-t border-zinc-200 pt-8 mt-8">
       <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-        <p class="text-slate-500 text-sm text-center md:text-left">
+        <p class="text-zinc-400 text-sm text-center md:text-left">
           &copy; <time datetime={String(currentYear)}>{currentYear}</time> IEEE Student
           Branch, College of Engineering Trikarpur. All rights reserved.
         </p>
         <div class="flex space-x-6">
           <a
             href="#"
-            class="text-slate-500 hover:text-cyan-400 text-sm transition-colors duration-300"
+            class="text-zinc-400 hover:text-blue-600 text-sm transition-colors duration-300 font-medium"
             >Privacy Policy</a
           >
           <a
             href="#"
-            class="text-slate-500 hover:text-cyan-400 text-sm transition-colors duration-300"
+            class="text-zinc-400 hover:text-blue-600 text-sm transition-colors duration-300 font-medium"
             >Terms of Service</a
           >
         </div>

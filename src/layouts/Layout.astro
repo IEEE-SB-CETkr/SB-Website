@@ -86,9 +86,9 @@ const fullTitle = title.includes("IEEE SB CETKR")
     />
 
     <!-- Favicon: use SB_LOGO_W from public/ -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/SB_LOGO_W.png" />
-    <link rel="icon" href="/SB_LOGO_W.png" />
-    <link rel="apple-touch-icon" href="/SB_LOGO_W.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/SB_LOGO_B.png" />
+    <link rel="icon" href="/SB_LOGO_B.png" />
+    <link rel="apple-touch-icon" href="/SB_LOGO_B.png" />
 
     <!-- AOS CSS -->
 
@@ -106,22 +106,9 @@ const fullTitle = title.includes("IEEE SB CETKR")
       /></noscript
     >
   </head>
-  <body class="min-h-screen flex flex-col relative bg-grid overflow-x-hidden">
-    <div class="fixed inset-0 w-screen h-screen overflow-hidden">
-      <div
-        class="absolute inset-0 bg-gradient-to-br from-slate-900 via-transparent to-slate-900 z-0"
-      >
-      </div>
-      <div
-        class="absolute top-0 left-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl filter animate-spin-slow"
-      >
-      </div>
-      <div
-        class="absolute bottom-0 right-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl filter animate-spin-slow-reverse"
-      >
-      </div>
-    </div>
-
+  <body
+    class="min-h-screen flex flex-col relative bg-white overflow-x-hidden selection:bg-blue-100 selection:text-blue-900"
+  >
     <div
       class="relative z-10 flex flex-col min-h-screen w-full max-w-[100vw] overflow-x-hidden"
     >
@@ -144,7 +131,7 @@ const fullTitle = title.includes("IEEE SB CETKR")
 
       // Initialize AOS
       AOS.init({
-        duration: 800,
+        duration: 600,
         easing: "ease-in-out",
         once: true,
         mirror: false,

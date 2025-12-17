@@ -7,68 +7,77 @@ import "../styles/components/hero.css";
  * Copyright (C) 2025 IEEE Student Branch CETKR
  -->
 <section
-  class="relative min-h-screen flex items-center justify-center px-4 overflow-hidden bg-slate-900"
+  class="relative min-h-screen flex items-center justify-center px-4 overflow-hidden bg-white"
 >
-  <!-- Dynamic Background -->
-  <div class="absolute inset-0 z-0">
+  <!-- Dynamic Background (Aurora) -->
+  <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
     <div
-      class="absolute top-0 -left-1/4 w-[800px] h-[800px] bg-indigo-600/20 rounded-full blur-[120px] animate-pulse"
+      class="absolute top-[-10%] left-[-10%] w-[800px] h-[800px] bg-blue-100/50 rounded-full blur-[120px] mix-blend-multiply"
     >
     </div>
     <div
-      class="absolute bottom-0 -right-1/4 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[100px] animate-pulse delay-700"
+      class="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-indigo-100/50 rounded-full blur-[100px] mix-blend-multiply delay-700"
     >
     </div>
-    <div class="absolute inset-0 bg-[url('/images/grid.svg')] opacity-[0.03]">
+    <div
+      class="absolute top-[40%] left-[60%] w-[400px] h-[400px] bg-cyan-100/50 rounded-full blur-[80px] mix-blend-multiply"
+    >
+    </div>
+    <div
+      class="absolute inset-0 bg-[url('/images/grid.svg')] opacity-[0.03] invert"
+    >
     </div>
   </div>
 
   <div class="container mx-auto text-center relative z-10 max-w-6xl px-6">
     <!-- Badge -->
-    <div class="mb-8" data-aos="fade-down" data-aos-duration="1000">
+    <div class="mb-10" data-aos="fade-down" data-aos-duration="1000">
       <span
-        class="inline-flex items-center px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-950/30 text-cyan-300 text-xs font-bold tracking-widest uppercase backdrop-blur-md"
+        class="inline-flex items-center px-4 py-1.5 rounded-full border border-blue-100 bg-white/50 text-blue-600 text-[11px] font-bold tracking-[0.2em] uppercase backdrop-blur-sm shadow-sm"
       >
-        <span class="w-2 h-2 rounded-full bg-cyan-400 mr-2 animate-ping"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-blue-500 mr-3 animate-pulse"
+        ></span>
         IEEE SB CETKR
       </span>
     </div>
 
     <!-- Main Heading -->
     <h1
-      class="text-6xl md:text-8xl lg:text-9xl font-black mb-8 leading-none tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-500/50 drop-shadow-2xl"
+      class="text-6xl md:text-8xl lg:text-9xl font-bold mb-8 leading-[0.9] tracking-tight text-zinc-900 drop-shadow-sm"
       data-aos="fade-up"
       data-aos-duration="1000"
       data-aos-delay="100"
     >
       INNOVATE<br />
-      <span class="text-stroke-white text-transparent opacity-80">INSPIRE</span
-      ><br />
-      <span class="gradient-text">IGNITE</span>
+      <span class="text-zinc-300">INSPIRE</span><br />
+      <span
+        class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600"
+        >IGNITE</span
+      >
     </h1>
 
     <p
-      class="text-lg md:text-2xl text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed font-light"
+      class="text-lg md:text-xl text-zinc-500 mb-12 max-w-2xl mx-auto leading-relaxed font-normal"
       data-aos="fade-up"
       data-aos-duration="1000"
       data-aos-delay="300"
     >
       Join a global community of innovators at the College of Engineering
-      Trikarpur.
-      <span class="text-cyan-400 font-medium">Shape the future</span> of technology
-      with us.
+      Trikarpur. <span class="text-zinc-900 font-semibold"
+        >Shape the future</span
+      > of technology with us.
     </p>
 
     <!-- Buttons -->
     <div
-      class="flex flex-col sm:flex-row justify-center items-center gap-6"
+      class="flex flex-col sm:flex-row justify-center items-center gap-4"
       data-aos="fade-up"
       data-aos-duration="1000"
       data-aos-delay="500"
     >
       <a
         href="https://www.ieee.org/membership/join"
-        class="group relative px-8 py-4 bg-blue-600 text-white font-bold rounded-full overflow-hidden shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50 transition-all duration-300 hover:-translate-y-1"
+        class="group relative px-8 py-4 bg-zinc-900 text-white text-sm font-semibold rounded-full overflow-hidden shadow-xl shadow-zinc-900/20 hover:shadow-2xl hover:shadow-zinc-900/30 transition-all duration-300 hover:-translate-y-1"
       >
         <span class="relative z-10 flex items-center">
           BECOME A MEMBER
@@ -77,15 +86,11 @@ import "../styles/components/hero.css";
             >arrow_forward</span
           >
         </span>
-        <div
-          class="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        >
-        </div>
       </a>
 
       <a
         href="/events"
-        class="group px-8 py-4 bg-slate-800/50 text-white font-medium rounded-full border border-white/10 backdrop-blur-sm hover:bg-slate-700/50 transition-all duration-300"
+        class="group px-8 py-4 bg-white text-zinc-900 text-sm font-semibold rounded-full border border-zinc-200 shadow-sm hover:shadow-md hover:border-zinc-300 transition-all duration-300"
       >
         SEE OUR WORKS
       </a>
@@ -94,7 +99,5 @@ import "../styles/components/hero.css";
 </section>
 
 <style>
-  .text-stroke-white {
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
-  }
+  /* Clean styles, no text-stroke needed for light mode elegance */
 </style>

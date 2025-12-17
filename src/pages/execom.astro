@@ -49,19 +49,19 @@ const chapterLeads = getMembers([
 const sections = [
   {
     title: "Leadership",
-    color: "cyan-400",
+    bgClass: "bg-cyan-400",
     shadow: "rgba(34,211,238,0.5)",
     members: leadership,
   },
   {
     title: "Core Team",
-    color: "blue-500",
+    bgClass: "bg-blue-600",
     shadow: "rgba(59,130,246,0.5)",
     members: coreTeam,
   },
   {
     title: "Chapter Leads",
-    color: "purple-500",
+    bgClass: "bg-purple-500",
     shadow: "rgba(168,85,247,0.5)",
     members: chapterLeads,
   },
@@ -70,37 +70,50 @@ const sections = [
 
 <Header />
 <Layout title={title} description={description}>
-  <section class="relative pt-32 pb-20 bg-slate-950 overflow-hidden">
-    <div class="absolute inset-0 opacity-20 pointer-events-none">
+  <!-- Background Elements (Copied from Chapters) -->
+  <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+    <div
+      class="absolute top-0 right-[10%] w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-[120px] mix-blend-multiply"
+    >
+    </div>
+    <div
+      class="absolute bottom-0 left-[10%] w-[600px] h-[600px] bg-purple-100/40 rounded-full blur-[120px] mix-blend-multiply"
+    >
+    </div>
+  </div>
+
+  <section class="relative pt-40 pb-20 bg-transparent overflow-hidden">
+    <!-- Hero Background Grid (Matches Chapters) -->
+    <div class="absolute inset-0 z-0 opacity-40 pointer-events-none">
       <div
-        class="absolute inset-0 bg-[url('/images/grid.svg')] [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"
+        class="absolute inset-0 bg-[url('/images/grid.svg')] [mask-image:linear-gradient(180deg,black,transparent)]"
       >
       </div>
-    </div>
-    <div
-      class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"
-    >
-    </div>
-    <div
-      class="absolute bottom-0 left-0 -ml-20 -mb-20 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"
-    >
     </div>
 
     <div class="container mx-auto px-6 relative z-10 text-center">
       <h1
-        class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight"
+        class="text-4xl md:text-5xl lg:text-6xl font-bold text-zinc-900 mb-6 tracking-tight"
+        data-aos="fade-up"
+        data-aos-duration="800"
       >
         Meet Our <span
-          class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
+          class="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"
           >Executive Committee</span
         >
       </h1>
       <div
-        class="w-24 h-1.5 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto rounded-full mb-8 shadow-[0_0_15px_rgba(34,211,238,0.5)]"
+        class="w-24 h-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto rounded-full mb-8 shadow-sm"
+        data-aos="fade-up"
+        data-aos-duration="800"
+        data-aos-delay="100"
       >
       </div>
       <p
-        class="text-lg md:text-xl text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed"
+        class="text-lg md:text-xl text-zinc-500 mb-8 max-w-2xl mx-auto leading-relaxed font-normal"
+        data-aos="fade-up"
+        data-aos-duration="800"
+        data-aos-delay="200"
       >
         The passionate leaders and visionaries driving innovation, fostering
         technical excellence, and building a vibrant community at IEEE SB CETKr.
@@ -108,28 +121,42 @@ const sections = [
     </div>
   </section>
 
-  <div class="bg-slate-950 pb-20">
+  <div class="bg-white pb-20">
     <div class="container mx-auto px-6 space-y-24">
       {
         sections.map((section) => (
           <section class="relative">
-            <div class="flex items-center justify-center mb-12">
-              <h2 class="text-3xl font-bold text-white flex items-center gap-3">
+            <div
+              class="flex items-center justify-center mb-16"
+              data-aos="fade-up"
+              data-aos-duration="600"
+            >
+              <h2 class="text-3xl font-bold text-zinc-900 flex items-center gap-4">
                 <span
-                  class={`w-2 h-8 bg-${section.color} rounded-full`}
+                  class={`w-1.5 h-10 ${section.bgClass} rounded-full`}
                   style={`box-shadow: 0 0 15px ${section.shadow}`}
                 />
                 {section.title}
               </h2>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center">
-              {section.members.map((member) => (
-                <div class="w-full max-w-sm h-full">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-12 justify-items-center relative z-10">
+              {section.members.map((member, index) => (
+                <div
+                  class="w-full max-w-sm h-full"
+                  data-aos="fade-up"
+                  data-aos-duration="600"
+                  data-aos-delay={index * 100}
+                >
                   <MemberCard member={member} />
                 </div>
               ))}
             </div>
+
+            {/* Subtle divider between sections if not last */}
+            {section !== sections[sections.length - 1] && (
+              <div class="absolute -bottom-12 left-1/2 -translate-x-1/2 w-32 h-px bg-zinc-100" />
+            )}
           </section>
         ))
       }

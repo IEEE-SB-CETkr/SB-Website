@@ -31,31 +31,54 @@ const pageDescription = "Upcoming and past events organized by IEEE SB CETKR";
 
 <Header />
 <Layout title={pageTitle} description={pageDescription}>
-  <main class="min-h-screen bg-slate-950">
-    <section
-      class="relative pt-32 pb-20 bg-gradient-to-br from-slate-900 to-slate-800 overflow-hidden"
+  <!-- Background Elements (Copied from Chapters) -->
+  <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+    <div
+      class="absolute top-0 right-[10%] w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-[120px] mix-blend-multiply"
     >
-      <div class="absolute inset-0 opacity-20 pointer-events-none">
+    </div>
+    <div
+      class="absolute bottom-0 left-[10%] w-[600px] h-[600px] bg-purple-100/40 rounded-full blur-[120px] mix-blend-multiply"
+    >
+    </div>
+  </div>
+
+  <main class="min-h-screen relative bg-transparent">
+    <!-- Hero Section (Matches Chapters) -->
+    <section class="relative pt-40 pb-20 overflow-hidden">
+      <div class="absolute inset-0 z-0 opacity-40 pointer-events-none">
         <div
-          class="absolute inset-0 bg-[url('/images/grid.svg')] [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"
+          class="absolute inset-0 bg-[url('/images/grid.svg')] [mask-image:linear-gradient(180deg,black,transparent)]"
         >
         </div>
       </div>
 
+      <!-- Background Blobs Removed -->
+
       <div class="container mx-auto px-6 relative z-10 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
+        <h1
+          class="text-4xl md:text-5xl font-bold text-zinc-900 mb-6 tracking-tight"
+          data-aos="fade-up"
+          data-aos-duration="800"
+        >
           <span
-            class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500"
+            class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 text-fill-transparent"
           >
             IEEE SB CETkr Events
           </span>
         </h1>
         <div
-          class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto rounded-full mb-8"
+          class="w-24 h-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto rounded-full mb-8"
+          data-aos="fade-up"
+          data-aos-duration="800"
+          data-aos-delay="100"
         >
         </div>
         <p
-          class="text-lg text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed"
+          class="text-lg md:text-xl text-zinc-500 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
+          data-aos="fade-up"
+          data-aos-duration="800"
+          data-aos-delay="200"
         >
           Join us for exciting technical events, workshops, and competitions
           organized by the IEEE Student Branch at College of Engineering
@@ -66,54 +89,63 @@ const pageDescription = "Upcoming and past events organized by IEEE SB CETKR";
 
     {
       upcomingEvents.length > 0 && (
-        <section class="py-16 bg-slate-900">
+        <section class="py-20 bg-white">
           <div class="container mx-auto px-6 max-w-7xl">
-            <h2 class="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center">
-              <span class="w-2 h-8 bg-cyan-400 rounded-full mr-3 shadow-[0_0_15px_rgba(34,211,238,0.5)]" />
+            <h2
+              class="text-2xl md:text-3xl font-bold text-zinc-900 mb-10 flex items-center"
+              data-aos="fade-right"
+              data-aos-duration="800"
+            >
+              <span class="w-1.5 h-8 bg-blue-600 rounded-full mr-4 shadow-sm" />
               Upcoming Events
             </h2>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {upcomingEvents.map((event) => (
-                <article class="group relative flex flex-col h-full bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10 hover:-translate-y-1">
+              {upcomingEvents.map((event, index) => (
+                <article
+                  class="group relative flex flex-col h-full bg-white/70 backdrop-blur-xl rounded-2xl overflow-hidden border border-zinc-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-500"
+                  data-aos="fade-up"
+                  data-aos-duration="600"
+                  data-aos-delay={index * 100}
+                >
                   <a
                     href={`/events/${event.slug}/`}
                     class="flex flex-col h-full"
                   >
                     {event.data.image && (
-                      <div class="h-48 md:h-56 overflow-hidden bg-slate-700/30 relative">
+                      <div class="h-48 md:h-56 overflow-hidden bg-zinc-100 relative">
                         <img
                           src={event.data.image.url}
                           alt={event.data.image.alt || event.data.title}
-                          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                           loading="lazy"
                           decoding="async"
                         />
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-60" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       </div>
                     )}
 
                     <div class="p-6 flex-1 flex flex-col">
-                      <h3 class="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors line-clamp-2">
+                      <h3 class="text-xl font-bold text-zinc-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight">
                         {event.data.title}
                       </h3>
-                      <p class="text-slate-300 text-sm mb-6 line-clamp-2 flex-1">
+                      <p class="text-zinc-500 text-sm mb-6 line-clamp-2 flex-1 font-normal leading-relaxed">
                         {event.data.description}
                       </p>
 
-                      <div class="pt-4 border-t border-slate-700/50 space-y-2">
+                      <div class="pt-4 border-t border-zinc-100 space-y-2.5">
                         <time
                           datetime={event.data.eventDate.toISOString()}
-                          class="flex items-center text-sm text-slate-400"
+                          class="flex items-center text-sm font-medium text-zinc-500"
                         >
-                          <span class="material-icons text-base mr-2 text-cyan-400">
+                          <span class="material-icons text-lg mr-2.5 text-blue-600 bg-blue-50 p-1 rounded-full">
                             calendar_today
                           </span>
                           {dateFormatter.format(event.data.eventDate)}
                         </time>
                         {event.data.location && (
-                          <div class="flex items-center text-sm text-slate-400">
-                            <span class="material-icons text-base mr-2 text-cyan-400">
+                          <div class="flex items-center text-sm font-medium text-zinc-500">
+                            <span class="material-icons text-lg mr-2.5 text-blue-600 bg-blue-50 p-1 rounded-full">
                               location_on
                             </span>
                             <span class="truncate">{event.data.location}</span>
@@ -132,26 +164,26 @@ const pageDescription = "Upcoming and past events organized by IEEE SB CETKR";
 
     {
       pastEvents.length > 0 && (
-        <section class="py-16 bg-slate-950 border-t border-slate-900">
+        <section class="py-20">
           <div class="container mx-auto px-6 max-w-7xl">
-            <h2 class="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center opacity-90">
-              <span class="w-2 h-8 bg-slate-600 rounded-full mr-3" />
+            <h2 class="text-2xl md:text-3xl font-bold text-zinc-900 mb-10 flex items-center opacity-80">
+              <span class="w-1.5 h-8 bg-zinc-300 rounded-full mr-4" />
               Past Events
             </h2>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {pastEvents.map((event) => (
-                <article class="group flex flex-col h-full bg-slate-900/50 rounded-2xl overflow-hidden border border-slate-800 hover:border-slate-700 transition-all duration-300 hover:shadow-lg">
+                <article class="group flex flex-col h-full bg-white rounded-2xl overflow-hidden border border-zinc-200 shadow-sm hover:shadow-md hover:border-zinc-300 transition-all duration-300">
                   <a
                     href={`/events/${event.slug}/`}
-                    class="flex flex-col h-full opacity-80 group-hover:opacity-100 transition-opacity"
+                    class="flex flex-col h-full opacity-70 group-hover:opacity-100 transition-opacity duration-300"
                   >
                     {event.data.image && (
-                      <div class="h-48 overflow-hidden bg-slate-800">
+                      <div class="h-48 overflow-hidden bg-zinc-100">
                         <img
                           src={event.data.image.url}
                           alt={event.data.image.alt || event.data.title}
-                          class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                          class="w-full h-full object-cover transition-all duration-500"
                           loading="lazy"
                           decoding="async"
                         />
@@ -159,19 +191,19 @@ const pageDescription = "Upcoming and past events organized by IEEE SB CETKR";
                     )}
 
                     <div class="p-6 flex-1 flex flex-col">
-                      <h3 class="text-lg font-bold text-slate-200 mb-2 group-hover:text-cyan-400 transition-colors">
+                      <h3 class="text-lg font-bold text-zinc-700 mb-2 group-hover:text-blue-600 transition-colors">
                         {event.data.title}
                       </h3>
-                      <p class="text-slate-500 text-sm mb-4 line-clamp-2">
+                      <p class="text-zinc-400 text-sm mb-4 line-clamp-2">
                         {event.data.description}
                       </p>
 
-                      <div class="mt-auto pt-4 border-t border-slate-800">
+                      <div class="mt-auto pt-4 border-t border-zinc-100">
                         <time
                           datetime={event.data.eventDate.toISOString()}
-                          class="flex items-center text-sm text-slate-500"
+                          class="flex items-center text-sm text-zinc-400 font-medium"
                         >
-                          <span class="material-icons text-base mr-2 text-slate-600">
+                          <span class="material-icons text-base mr-2 text-zinc-300">
                             event
                           </span>
                           {dateFormatter.format(event.data.eventDate)}
@@ -189,16 +221,16 @@ const pageDescription = "Upcoming and past events organized by IEEE SB CETKR";
 
     {
       allEvents.length === 0 && (
-        <section class="py-32 text-center">
+        <section class="py-32 text-center bg-white">
           <div class="container mx-auto px-6">
-            <div class="max-w-md mx-auto p-8 bg-slate-900/50 rounded-3xl border border-slate-800">
-              <span class="material-icons text-6xl text-slate-700 mb-4">
+            <div class="max-w-md mx-auto p-12 bg-zinc-50 rounded-3xl border border-zinc-100">
+              <span class="material-icons text-6xl text-zinc-300 mb-4">
                 event_busy
               </span>
-              <h2 class="text-2xl font-bold text-white mb-2">
+              <h2 class="text-2xl font-bold text-zinc-900 mb-2">
                 No Events Scheduled
               </h2>
-              <p class="text-slate-400">
+              <p class="text-zinc-500">
                 Check back later for upcoming workshops and tech talks.
               </p>
             </div>
