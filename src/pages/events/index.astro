@@ -31,31 +31,50 @@ const pageDescription = "Upcoming and past events organized by IEEE SB CETKR";
 
 <Header />
 <Layout title={pageTitle} description={pageDescription}>
-  <main class="min-h-screen bg-slate-950">
-    <section
-      class="relative pt-32 pb-20 bg-gradient-to-br from-slate-900 to-slate-800 overflow-hidden"
+  <!-- Background Elements -->
+  <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+    <div
+      class="absolute top-0 right-[10%] w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[100px]"
     >
-      <div class="absolute inset-0 opacity-20 pointer-events-none">
+    </div>
+    <div
+      class="absolute bottom-0 left-[10%] w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[100px]"
+    >
+    </div>
+  </div>
+
+  <main class="min-h-screen relative z-10">
+    <section class="relative pt-40 pb-20 overflow-hidden">
+      <div class="absolute inset-0 z-0">
         <div
-          class="absolute inset-0 bg-[url('/images/grid.svg')] [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"
+          class="absolute inset-0 bg-[url('/images/grid.svg')] opacity-10 [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"
         >
         </div>
       </div>
 
       <div class="container mx-auto px-6 relative z-10 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
+        <div data-aos="fade-down" data-aos-duration="1000">
           <span
-            class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500"
+            class="inline-block px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 text-sm font-medium mb-6 backdrop-blur-sm"
           >
-            IEEE SB CETkr Events
+            Join Us
           </span>
-        </h1>
-        <div
-          class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto rounded-full mb-8"
-        >
         </div>
+
+        <h1
+          class="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          data-aos-delay="100"
+        >
+          Our <span class="gradient-text font-extrabold">Events</span>
+        </h1>
+
         <p
-          class="text-lg text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed"
+          class="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          data-aos-delay="200"
         >
           Join us for exciting technical events, workshops, and competitions
           organized by the IEEE Student Branch at College of Engineering
