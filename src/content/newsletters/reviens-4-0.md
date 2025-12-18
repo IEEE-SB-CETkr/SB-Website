@@ -4,6 +4,9 @@ description: "IEEE SB CETKR hosted Reviens 4.0 from 1st to 3rd November 2024, a 
 pubDate: "2024-11-05"
 author: "IEEE SB CETKR"
 tags: ["Events", "Workshops", "Reviens", "IEEE"]
+image:
+  url: "/images/events/reviens4/cover.jpg"
+  alt: "Reviens 4.0"
 ---
 
 # Reviens 4.0: Sparkles of Inspiration
