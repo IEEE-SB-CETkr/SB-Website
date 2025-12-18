@@ -26,19 +26,21 @@ import mdx from '@astrojs/mdx';
 // https://astro.build/config
 export default defineConfig({
   site: process.env.GITHUB_PAGES
-  ? 'https://kethu-x86.github.io/ieeesbcetkr/'
-  : 'https://example.com',
+    ? 'https://kethu-x86.github.io/ieeesbcetkr/'
+    : 'https://example.com',
   base: process.env.GITHUB_PAGES ? '/ieeesbcetkr/' : '/',
-  integrations: [sitemap(), 
-    react(), 
-    playformCompress(
-      {
-        Image: true,
-        CSS: true,
-        HTML: true
-      }
-    ), 
-    mdx()],
+  integrations: [sitemap(),
+  react(),
+  playformCompress(
+    {
+      Image: true,
+      CSS: true,
+      HTML: true
+    }
+  ),
+  mdx({
+    smartypants: false,
+  })],
   vite: {
     plugins: [
       tailwindcss(),

@@ -2,7 +2,7 @@
 title: "Reviens 4.0"
 description: "IEEE SB CETKR hosted Reviens 4.0, a flagship three-day event featuring relevant workshops, inspiring talks, and vibrant cultural activities."
 pubDate: 2024-11-05
-eventDate: 2024-11-01
+eventDate: 2024-11-01T17:00:00+0530
 location: "College of Engineering Trikaripur"
 status: "completed"
 author: "IEEE SB CETKR"
