@@ -1,3 +1,8 @@
+---
+import Layout from "../layouts/Layout.astro";
+import HomePage from "../components/HomePage.astro";
+---
+
 <!--
  * Website for IEEE SB CETKR
  * Copyright (C) 2025 IEEE Student Branch CETKR
@@ -15,11 +20,9 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
 -->
----
-import Layout from '../layouts/Layout.astro';
-import HomePage from '../components/HomePage.astro';
----
-
-<Layout title="IEEE SB CETKR | Innovate. Inspire. Ignite.">
+<Layout
+  title="IEEE SB CETKR | Innovate. Inspire. Ignite."
+  description="Official website of IEEE Student Branch at College of Engineering Trikaripur. Join our community of innovators, attend workshops, and shape the future of technology."
+>
   <HomePage />
 </Layout>

@@ -1,16 +1,18 @@
 ---
+import { Image } from "astro:assets";
+
 interface GalleryItem {
   type: "image" | "video";
   url: string;
   alt?: string;
   caption?: string;
-  thumbnail?: string; // Optional: Poster for videos to avoid loading full video in grid
+  thumbnail?: string;
 }
 
 interface Props {
   items: GalleryItem[];
   class?: string;
-  hideElementId?: string; // Optional: ID of an element (like a navbar) to hide when lightbox opens
+  hideElementId?: string;
 }
 
 const { items = [], class: className = "", hideElementId } = Astro.props;
@@ -31,14 +33,14 @@ const galleryId = `gallery-${Math.random().toString(36).slice(2, 9)}`;
         >
           <div class="relative overflow-hidden aspect-auto">
             {item.type === "image" ? (
-              <img
+              <Image
                 src={item.url}
                 alt={item.alt || ""}
                 class="w-full h-auto object-cover transform transition-transform duration-700 will-change-transform group-hover:scale-105"
                 loading={index < 4 ? "eager" : "lazy"}
                 decoding="async"
-                width="600"
-                height="400"
+                width={600}
+                height={400}
               />
             ) : (
               <div class="relative w-full">
@@ -65,6 +67,7 @@ const galleryId = `gallery-${Math.random().toString(36).slice(2, 9)}`;
                       viewBox="0 0 24 24"
                       fill="currentColor"
                       class="w-6 h-6 text-white"
+                      aria-hidden="true"
                     >
                       <path
                         fill-rule="evenodd"
@@ -119,6 +122,7 @@ const galleryId = `gallery-${Math.random().toString(36).slice(2, 9)}`;
             stroke-width="1.5"
             stroke="currentColor"
             class="w-6 h-6"
+            aria-hidden="true"
           >
             <path
               stroke-linecap="round"
@@ -140,6 +144,7 @@ const galleryId = `gallery-${Math.random().toString(36).slice(2, 9)}`;
           stroke-width="2"
           stroke="currentColor"
           class="w-6 h-6"
+          aria-hidden="true"
         >
           <path
             stroke-linecap="round"
@@ -192,6 +197,7 @@ const galleryId = `gallery-${Math.random().toString(36).slice(2, 9)}`;
           stroke-width="2"
           stroke="currentColor"
           class="w-6 h-6"
+          aria-hidden="true"
         >
           <path
             stroke-linecap="round"

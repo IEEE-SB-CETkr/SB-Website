@@ -14,7 +14,7 @@ interface Props {
 const {
   title = "IEEE SB CETKR | Innovate. Inspire. Ignite.",
   description = "IEEE Student Branch at College of Engineering Trikarpur - Empowering future engineers and technologists through innovation, collaboration, and professional development.",
-  image = "/images/og-image.jpg",
+  image = "SB_LOGO_W.png",
   url = "https://ieeesbcetkr.org",
   type = "website",
 } = Astro.props;
@@ -41,7 +41,7 @@ const fullTitle = title.includes("IEEE SB CETKR")
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
 --><!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth" style="background-color: #0f172a;">
   <head>
     <meta charset="UTF-8" />
     <meta
@@ -94,10 +94,8 @@ const fullTitle = title.includes("IEEE SB CETKR")
 
     <!-- Preload critical resources -->
     <link
-      rel="preload"
+      rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
     />
     <noscript
       ><link
@@ -127,17 +125,6 @@ const fullTitle = title.includes("IEEE SB CETKR")
     >
       <slot />
     </div>
-
-    <!-- Material Icons for Web Components -->
-    <script>
-      // Load Material Icons
-      if (!document.querySelector('link[href*="Material+Icons"]')) {
-        const link = document.createElement("link");
-        link.href = "https://fonts.googleapis.com/icon?family=Material+Icons";
-        link.rel = "stylesheet";
-        document.head.appendChild(link);
-      }
-    </script>
 
     <script>
       import AOS from "aos";
