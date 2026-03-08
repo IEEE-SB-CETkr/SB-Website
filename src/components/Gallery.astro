@@ -107,11 +107,11 @@ const galleryId = `gallery-${Math.random().toString(36).slice(2, 9)}`;
         class="absolute top-0 left-0 w-full p-4 flex justify-between items-center z-50 bg-gradient-to-b from-black/60 to-transparent pointer-events-none"
       >
         <span
-          id="lb-counter"
+          id={`${galleryId}-lb-counter`}
           class="text-white/90 font-mono text-sm pointer-events-auto px-3 py-1 bg-black/20 rounded-full backdrop-blur-md border border-white/10"
         ></span>
         <button
-          id="lb-close"
+          id={`${galleryId}-lb-close`}
           class="pointer-events-auto p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/50"
           aria-label="Close lightbox"
         >
@@ -133,7 +133,7 @@ const galleryId = `gallery-${Math.random().toString(36).slice(2, 9)}`;
       </div>
 
       <button
-        id="lb-prev"
+        id={`${galleryId}-lb-prev`}
         class="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/20 hover:bg-black/40 text-white/90 hover:text-white backdrop-blur-sm border border-white/10 transition-all hover:scale-105 z-40 hidden md:flex focus:outline-none focus:ring-2 focus:ring-white/50"
         aria-label="Previous image"
       >
@@ -155,30 +155,30 @@ const galleryId = `gallery-${Math.random().toString(36).slice(2, 9)}`;
 
       <div
         class="relative w-full h-full flex items-center justify-center p-4"
-        id="lb-backdrop-target"
+        id={`${galleryId}-lb-backdrop-target`}
       >
         <div
           class="relative max-w-[95vw] max-h-[85vh] shadow-2xl overflow-hidden rounded-md bg-black"
         >
           <img
-            id="lb-img"
+            id={`${galleryId}-lb-img`}
             class="max-w-full max-h-[85vh] object-contain hidden"
             alt="Lightbox"
             draggable="false"
           />
           <video
-            id="lb-video"
+            id={`${galleryId}-lb-video`}
             class="max-w-full max-h-[85vh] hidden"
             controls
             playsinline></video>
         </div>
 
         <div
-          id="lb-caption-container"
+          id={`${galleryId}-lb-caption-container`}
           class="absolute bottom-8 left-1/2 -translate-x-1/2 max-w-xl w-full px-4 text-center pointer-events-none hidden"
         >
           <p
-            id="lb-caption"
+            id={`${galleryId}-lb-caption`}
             class="inline-block px-4 py-2 bg-black/60 backdrop-blur-md rounded-lg text-white/90 text-sm font-medium shadow-lg"
           >
           </p>
@@ -186,7 +186,7 @@ const galleryId = `gallery-${Math.random().toString(36).slice(2, 9)}`;
       </div>
 
       <button
-        id="lb-next"
+        id={`${galleryId}-lb-next`}
         class="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/20 hover:bg-black/40 text-white/90 hover:text-white backdrop-blur-sm border border-white/10 transition-all hover:scale-105 z-40 hidden md:flex focus:outline-none focus:ring-2 focus:ring-white/50"
         aria-label="Next image"
       >
@@ -236,18 +236,18 @@ const galleryId = `gallery-${Math.random().toString(36).slice(2, 9)}`;
   }
 </style>
 
-<script define:vars={{ galleryId, hideElementId }}>
+<script is:inline define:vars={{ galleryId, hideElementId }}>
   (() => {
     const gallery = document.getElementById(galleryId);
     if (!gallery) return;
 
     // Elements
     const dialog = document.getElementById(`${galleryId}-lightbox`);
-    const imgEl = document.getElementById("lb-img");
-    const vidEl = document.getElementById("lb-video");
-    const captionEl = document.getElementById("lb-caption");
-    const captionContainer = document.getElementById("lb-caption-container");
-    const counterEl = document.getElementById("lb-counter");
+    const imgEl = document.getElementById(`${galleryId}-lb-img`);
+    const vidEl = document.getElementById(`${galleryId}-lb-video`);
+    const captionEl = document.getElementById(`${galleryId}-lb-caption`);
+    const captionContainer = document.getElementById(`${galleryId}-lb-caption-container`);
+    const counterEl = document.getElementById(`${galleryId}-lb-counter`);
 
     // Config
     const externalHeader = hideElementId
@@ -255,7 +255,6 @@ const galleryId = `gallery-${Math.random().toString(36).slice(2, 9)}`;
       : null;
     let items = []; // Will be populated from DOM
     let currentIndex = 0;
-    let isTransitioning = false;
 
     // Initialize: Collect items from DOM to avoid JSON bloat
     const triggers = gallery.querySelectorAll(".gallery-trigger");
@@ -361,16 +360,16 @@ const galleryId = `gallery-${Math.random().toString(36).slice(2, 9)}`;
 
     // Event Listeners
     document
-      .getElementById("lb-close")
+      .getElementById(`${galleryId}-lb-close`)
       .addEventListener("click", closeLightbox);
-    document.getElementById("lb-next").addEventListener("click", next);
-    document.getElementById("lb-prev").addEventListener("click", prev);
+    document.getElementById(`${galleryId}-lb-next`).addEventListener("click", next);
+    document.getElementById(`${galleryId}-lb-prev`).addEventListener("click", prev);
 
     // Close on backdrop click
     document
-      .getElementById("lb-backdrop-target")
+      .getElementById(`${galleryId}-lb-backdrop-target`)
       .addEventListener("click", (e) => {
-        if (e.target.id === "lb-backdrop-target") closeLightbox();
+        if (e.target.id === `${galleryId}-lb-backdrop-target`) closeLightbox();
       });
 
     // Keyboard Navigation
