@@ -6,35 +6,87 @@
  * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-.animate-scroll {
-  animation: scroll 1.5s ease-in-out infinite;
-}
-
-@keyframes scroll {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(8px); opacity: 0.5; }
-}
-
-.gradient-text span {
-  display: inline-block;
+/* Staggered text reveal */
+.hero-text-reveal {
   opacity: 0;
-  animation: fadeInUp 0.8s ease-out forwards;
+  transform: translateY(30px);
+  animation: heroReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-.gradient-text span:nth-child(1) { animation-delay: 0.1s; }
-.gradient-text span:nth-child(2) { animation-delay: 0.3s; }
-.gradient-text span:nth-child(3) { animation-delay: 0.5s; }
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+.hero-text-reveal:nth-child(1) { animation-delay: 0.2s; }
+.hero-text-reveal:nth-child(2) { animation-delay: 0.4s; }
+.hero-text-reveal:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes heroReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Outlined text (glass "INSPIRE" style) */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.25);
+  transition: -webkit-text-stroke-color 0.3s ease;
+}
+
+.text-outline:hover {
+  -webkit-text-stroke-color: rgba(34, 211, 238, 0.5);
+}
+
+@media (min-width: 768px) {
+  .text-outline {
+    -webkit-text-stroke-width: 3px;
+  }
+}
+
+/* Particle elements */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.particle-sm {
+  width: 4px;
+  height: 4px;
+}
+
+.particle-md {
+  width: 8px;
+  height: 8px;
+}
+
+.particle-lg {
+  width: 12px;
+  height: 12px;
+}
+
+.particle-square {
+  border-radius: 2px;
+}
+
+.particle-ring {
+  border-radius: 50%;
+  background: transparent !important;
+  border: 1px solid currentColor;
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  animation: bounce-scroll 2s ease-in-out infinite;
+}
+
+/* Hero badge pulse */
+.badge-dot {
+  animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.5); }
 }

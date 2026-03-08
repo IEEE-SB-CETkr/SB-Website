@@ -5,21 +5,18 @@ import Footer from "../components/Footer.astro";
 import MemberCard from "../components/MemberCard.astro";
 import { execomMembers } from "../data/execom";
 
-// Page Metadata
 const title = "Executive Committee | IEEE SB CETKR";
 const description =
   "Meet the dedicated team behind IEEE Student Branch at College of Engineering Trikarpur";
 
-// Helper to safely aggregate members from multiple roles
 const getMembers = (roles: string[]) =>
   roles.flatMap((role) => execomMembers[role] || []);
 
-// Data Preparation
 const leadership = [
   ...(execomMembers["Branch Counselor"] || []),
   ...(execomMembers["Chairperson"] || []),
   ...(execomMembers["Vice Chairperson"] || []),
-  ...(execomMembers["Secretary"]?.slice(0, 1) || []), // Safely get first secretary
+  ...(execomMembers["Secretary"]?.slice(0, 1) || []),
 ];
 
 const coreTeam = getMembers([
@@ -45,24 +42,23 @@ const chapterLeads = getMembers([
   "IEEE WIE Vice Chair",
 ]);
 
-// Section Configuration for Rendering
 const sections = [
   {
     title: "Leadership",
-    color: "cyan-400",
-    shadow: "rgba(34,211,238,0.5)",
+    color: "from-teal-500 to-cyan-500",
+    accentClass: "bg-teal-500",
     members: leadership,
   },
   {
     title: "Core Team",
-    color: "blue-500",
-    shadow: "rgba(59,130,246,0.5)",
+    color: "from-blue-500 to-indigo-500",
+    accentClass: "bg-blue-500",
     members: coreTeam,
   },
   {
     title: "Chapter Leads",
-    color: "purple-500",
-    shadow: "rgba(168,85,247,0.5)",
+    color: "from-amber-500 to-orange-500",
+    accentClass: "bg-amber-500",
     members: chapterLeads,
   },
 ];
@@ -70,19 +66,24 @@ const sections = [
 
 <Header />
 <Layout title={title} description={description}>
+  <!-- Hero -->
   <section class="relative pt-40 pb-20 overflow-hidden">
-    <div class="absolute inset-0 z-0">
-      <div
-        class="absolute inset-0 bg-[url('/images/grid.svg')] opacity-10 [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"
-      >
-      </div>
-    </div>
+    <div class="absolute inset-0 dot-grid opacity-40"></div>
+    <div
+      class="absolute top-0 right-[10%] w-[500px] h-[500px] bg-teal-500/8 rounded-full blur-[120px]"
+      style="animation: drift 20s ease-in-out infinite;"
+    ></div>
+    <div
+      class="absolute bottom-0 left-[10%] w-[400px] h-[400px] bg-blue-600/8 rounded-full blur-[100px]"
+      style="animation: drift 25s ease-in-out infinite reverse;"
+    ></div>
 
     <div class="container mx-auto px-6 relative z-10 text-center">
       <div data-aos="fade-down" data-aos-duration="1000">
         <span
-          class="inline-block px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 text-sm font-medium mb-6 backdrop-blur-sm"
+          class="inline-flex items-center px-4 py-1.5 rounded-full border border-cyan-500/20 bg-cyan-950/40 text-cyan-300 text-xs font-bold tracking-[0.15em] uppercase backdrop-blur-xl mb-6"
         >
+          <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-2.5"></span>
           Our Team
         </span>
       </div>
@@ -97,35 +98,38 @@ const sections = [
       </h1>
 
       <p
-        class="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed"
+        class="text-base md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed"
         data-aos="fade-up"
         data-aos-duration="1000"
         data-aos-delay="200"
       >
         The passionate leaders and visionaries driving innovation, fostering
-        technical excellence, and building a vibrant community at IEEE SB CETKr.
+        technical excellence, and building a vibrant community at IEEE SB CETKR.
       </p>
     </div>
   </section>
 
-  <div class="bg-slate-950 pb-20">
-    <div class="container mx-auto px-6 space-y-24">
+  <!-- Team Sections -->
+  <div class="relative pb-20">
+    <div class="absolute inset-0 dot-grid opacity-20"></div>
+
+    <div class="container mx-auto px-6 space-y-24 relative z-10">
       {
         sections.map((section) => (
           <section class="relative">
-            <div class="flex items-center justify-center mb-12">
-              <h2 class="text-3xl font-bold text-white flex items-center gap-3">
-                <span
-                  class={`w-2 h-8 bg-${section.color} rounded-full`}
-                  style={`box-shadow: 0 0 15px ${section.shadow}`}
-                />
-                {section.title}
-              </h2>
+            <div class="flex items-center justify-center mb-12" data-aos="fade-up">
+              <div class="flex items-center gap-4">
+                <span class={`w-10 h-1 ${section.accentClass} rounded-full`} />
+                <h2 class="text-2xl md:text-3xl font-bold text-white">
+                  {section.title}
+                </h2>
+                <span class={`w-10 h-1 ${section.accentClass} rounded-full`} />
+              </div>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center">
-              {section.members.map((member) => (
-                <div class="w-full max-w-sm h-full">
+              {section.members.map((member, i) => (
+                <div class="w-full max-w-sm h-full" data-aos="fade-up" data-aos-delay={i * 80}>
                   <MemberCard member={member} />
                 </div>
               ))}
@@ -135,5 +139,6 @@ const sections = [
       }
     </div>
   </div>
+
+  <Footer />
 </Layout>
-<Footer />

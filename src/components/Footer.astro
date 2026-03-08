@@ -1,17 +1,14 @@
 ---
 const currentYear = new Date().getFullYear();
 
-// Site Navigation Links
-// using root-relative paths (/#section) ensures these work from sub-pages like /events/[slug]
 const siteLinks = [
   { label: "About", href: "/#about" },
   { label: "Events", href: "/events" },
-  { label: "Team", href: "/execom" }, // Updated based on your previous "Executive Committee" prompt
-  { label: "Chapters", href: "/#chapters" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Team", href: "/execom" },
+  { label: "Chapters", href: "/chapters" },
+  { label: "Contact", href: "/contact" },
 ];
 
-// Icon Paths (Extracted for cleanliness)
 const ICONS = {
   facebook:
     "M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z",
@@ -27,184 +24,167 @@ const ICONS = {
     "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z",
   email:
     "M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z",
-  phone:
-    "M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z",
 };
 
 const socialLinks = [
-  {
-    name: "Facebook",
-    url: "https://facebook.com/ieeesbcetkr",
-    icon: ICONS.facebook,
-  },
+  { name: "Facebook", url: "https://facebook.com/ieeesbcetkr", icon: ICONS.facebook },
   { name: "Twitter", url: "https://x.com/ieeesbcetkr", icon: ICONS.twitter },
-  {
-    name: "LinkedIn",
-    url: "https://linkedin.com/company/ieeesbcetkr",
-    icon: ICONS.linkedin,
-  },
-  {
-    name: "Instagram",
-    url: "https://instagram.com/ieeesbcetkr",
-    icon: ICONS.instagram,
-  },
-  {
-    name: "YouTube",
-    url: "https://youtube.com/ieeesbcetkr",
-    icon: ICONS.youtube,
-  },
+  { name: "LinkedIn", url: "https://linkedin.com/company/ieeesbcetkr", icon: ICONS.linkedin },
+  { name: "Instagram", url: "https://instagram.com/ieeesbcetkr", icon: ICONS.instagram },
+  { name: "YouTube", url: "https://youtube.com/ieeesbcetkr", icon: ICONS.youtube },
 ];
 ---
 
-<footer
-  class="relative bg-slate-900/95 backdrop-blur-sm border-t border-slate-800 pt-16 pb-8"
->
-  <div class="container mx-auto px-6">
-    <div class="grid md:grid-cols-4 gap-12 mb-12">
-      <div class="md:col-span-2">
-        <a href="/" class="flex items-center gap-3 mb-6 w-fit group">
-          <img
-            src="/SB_LOGO_W.png"
-            alt="IEEE SB CETKR logo"
-            class="w-12 h-12 object-contain transition-transform group-hover:scale-105"
-            loading="lazy"
-          />
-          <h3 class="text-2xl font-bold text-white">
-            <span class="text-cyan-400">IEEE</span> SB CETKR
-          </h3>
-        </a>
-        <p class="text-slate-400 mb-6 max-w-md">
-          Empowering the next generation of engineers and technologists through
-          innovation, collaboration, and professional development.
-        </p>
+<footer class="relative bg-slate-950 pt-px">
+  <!-- Gradient top border -->
+  <div class="w-full h-px bg-gradient-to-r from-transparent via-teal-500/50 to-transparent"></div>
 
-        <div class="flex space-x-4">
-          {
-            socialLinks.map((social) => (
-              <a
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.name}
-                class="w-10 h-10 rounded-full bg-slate-800 hover:bg-cyan-500/10 text-slate-300 hover:text-cyan-400 flex items-center justify-center transition-all duration-300 hover:scale-110 border border-transparent hover:border-cyan-500/20"
-              >
+  <div class="pt-16 pb-8">
+    <div class="container mx-auto px-6">
+      <div class="grid md:grid-cols-12 gap-12 mb-12">
+        <!-- Brand Column -->
+        <div class="md:col-span-5">
+          <a href="/" class="flex items-center gap-3 mb-5 w-fit group">
+            <img
+              src="/SB_LOGO_W.png"
+              alt="IEEE SB CETKR logo"
+              class="w-11 h-11 object-contain transition-transform group-hover:scale-105"
+              loading="lazy"
+            />
+            <h3 class="text-xl font-bold text-white">
+              <span class="text-cyan-400">IEEE</span> SB CETKR
+            </h3>
+          </a>
+          <p class="text-slate-500 mb-6 max-w-sm text-sm leading-relaxed">
+            Empowering the next generation of engineers and technologists through
+            innovation, collaboration, and professional development.
+          </p>
+
+          <div class="flex space-x-3">
+            {
+              socialLinks.map((social) => (
+                <a
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.name}
+                  class="w-9 h-9 rounded-lg bg-slate-800/60 hover:bg-teal-500/10 text-slate-500 hover:text-cyan-400 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 border border-transparent hover:border-cyan-500/20"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    {social.name === "Instagram" ? (
+                      <path
+                        fill-rule="evenodd"
+                        d={social.icon}
+                        clip-rule="evenodd"
+                      />
+                    ) : (
+                      <path d={social.icon} />
+                    )}
+                  </svg>
+                </a>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="md:col-span-3">
+          <h4 class="text-sm font-semibold text-white mb-5 tracking-wider uppercase">Quick Links</h4>
+          <nav>
+            <ul class="space-y-2.5">
+              {
+                siteLinks.map((link) => (
+                  <li>
+                    <a
+                      href={link.href}
+                      class="text-slate-500 hover:text-cyan-400 transition-colors duration-300 flex items-center group text-sm"
+                    >
+                      <span class="w-1 h-1 rounded-full bg-slate-700 mr-2.5 group-hover:bg-cyan-400 group-hover:shadow-[0_0_4px_rgba(34,211,238,0.4)] transition-all" />
+                      {link.label}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Contact -->
+        <div class="md:col-span-4">
+          <h4 class="text-sm font-semibold text-white mb-5 tracking-wider uppercase">Contact Us</h4>
+          <address class="not-italic">
+            <ul class="space-y-4 text-slate-500 text-sm">
+              <li class="flex items-start space-x-3">
                 <svg
-                  class="w-5 h-5"
+                  class="w-4 h-4 text-cyan-400/70 mt-0.5 shrink-0"
                   fill="currentColor"
                   viewBox="0 0 24 24"
-                  aria-hidden="true"
                 >
-                  {social.name === "Instagram" ? (
-                    <path
-                      fill-rule="evenodd"
-                      d={social.icon}
-                      clip-rule="evenodd"
-                    />
-                  ) : (
-                    <path d={social.icon} />
-                  )}
+                  <path d={ICONS.location}></path>
                 </svg>
-              </a>
-            ))
-          }
+                <span class="sr-only">Location:</span>
+                <span>College of Engineering Trikaripur, Kasaragod, Kerala, India</span>
+              </li>
+              <li class="flex items-center space-x-3">
+                <svg
+                  class="w-4 h-4 text-cyan-400/70 shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d={ICONS.email}></path>
+                </svg>
+                <span class="sr-only">Email:</span>
+                <a
+                  href="mailto:ieeesbcetkr@gmail.com"
+                  class="hover:text-cyan-400 transition-colors duration-300"
+                >
+                  ieeesbcetkr@gmail.com
+                </a>
+              </li>
+            </ul>
+          </address>
         </div>
       </div>
 
-      <div>
-        <h4 class="text-lg font-semibold text-white mb-6">Quick Links</h4>
-        <nav>
-          <ul class="space-y-3">
-            {
-              siteLinks.map((link) => (
-                <li>
-                  <a
-                    href={link.href}
-                    class="text-slate-400 hover:text-cyan-400 transition-colors duration-300 flex items-center group"
-                  >
-                    <span class="w-1.5 h-1.5 rounded-full bg-slate-600 mr-2 group-hover:bg-cyan-400 transition-colors" />
-                    {link.label}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </nav>
-      </div>
+      <!-- Bottom bar -->
+      <div class="border-t border-slate-800/60 pt-6 mt-6">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+          <p class="text-slate-600 text-xs text-center md:text-left">
+            &copy; <time datetime={String(currentYear)}>{currentYear}</time> IEEE Student
+            Branch, College of Engineering Trikaripur. All rights reserved.
+          </p>
+          <div class="flex items-center space-x-6">
+            <a
+              href="#"
+              class="text-slate-600 hover:text-cyan-400 text-xs transition-colors duration-300"
+            >Privacy Policy</a>
+            <a
+              href="#"
+              class="text-slate-600 hover:text-cyan-400 text-xs transition-colors duration-300"
+            >Terms</a>
 
-      <div>
-        <h4 class="text-lg font-semibold text-white mb-6">Contact Us</h4>
-        <address class="not-italic">
-          <ul class="space-y-4 text-slate-400">
-            <li class="flex items-start space-x-3">
-              <svg
-                class="w-5 h-5 text-cyan-400 mt-0.5 shrink-0"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d={ICONS.location}></path>
-              </svg>
-              <span class="sr-only">Location:</span>
-              <span
-                >College of Engineering Trikaripur, Kasaragod, Kerala, India</span
-              >
-            </li>
-            <li class="flex items-center space-x-3">
-              <svg
-                class="w-5 h-5 text-cyan-400 shrink-0"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d={ICONS.email}></path>
-              </svg>
-              <span class="sr-only">Email:</span>
-              <a
-                href="mailto:ieeesbcetkr@gmail.com"
-                class="hover:text-cyan-400 transition-colors duration-300"
-              >
-                ieeesbcetkr@gmail.com
-              </a>
-            </li>
-            <!--
-            <li class="flex items-center space-x-3">
-              <svg
-                class="w-5 h-5 text-cyan-400 shrink-0"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d={ICONS.phone}></path>
-              </svg>
-              <a
-                href="tel:+911234567890"
-                class="hover:text-cyan-400 transition-colors duration-300"
-              >
-                +91 12345 67890
-              </a>
-            </li>
-          -->
-          </ul>
-        </address>
-      </div>
-    </div>
-
-    <div class="border-t border-slate-800 pt-8 mt-8">
-      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-        <p class="text-slate-500 text-sm text-center md:text-left">
-          &copy; <time datetime={String(currentYear)}>{currentYear}</time> IEEE Student
-          Branch, College of Engineering Trikaripur. All rights reserved.
-        </p>
-        <div class="flex space-x-6">
-          <a
-            href="#"
-            class="text-slate-500 hover:text-cyan-400 text-sm transition-colors duration-300"
-            >Privacy Policy</a
-          >
-          <a
-            href="#"
-            class="text-slate-500 hover:text-cyan-400 text-sm transition-colors duration-300"
-            >Terms of Service</a
-          >
+            <!-- Back to top -->
+            <button
+              id="back-to-top"
+              class="w-8 h-8 rounded-lg bg-slate-800/60 text-slate-500 hover:text-cyan-400 hover:bg-teal-500/10 flex items-center justify-center transition-all duration-300 hover:-translate-y-0.5 border border-transparent hover:border-cyan-500/20"
+              aria-label="Back to top"
+            >
+              <span class="material-icons text-base" aria-hidden="true">keyboard_arrow_up</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </footer>
+
+<script>
+  document.getElementById("back-to-top")?.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
