@@ -174,7 +174,7 @@ const timeStr = eventDate.toLocaleTimeString("en-US", {
 
               {
                 registrationLink && (
-                  <div class="mt-8 pt-6 border-t border-slate-800">
+                  <div id="registration-container" class="mt-8 pt-6 border-t border-slate-800" data-event-date={eventDate.toISOString()}>
                     <a
                       href={registrationLink}
                       target="_blank"
@@ -197,3 +197,23 @@ const timeStr = eventDate.toLocaleTimeString("en-US", {
   </main>
 </Layout>
 <Footer />
+
+<script>
+  function checkRegistrationStatus() {
+    const container = document.getElementById("registration-container");
+    if (!container) return;
+
+    const dateStr = container.getAttribute("data-event-date");
+    if (!dateStr) return;
+
+    const eventDate = new Date(dateStr);
+    const now = new Date();
+
+    if (eventDate < now) {
+      container.style.display = "none";
+    }
+  }
+
+  // Run on initial load
+  checkRegistrationStatus();
+</script>

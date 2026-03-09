@@ -1,0 +1,259 @@
+---
+/**
+ * Shared Lightbox Component
+ * Supports images and videos with mobile-first navigation and swipe gestures.
+ */
+interface Props {
+  id?: string;
+}
+
+const { id = "global-lightbox" } = Astro.props;
+---
+
+<sb-lightbox id={id} class="fixed inset-0 z-[9999] hidden pointer-events-none" aria-modal="true" role="dialog">
+  <!-- Backdrop -->
+  <div class="absolute inset-0 bg-slate-950/95 backdrop-blur-xl transition-opacity duration-300 opacity-0 lb-backdrop pointer-events-auto"></div>
+
+  <!-- Main Container -->
+  <div class="relative w-full h-full flex flex-col items-center justify-center p-4 md:p-8 lb-container opacity-0 transition-all duration-500 scale-95">
+    
+    <!-- Top Bar -->
+    <div class="absolute top-0 left-0 w-full p-4 flex justify-between items-center z-50 bg-gradient-to-b from-black/60 to-transparent pointer-events-none">
+      <span class="lb-counter text-white/90 font-mono text-sm pointer-events-auto px-4 py-1.5 bg-white/10 rounded-full backdrop-blur-md border border-white/10 shadow-lg"></span>
+      
+      <button class="lb-close pointer-events-auto p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all border border-white/10 focus:outline-none focus:ring-2 focus:ring-cyan-500 shadow-lg active:scale-95" aria-label="Close lightbox">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Media Area -->
+    <div class="relative w-full h-full flex items-center justify-center pointer-events-none lb-media-stage">
+      <!-- Navigation Buttons (Always visible on mobile but sleek) -->
+      <button class="lb-prev absolute left-2 md:left-6 p-4 rounded-full bg-white/5 hover:bg-white/10 text-white/70 hover:text-cyan-400 backdrop-blur-sm border border-white/5 transition-all hover:scale-110 z-40 pointer-events-auto focus:outline-none focus:ring-2 focus:ring-cyan-500 shadow-xl active:scale-90" aria-label="Previous">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6 md:w-8 md:h-8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"></path>
+        </svg>
+      </button>
+
+      <div class="relative max-w-full max-h-full flex items-center justify-center pointer-events-auto lb-media-wrapper rounded-xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-white/5 bg-black/40">
+        <img class="lb-img max-w-full max-h-[85vh] object-contain hidden select-none" alt="Lightbox Content" draggable="false" />
+        <video class="lb-video max-w-full max-h-[85vh] hidden" controls playsinline></video>
+        
+        <!-- Loading Spinner -->
+        <div class="lb-loader absolute inset-0 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm hidden">
+          <div class="w-12 h-12 border-4 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin"></div>
+        </div>
+      </div>
+
+      <button class="lb-next absolute right-2 md:right-6 p-4 rounded-full bg-white/5 hover:bg-white/10 text-white/70 hover:text-cyan-400 backdrop-blur-sm border border-white/5 transition-all hover:scale-110 z-40 pointer-events-auto focus:outline-none focus:ring-2 focus:ring-cyan-500 shadow-xl active:scale-90" aria-label="Next">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6 md:w-8 md:h-8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Caption -->
+    <div class="lb-caption-container absolute bottom-8 left-1/2 -translate-x-1/2 max-w-2xl w-full px-6 text-center pointer-events-none transition-all duration-300">
+      <div class="lb-caption-box inline-block px-6 py-3 bg-white/10 backdrop-blur-xl border border-white/10 rounded-2xl text-white/90 text-sm md:text-base font-medium shadow-2xl">
+        <p class="lb-caption"></p>
+      </div>
+    </div>
+  </div>
+</sb-lightbox>
+
+<style>
+  sb-lightbox.active {
+    display: flex;
+    pointer-events: auto;
+  }
+  
+  sb-lightbox.active .lb-backdrop {
+    opacity: 1;
+  }
+  
+  sb-lightbox.active .lb-container {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Fade transition for image change */
+  .lb-img.fade-in {
+    animation: mediaFadeIn 0.4s ease-out forwards;
+  }
+
+  @keyframes mediaFadeIn {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  /* Custom Scrollbar for Lightbox */
+  .lb-media-wrapper::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  .lb-media-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+  }
+</style>
+
+<script>
+  class SBLightbox extends HTMLElement {
+    constructor() {
+      super();
+      this.items = [];
+      this.currentIndex = 0;
+      this.elements = {};
+      this.touchStartX = 0;
+      this.touchStartY = 0;
+      this.isZoomed = false;
+    }
+
+    connectedCallback() {
+      this.initElements();
+      this.initEventListeners();
+    }
+
+    initElements() {
+      this.elements = {
+        backdrop: this.querySelector('.lb-backdrop'),
+        container: this.querySelector('.lb-container'),
+        img: this.querySelector('.lb-img'),
+        video: this.querySelector('.lb-video'),
+        caption: this.querySelector('.lb-caption'),
+        captionContainer: this.querySelector('.lb-caption-container'),
+        counter: this.querySelector('.lb-counter'),
+        loader: this.querySelector('.lb-loader'),
+        close: this.querySelector('.lb-close'),
+        prev: this.querySelector('.lb-prev'),
+        next: this.querySelector('.lb-next'),
+        mediaWrapper: this.querySelector('.lb-media-wrapper')
+      };
+    }
+
+    initEventListeners() {
+      this.elements.close.onclick = () => this.close();
+      this.elements.prev.onclick = (e) => { e.stopPropagation(); this.prev(); };
+      this.elements.next.onclick = (e) => { e.stopPropagation(); this.next(); };
+      this.elements.backdrop.onclick = () => this.close();
+
+      // Keyboard
+      window.addEventListener('keydown', (e) => {
+        if (!this.classList.contains('active')) return;
+        if (e.key === 'ArrowRight') this.next();
+        if (e.key === 'ArrowLeft') this.prev();
+        if (e.key === 'Escape') this.close();
+      });
+
+      // Swipe
+      this.elements.container.addEventListener('touchstart', (e) => {
+        this.touchStartX = e.changedTouches[0].screenX;
+        this.touchStartY = e.changedTouches[0].screenY;
+      }, { passive: true });
+
+      this.elements.container.addEventListener('touchend', (e) => {
+        const touchEndX = e.changedTouches[0].screenX;
+        const touchEndY = e.changedTouches[0].screenY;
+        const diffX = this.touchStartX - touchEndX;
+        const diffY = Math.abs(this.touchStartY - touchEndY);
+
+        if (Math.abs(diffX) > 50 && diffY < 100) {
+          if (diffX > 0) this.next();
+          else this.prev();
+        } else if (Math.abs(this.touchStartY - touchEndY) > 150 && Math.abs(diffX) < 50) {
+          // Swipe up/down to close
+          this.close();
+        }
+      }, { passive: true });
+    }
+
+    open(items, index = 0) {
+      this.items = items;
+      this.currentIndex = index;
+      this.classList.add('active');
+      this.updateContent();
+      document.body.style.overflow = 'hidden';
+      
+      // Focus management
+      this.elements.close.focus();
+    }
+
+    close() {
+      this.classList.remove('active');
+      document.body.style.overflow = '';
+      this.elements.video.pause();
+      this.elements.video.src = '';
+      
+      // Dispatch event for callers (like Carousel) to resume autoplay
+      this.dispatchEvent(new CustomEvent('lb-close'));
+    }
+
+    next() {
+      this.currentIndex = (this.currentIndex + 1) % this.items.length;
+      this.updateContent('next');
+    }
+
+    prev() {
+      this.currentIndex = (this.currentIndex - 1 + this.items.length) % this.items.length;
+      this.updateContent('prev');
+    }
+
+    updateContent(direction = '') {
+      const item = this.items[this.currentIndex];
+      if (!item) return;
+
+      // Show loader for new image
+      this.elements.loader.classList.remove('hidden');
+      
+      // Update media
+      this.elements.img.classList.add('hidden');
+      this.elements.video.classList.add('hidden');
+      this.elements.video.pause();
+
+      if (item.type === 'image') {
+        this.elements.img.src = item.url;
+        this.elements.img.onload = () => {
+          this.elements.loader.classList.add('hidden');
+          this.elements.img.classList.remove('hidden');
+          this.elements.img.classList.add('fade-in');
+          setTimeout(() => this.elements.img.classList.remove('fade-in'), 400);
+        };
+      } else {
+        this.elements.video.src = item.url;
+        this.elements.video.onloadeddata = () => {
+          this.elements.loader.classList.add('hidden');
+          this.elements.video.classList.remove('hidden');
+          this.elements.video.play().catch(() => {});
+        };
+      }
+
+      // Update UI
+      this.elements.counter.textContent = `${this.currentIndex + 1} / ${this.items.length}`;
+      
+      if (item.caption) {
+        this.elements.caption.textContent = item.caption;
+        this.elements.captionContainer.style.opacity = '1';
+        this.elements.captionContainer.style.transform = 'translateX(-50%) translateY(0)';
+      } else {
+        this.elements.captionContainer.style.opacity = '0';
+        this.elements.captionContainer.style.transform = 'translateX(-50%) translateY(20px)';
+      }
+
+      // Preload
+      this.preload((this.currentIndex + 1) % this.items.length);
+      this.preload((this.currentIndex - 1 + this.items.length) % this.items.length);
+    }
+
+    preload(index) {
+      const item = this.items[index];
+      if (item && item.type === 'image') {
+        const img = new Image();
+        img.src = item.url;
+      }
+    }
+  }
+
+  customElements.define('sb-lightbox', SBLightbox);
+</script>

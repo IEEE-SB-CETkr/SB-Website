@@ -1,5 +1,6 @@
 ---
 import path from "path";
+import Lightbox from "./shared/Lightbox.astro";
 
 interface Image {
   src: string;
@@ -123,51 +124,7 @@ const carouselId = `carousel-${Math.random().toString(36).slice(2, 9)}`;
     }
   </div>
 
-  <dialog
-    id={`${carouselId}-lightbox`}
-    class="fixed inset-0 z-[100] w-full h-full bg-black/95 backdrop-blur-sm p-0 m-0 border-none open:animate-fade-in closed:animate-fade-out"
-  >
-    <div class="w-full h-full flex items-center justify-center relative p-4">
-      <button
-        id={`${carouselId}-lightbox-close`}
-        class="absolute top-6 right-6 text-white/50 hover:text-white transition-colors p-2 z-50"
-      >
-        <span class="material-icons text-4xl">close</span>
-      </button>
-
-      <button
-        id={`${carouselId}-lb-prev`}
-        class="absolute left-4 top-1/2 -translate-y-1/2 p-4 text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-all z-50 hidden md:block"
-      >
-        <span class="material-icons text-4xl">chevron_left</span>
-      </button>
-
-      <img
-        id={`${carouselId}-lightbox-img`}
-        class="max-w-full max-h-[85vh] object-contain shadow-2xl rounded-sm select-none"
-        src=""
-        alt=""
-        draggable="false"
-      />
-
-      <button
-        id={`${carouselId}-lb-next`}
-        class="absolute right-4 top-1/2 -translate-y-1/2 p-4 text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-all z-50 hidden md:block"
-      >
-        <span class="material-icons text-4xl">chevron_right</span>
-      </button>
-
-      <div
-        class="absolute bottom-8 left-0 w-full text-center pointer-events-none"
-      >
-        <p
-          id={`${carouselId}-lightbox-caption`}
-          class="inline-block px-4 py-2 bg-black/50 backdrop-blur-md rounded-full text-white/90 font-medium tracking-wide"
-        >
-        </p>
-      </div>
-    </div>
-  </dialog>
+  <Lightbox id={`lb-${carouselId}`} />
 </div>
 
 <style>
@@ -210,19 +167,6 @@ const carouselId = `carousel-${Math.random().toString(36).slice(2, 9)}`;
       transform: scaleX(1);
     }
   }
-
-  /* Lightbox Animation */
-  dialog[open] {
-    animation: fadeIn 0.2s ease-out forwards;
-  }
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
 </style>
 
 <script is:inline define:vars={{ slideDuration: SLIDE_DURATION, carouselId }}>
@@ -239,15 +183,11 @@ const carouselId = `carousel-${Math.random().toString(36).slice(2, 9)}`;
     const progressBar = document.getElementById(`${carouselId}-progress-bar`);
 
     // Lightbox Elements
-    const lightbox = document.getElementById(`${carouselId}-lightbox`);
-    const lightboxImg = document.getElementById(`${carouselId}-lightbox-img`);
-    const lightboxCaption = document.getElementById(`${carouselId}-lightbox-caption`);
-    const lbPrevBtn = document.getElementById(`${carouselId}-lb-prev`);
-    const lbNextBtn = document.getElementById(`${carouselId}-lb-next`);
+    const lightbox = document.getElementById(`lb-${carouselId}`);
 
     let currentIndex = 0;
-    let lightboxIndex = 0;
     let autoPlayTimer;
+    let isLightboxOpen = false;
 
     // --- Core Carousel Logic ---
 
@@ -296,7 +236,7 @@ const carouselId = `carousel-${Math.random().toString(36).slice(2, 9)}`;
       autoPlayTimer = setInterval(() => {
         // Stop autoplay if lightbox is open or user is hovering
         const isHovering = root.matches(':hover');
-        if (!isHovering && !lightbox.open) {
+        if (!isHovering && !isLightboxOpen) {
           next();
         }
       }, slideDuration);
@@ -358,75 +298,34 @@ const carouselId = `carousel-${Math.random().toString(36).slice(2, 9)}`;
       { passive: true }
     );
 
-    // --- Lightbox Logic ---
+    // --- Lightbox Integration ---
 
-    function updateLightboxImage(index) {
-      if (slides.length === 0) return;
-      if (index < 0) index = slides.length - 1;
-      if (index >= slides.length) index = 0;
-
-      lightboxIndex = index;
-
-      // Get data from the slide's image tag
-      const sourceImg = slides[index].querySelector("img");
-      if (sourceImg) {
-        lightboxImg.src = sourceImg.dataset.lightboxSrc || sourceImg.src;
-        lightboxCaption.textContent =
-          sourceImg.dataset.lightboxCaption || sourceImg.alt;
-      }
-    }
+    const items = slides.map(slide => {
+      const img = slide.querySelector("img");
+      return {
+        type: 'image',
+        url: img.dataset.lightboxSrc || img.src,
+        caption: img.dataset.lightboxCaption || img.alt
+      };
+    });
 
     slides.forEach((slide, idx) => {
       const img = slide.querySelector("img");
       if (!img) return;
       img.addEventListener("click", () => {
-        updateLightboxImage(idx);
-        lightbox.showModal();
-        // LOCK SCROLL
-        document.body.style.overflow = "hidden";
-        clearInterval(autoPlayTimer); // Pause background carousel completely
+        if (lightbox && typeof lightbox.open === 'function') {
+          isLightboxOpen = true;
+          lightbox.open(items, idx);
+          clearInterval(autoPlayTimer); // Pause background carousel completely
+        }
       });
     });
 
-    const closeLightbox = () => {
-      lightbox.close();
-      // UNLOCK SCROLL
-      document.body.style.overflow = "";
-      resetTimer(); // Resume background carousel
-    };
-
-    // Lightbox Controls
-    document
-      .getElementById(`${carouselId}-lightbox-close`)
-      ?.addEventListener("click", closeLightbox);
-
-    lbNextBtn?.addEventListener("click", (e) => {
-      e.stopPropagation();
-      updateLightboxImage(lightboxIndex + 1);
-    });
-
-    lbPrevBtn?.addEventListener("click", (e) => {
-      e.stopPropagation();
-      updateLightboxImage(lightboxIndex - 1);
-    });
-
-    // Close on backdrop click
-    lightbox.addEventListener("click", (e) => {
-      if (e.target === lightbox) closeLightbox();
-    });
-
-    // --- Global Keyboard Nav ---
-    document.addEventListener("keydown", (e) => {
-      if (lightbox.open) {
-        // Control Lightbox
-        if (e.key === "ArrowRight") updateLightboxImage(lightboxIndex + 1);
-        if (e.key === "ArrowLeft") updateLightboxImage(lightboxIndex - 1);
-        if (e.key === "Escape") closeLightbox();
-      } else {
-        // Only respond if this carousel is the one we are interacting with?
-        // Actually, for simplicity we'll just check if lightbox is open.
-        // But keyboard nav for multiple carousels on one page is tricky.
-      }
-    });
+    if (lightbox) {
+      lightbox.addEventListener('lb-close', () => {
+        isLightboxOpen = false;
+        resetTimer(); // Resume background carousel
+      });
+    }
   })();
 </script>
