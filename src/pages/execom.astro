@@ -52,57 +52,57 @@ const ECC = getMembers(["ECC"]);
 const sections = [
   {
     title: "Faculty Advisors",
-    color: "from-amber-500 to-orange-500",
-    accentClass: "bg-amber-500",
+    color: "from-teal-500 to-cyan-500",
+    accentClass: "bg-teal-500",
     members: facultyMembers,
   },
   {
     title: "Leadership",
-    color: "from-amber-500 to-orange-500",
-    accentClass: "bg-amber-500",
+    color: "from-teal-500 to-cyan-500",
+    accentClass: "bg-teal-500",
     members: leadership,
   },
   {
     title: "Webmasters",
-    color: "from-amber-500 to-orange-500",
-    accentClass: "bg-amber-500",
+    color: "from-blue-500 to-indigo-500",
+    accentClass: "bg-blue-500",
     members: webmasters,
   },
   {
     title: "Event Coordinators",
-    color: "from-amber-500 to-orange-500",
-    accentClass: "bg-amber-500",
+    color: "from-blue-500 to-indigo-500",
+    accentClass: "bg-blue-500",
     members: eventCoordinators,
   },
   {
     title: "IEEE Link Representatives",
-    color: "from-amber-500 to-orange-500",
-    accentClass: "bg-amber-500",
+    color: "from-blue-500 to-indigo-500",
+    accentClass: "bg-blue-500",
     members: LinkRepresentatives,
   },
   {
-    color: "from-amber-500 to-orange-500",
-    accentClass: "bg-amber-500",
+    color: "from-blue-500 to-indigo-500",
+    accentClass: "bg-blue-500",
     isPaired: true,
     mdcMembers: MDC,
     eccMembers: ECC,
   },
   {
     title: "Design Team",
-    color: "from-amber-500 to-orange-500",
-    accentClass: "bg-amber-500",
+    color: "from-blue-500 to-indigo-500",
+    accentClass: "bg-blue-500",
     members: designTeam,
   },
   {
     title: "Content Team",
-    color: "from-amber-500 to-orange-500",
-    accentClass: "bg-amber-500",
+    color: "from-blue-500 to-indigo-500",
+    accentClass: "bg-blue-500",
     members: contentTeam,
   },
   {
     title: "Newsletter Editors",
-    color: "from-amber-500 to-orange-500",
-    accentClass: "bg-amber-500",
+    color: "from-blue-500 to-indigo-500",
+    accentClass: "bg-blue-500",
     members: newsletterEditors,
   },
   {
@@ -201,8 +201,8 @@ const sections = [
             )}
 
             {section.isPaired ? (
-              <div class="grid grid-cols-3 gap-8">
-                <div class="col-span-2">
+              <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2">
                   <div
                     class="flex items-center justify-center mb-12"
                     data-aos="fade-up"
@@ -237,7 +237,7 @@ const sections = [
                   </div>
                 </div>
 
-                <div class="col-span-1">
+                <div class="lg:col-span-1">
                   <div
                     class="flex items-center justify-center mb-12"
                     data-aos="fade-up"
