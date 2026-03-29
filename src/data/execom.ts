@@ -19,7 +19,7 @@ export interface ExecomMember {
   id: number;
   name: string;
   role: string;
-  image: string | any;
+  image: any; // Updated from string | any
   social?: {
     linkedin?: string;
     github?: string;
@@ -57,29 +57,29 @@ function resolveTeamImage(img: string): any {
 export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   "facultyMembers": [
     {
-      id: 0,
+      id: 1,
       name: "Dr. Naveena AK",
       role: "IEEE Branch Counselor",
-      image: ("../media/team/Dr.Naveena.jpeg"),
+      image: "../media/team/Dr.Naveena.jpeg",
       social: {},
       department: "HOD - Department of CSE",
       year: ""
     },
     {
-      id: 1,
+      id: 2,
       name: "Mr. Adil Nassar",
       role: "IEEE PES Chapter Advisor",
       department: "ASST PROF - Department of EEE",
-      image: ("../media/team/adhilnasser.jpg"),
+      image: "../media/team/adhilnasser.jpg",
       social: {}
     }
   ],
   "Chairperson": [
     {
-      id: 2,
+      id: 3,
       name: "Aadith V P",
       role: "Chairperson",
-      image: resolveTeamImage("/media/team/Aadith.jpeg"),
+      image: "/media/team/Aadith.jpeg",
       social: {
         linkedin: "https://www.linkedin.com/in/aadithvp",
         github: "https://github.com/aadithvp"
@@ -90,12 +90,12 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   ],
   "Vice Chairperson": [
     {
-      id: 3,
+      id: 4,
       name: "Anush Ahmed",
       role: "Vice Chairperson",
-      image: ("../media/team/ANUSH.jpg"),
+      image: "../media/team/ANUSH.jpg",
       social: {
-        linkedin: "https://www.linkedin.com/in/anush-ahmed-15144a316?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+        linkedin: "https://www.linkedin.com/in/anush-ahmed-15144a316",
       },
       department: "CSE",
       year: "2023"
@@ -103,10 +103,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   ],
   "Secretary": [
     {
-      id: 4,
+      id: 5,
       name: "Anjana. K",
       role: "Secretary",
-      image: resolveTeamImage("/media/team/Anjana.jpg"),
+      image: "/media/team/Anjana.jpg",
       social: {
         linkedin: "https://www.linkedin.com/in/anjana-k-973740332"
       },
@@ -116,10 +116,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   ],
   "Joint Secretary": [
     {
-      id: 5,
+      id: 6,
       name: "Jasim AG",
       role: "Joint Secretary",
-      image: ("../media/team/Jasim.jpg"),
+      image: "../media/team/Jasim.jpg",
       social: {
         linkedin: "http://linkedin.com/in/jasim-ag-396a30316"
       },
@@ -129,12 +129,12 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   ],
   "Treasurer": [
     {
-      id: 6,
+      id: 7,
       name: "Vaishnav K",
       role: "Treasurer",
-      image: ("../media/team/Vaishnav.jpeg"),
+      image: "../media/team/Vaishnav.jpeg",
       social: {
-        linkedin: "https://www.linkedin.com/in/vaishnav-kadambur-0a6296367?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
+        linkedin: "https://www.linkedin.com/in/vaishnav-kadambur-0a6296367",
       },
       department: "ECE",
       year: "2023"
@@ -142,12 +142,12 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   ],
   "IEEE WIE Chair": [
     {
-      id: 17,
+      id: 8,
       name: "Asliya S",
-      role: "IEEE IAS Chair",
-      image: ("../media/team/asliya.jpg"),
+      role: "IEEE WIE Chair",
+      image: "../media/team/asliya.jpg",
       social: {
-        linkedin: "www.linkedin.com/in/asliya-s-9332a7304?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+        linkedin: "www.linkedin.com/in/asliya-s-9332a7304"
       },
       department: "ECE",
       year: "2023"
@@ -155,10 +155,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   ],
   "IEEE WIE Vice Chair": [
     {
-      id: 8,
+      id: 9,
       name: "Nayana Sivadas",
       role: "IEEE WIE Vice Chair",
-      image: resolveTeamImage("/media/team/Nayana.jpg"),
+      image: "/media/team/Nayana.jpg",
       social: {
         linkedin: "https://www.linkedin.com/in/nayana-sivadas-556215329/"
       },
@@ -168,10 +168,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   ],
   "IEEE WIE Secretary": [
     {
-      id: 8,
+      id: 10,
       name: "Khadeeja Khalid",
       role: "IEEE WIE Secretary",
-      image: resolveTeamImage("/media/team/kajju.jpeg"),
+      image: "/media/team/kajju.jpeg",
       social: {
         linkedin: "https://www.linkedin.com/in/khadeeja-khalid005/",
         github: "https://github.com/KhadeejaKhalid"
@@ -182,10 +182,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   ],
   "IEEE PES Chair": [
     {
-      id: 13,
+      id: 11,
       name: "Athulya P N",
       role: "IEEE PES Chair",
-      image: ("../media/team/Athulya.jpeg"),
+      image: "../media/team/Athulya.jpeg",
       social: {
         linkedin: "https://www.linkedin.com/in/athulya-nixan-251a0b306"
       },
@@ -195,10 +195,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   ],
   "IEEE PES Vice Chair": [
     {
-      id: 14,
+      id: 12,
       name: "Gautham Gireesh A",
       role: "IEEE PES Vice Chair",
-      image: ("../media/team/Gautham.jpg"),
+      image: "../media/team/Gautham.jpg",
       social: {
         linkedin: "https://www.linkedin.com/in/gautham-gireesh-a-04a7ba3a2",
         github: "https://github.com/gauthamannukkaran-hue"
@@ -209,10 +209,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   ],
   "IEEE PES Secretary": [
     {
-      id: 14,
+      id: 13,
       name: "Pranav E",
       role: "IEEE PES Secretary",
-      image: ("../media/team/Pranav.jpg"),
+      image: "../media/team/Pranav.jpg",
       social: {
         linkedin: "https://www.linkedin.com/in/pranav-e-637709351/"
       },
@@ -223,10 +223,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   ],
   "Women in Power": [
     {
-      id: 15,
+      id: 14,
       name: "Karthika M",
       role: "Women in Power Lead",
-      image: ("../media/team/karthika.jpg"),
+      image: "../media/team/karthika.jpg",
       social: {
         linkedin: "https://www.linkedin.com/in/karthikadas28/",
         github: "https://github.com/karthikadas"
@@ -237,12 +237,12 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   ],
   "IEEE IAS Chair": [
     {
-      id: 18,
+      id: 15,
       name: "Devanandan P",
       role: "IEEE IAS Vice Chair",
-      image: ("../media/team/Devanandan.jpeg"),
+      image: "../media/team/Devanandan.jpeg",
       social: {
-        linkedin: "https://www.linkedin.com/in/devanandan-p-906101367?"
+        linkedin: "https://www.linkedin.com/in/devanandan-p-906101367"
       },
       department: "ECE",
       year: "2023"
@@ -250,10 +250,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   ],
   "IEEE IAS Vice Chair": [
     {
-      id: 8,
+      id: 16,
       name: "Adhima Sudheer MV",
-      role: "IEEE WIE Vice Chair",
-      image: resolveTeamImage("/media/team/Adhima.jpeg"),
+      role: "IEEE IAS Vice Chair",
+      image: "/media/team/Adhima.jpeg",
       social: {
         linkedin: "https://www.linkedin.com/in/adhima-sudheer-mv-450701332"
       },
@@ -261,10 +261,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
       year: "2023"
     },
     {
-      id: 19,
+      id: 17,
       name: "Deepak P V",
       role: "IEEE IAS Secretary",
-      image: resolveTeamImage("/media/team/Deepak.jpg"),
+      image: "/media/team/Deepak.jpg",
       social: {
         linkedin: "https://www.linkedin.com/in/deepak-pv-519681298/"
       },
@@ -275,10 +275,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   ],
   "Webmasters": [
     {
-      id: 7,
+      id: 18,
       name: "Anukheth Sunil",
       role: "",
-      image: ("../media/team/anukheth.jpg"),
+      image: "../media/team/anukheth.jpg",
       social: {
         linkedin: "https://www.linkedin.com/in/anukheth-sunil/",
         github: "https://github.com/kethu-x86"
@@ -287,10 +287,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
       year: "2023"
     },
     {
-      id: 10,
+      id: 19,
       name: "Abhinavraj T",
       role: "",
-      image: ("../media/team/abhinavraj.png"),
+      image: "../media/team/abhinavraj.png",
       social: {
         linkedin: "https://www.linkedin.com/in/abhinavrajt",
         github: "https://github.com/abhinavraj2004"
@@ -299,10 +299,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
       year: "2023"
     },
     {
-      id: 7,
+      id: 20,
       name: "Sravan vishnu P",
       role: "",
-      image: ("../media/team/sravan.jpeg"),
+      image: "../media/team/sravan.jpeg",
       social: {
         linkedin: "https://www.linkedin.com/in/sravan-vishnu",
         github: "https://github.com/sravanvishnu"
@@ -313,10 +313,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   ],
   "Event Coordinators": [
     {
-      id: 6,
+      id: 21,
       name: "Abhishek Vadakke Madam",
       role: "",
-      image: ("../media/team/Abhishek.png"),
+      image: "../media/team/Abhishek.png",
       social: {
         linkedin: "https://www.linkedin.com/in/abhishek-vadakke-madam-2b7b53296",
         github: "https://github.com/Unkn0wn-007"
@@ -325,22 +325,22 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
       year: "2023"
     },
     {
-      id: 8,
+      id: 22,
       name: "Laya Khathoon V",
       role: "",
-      image: ("../media/team/Laya.jpeg"),
+      image: "../media/team/Laya.jpeg",
       social: {
-        linkedin: "https://www.linkedin.com/in/laya-khathoon-v-763189387?trk=contact-info",
+        linkedin: "https://www.linkedin.com/in/laya-khathoon-v-763189387",
         github: "https://github.com/Layakhathoon"
       },
       department: "CSE",
       year: "2023"
     },
     {
-      id: 9,
+      id: 23,
       name: "Vignesh Sasidharan",
       role: "",
-      image: ("../media/team/vignesh.jpg"),
+      image: "../media/team/vignesh.jpg",
       social: {
         linkedin: "https://www.linkedin.com/in/vignesh-sasidharan-135067266",
         github: "https://github.com/V-1gn3sh"
@@ -351,10 +351,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   ],
   "IEEE Link Representative": [
     {
-      id: 21,
+      id: 24,
       name: "Unnikrishnan Namboothiri EN",
       role: "",
-      image: resolveTeamImage("/media/team/Unni.jpeg"),
+      image: "/media/team/Unni.jpeg",
       social: {
         linkedin: "https://www.linkedin.com/in/unnikrishnan-namboothiri-en-63aa58332"
       },
@@ -362,10 +362,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
       year: "2024"
     },
     {
-      id: 21,
+      id: 25,
       name: "Adith K",
       role: "",
-      image: resolveTeamImage("/media/team/Adithk.jpg"),
+      image: "/media/team/Adithk.jpg",
       social: {
         linkedin: "https://www.linkedin.com/in/adith-k-a132b4364/",
         github: "https://github.com/AdithK06"
@@ -376,10 +376,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   ],
   "MDC": [
     {
-      id: 22,
+      id: 26,
       name: "Sathyajith K M",
       role: "",
-      image: resolveTeamImage("/media/team/Sathyajith.jpg"),
+      image: "/media/team/Sathyajith.jpg",
       social: {
         linkedin: "https://www.linkedin.com/in/sathyajith-k-m/",
         github: "https://github.com/sathyajithkm"
@@ -388,10 +388,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
       year: "2024"
     },
     {
-      id: 22,
+      id: 27,
       name: "Nayan Keshav",
       role: "",
-      image: resolveTeamImage("/media/team/nayan.png"),
+      image: "/media/team/nayan.png",
       social: {
         linkedin: "https://www.linkedin.com/in/nayan-keshav/",
         github: "https://github.com/nayankeshav"
@@ -402,10 +402,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   ],
   "IEEE IAS MDC": [
     {
-      id: 22,
+      id: 28,
       name: "Adith M",
       role: "IEEE IAS MDC",
-      image: resolveTeamImage("/media/team/adithm.jpg"),
+      image: "/media/team/adithm.jpg",
       social: {
         linkedin: "",
         github: ""
@@ -416,10 +416,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   ],
   "IEEE PES MDC": [
     {
-      id: 22,
+      id: 29,
       name: "Afrad",
       role: "IEEE PES MDC",
-      image: resolveTeamImage("/media/team/mohammedafrad.jpg"),
+      image: "/media/team/mohammedafrad.jpg",
       social: {
         linkedin: "https://www.linkedin.com/in/mohammed-afrad-4906aa38a/",
         github: "https://github.com/afru2323"
@@ -430,10 +430,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   ],
   "ECC": [
     {
-      id: 23,
+      id: 30,
       name: "Amegh V V",
       role: "",
-      image: resolveTeamImage("/media/team/Amegh.jpg"),
+      image: "/media/team/Amegh.jpg",
       social: {
         linkedin: "https://www.linkedin.com/in/amegh-vv",
         github: ""
@@ -444,10 +444,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   ],
   "Design Lead": [
     {
-      id: 9,
+      id: 31,
       name: "Sushanth Sugesh",
       role: "",
-      image: ("../media/team/susanth.jpg"),
+      image: "../media/team/susanth.jpg",
       social: {
         linkedin: ""
       },
@@ -455,10 +455,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
       year: "2023"
     },
     {
-      id: 9,
+      id: 32,
       name: "Mubeen Keerantakath",
       role: "Design Lead",
-      image: ("../media/team/MubeenKeerantakath.jpeg"),
+      image: "../media/team/MubeenKeerantakath.jpeg",
       social: {
         linkedin: "https://www.linkedin.com/in/mubeen-keerantakath-2b7b53296"
       },
@@ -466,10 +466,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
       year: "2023"
     },
     {
-      id: 10,
+      id: 33,
       name: "Adithyan M",
       role: "",
-      image: ("../media/team/adithyan.png"),
+      image: "../media/team/adithyan.png",
       social: {
         linkedin: "https://www.linkedin.com/in/adithyan-m-",
         github: "https://github.com/adithyanmcr7-wq"
@@ -480,10 +480,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   ],
   "Content Lead": [
     {
-      id: 12,
+      id: 34,
       name: "Abhishek Thamban",
       role: "",
-      image: ("../media/team/Abhishek Thamban.jpg"),
+      image: "../media/team/Abhishek Thamban.jpg",
       social: {
         linkedin: "https://www.linkedin.com/in/abhishek-thamban-722827353"
       },
@@ -491,10 +491,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
       year: "2023"
     },
     {
-      id: 11,
+      id: 35,
       name: "Ashique Paul Shajee",
       role: "Content Lead",
-      image: ("../media/team/Ashique.jpg"),
+      image: "../media/team/Ashique.jpg",
       social: {
         linkedin: "https://www.linkedin.com/in/ashique-paul",
         github: "https://github.com/ashiquepaul"
@@ -503,10 +503,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
       year: "2023"
     },
     {
-      id: 12,
+      id: 36,
       name: "Kishor U",
       role: "",
-      image: ("../media/team/kishor.jpg"),
+      image: "../media/team/kishor.jpg",
       social: {
 
       },
@@ -517,10 +517,10 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
   ],
   "Newsletter Editors": [
     {
-      id: 24,
+      id: 37,
       name: "Sidharth V",
       role: "",
-      image: resolveTeamImage("/media/team/Sidharth.jpg"),
+      image: "/media/team/Sidharth.jpg",
       social: {
         linkedin: "https://www.linkedin.com/in/sidharth-v-8704a6352/",
         github: "https://github.com/Sidharth967"
@@ -529,19 +529,19 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
       year: "2024"
     },
     {
-      id: 25,
+      id: 38,
       name: "Mithradev T V",
       role: "",
-      image: resolveTeamImage("/media/team/mithradev.jpg"),
+      image: "/media/team/mithradev.jpg",
       social: {},
       department: "AI",
       year: "2025"
     },
     {
-      id: 26,
+      id: 39,
       name: "Adish Pradeep",
       role: "",
-      image: resolveTeamImage("/media/team/adish.jpg"),
+      image: "/media/team/adish.jpg",
       social: {
         linkedin: "https://www.linkedin.com/in/adish-pradeep-4551a1336",
         github: "https://github.com/ADISH899"
