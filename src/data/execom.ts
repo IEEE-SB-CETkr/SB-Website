@@ -144,7 +144,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
     {
       id: 8,
       name: "Asliya S",
-      role: "IEEE WIE Chair",
+      role: "Chairperson",
       image: "../media/team/asliya.jpg",
       social: {
         linkedin: "www.linkedin.com/in/asliya-s-9332a7304"
@@ -157,7 +157,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
     {
       id: 9,
       name: "Nayana Sivadas",
-      role: "IEEE WIE Vice Chair",
+      role: "Vice Chairperson",
       image: "/media/team/Nayana.jpg",
       social: {
         linkedin: "https://www.linkedin.com/in/nayana-sivadas-556215329/"
@@ -170,7 +170,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
     {
       id: 10,
       name: "Khadeeja Khalid",
-      role: "IEEE WIE Secretary",
+      role: "Secretary",
       image: "/media/team/kajju.jpeg",
       social: {
         linkedin: "https://www.linkedin.com/in/khadeeja-khalid005/",
@@ -184,7 +184,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
     {
       id: 11,
       name: "Athulya P N",
-      role: "IEEE PES Chair",
+      role: "Chairperson",
       image: "../media/team/Athulya.jpeg",
       social: {
         linkedin: "https://www.linkedin.com/in/athulya-nixan-251a0b306"
@@ -197,7 +197,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
     {
       id: 12,
       name: "Gautham Gireesh A",
-      role: "IEEE PES Vice Chair",
+      role: "Vice Chairperson",
       image: "../media/team/Gautham.jpg",
       social: {
         linkedin: "https://www.linkedin.com/in/gautham-gireesh-a-04a7ba3a2",
@@ -211,7 +211,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
     {
       id: 13,
       name: "Pranav E",
-      role: "IEEE PES Secretary",
+      role: "Secretary",
       image: "../media/team/Pranav.jpg",
       social: {
         linkedin: "https://www.linkedin.com/in/pranav-e-637709351/"
@@ -239,7 +239,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
     {
       id: 15,
       name: "Devanandan P",
-      role: "IEEE IAS Vice Chair",
+      role: "Chairperson",
       image: "../media/team/Devanandan.jpeg",
       social: {
         linkedin: "https://www.linkedin.com/in/devanandan-p-906101367"
@@ -252,7 +252,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
     {
       id: 16,
       name: "Adhima Sudheer MV",
-      role: "IEEE IAS Vice Chair",
+      role: "Vice Chairperson",
       image: "/media/team/Adhima.jpeg",
       social: {
         linkedin: "https://www.linkedin.com/in/adhima-sudheer-mv-450701332"
@@ -263,7 +263,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
     {
       id: 17,
       name: "Deepak P V",
-      role: "IEEE IAS Secretary",
+      role: "Secretary",
       image: "/media/team/Deepak.jpg",
       social: {
         linkedin: "https://www.linkedin.com/in/deepak-pv-519681298/"
@@ -404,7 +404,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
     {
       id: 28,
       name: "Adith M",
-      role: "IEEE IAS MDC",
+      role: "MDC",
       image: "/media/team/adithm.jpg",
       social: {
         linkedin: "",
@@ -418,7 +418,7 @@ export const execomMembersRaw: { [key: string]: ExecomMember[] } = {
     {
       id: 29,
       name: "Afrad",
-      role: "IEEE PES MDC",
+      role: "MDC",
       image: "/media/team/mohammedafrad.jpg",
       social: {
         linkedin: "https://www.linkedin.com/in/mohammed-afrad-4906aa38a/",
